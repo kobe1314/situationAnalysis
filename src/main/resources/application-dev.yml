@@ -5,6 +5,15 @@ server:
 spring:
   datasource:
     username: root
-    password: Ye#123456
-    url: jdbc:mysql://114.115.147.134:3306/monitor_system?allowMultiQueries=true&characterEncoding=utf8&useSSL=false
+    password: root
+    url: jdbc:mysql://localhost:3306/situationAnalysis?allowMultiQueries=true&characterEncoding=utf8&useSSL=false
     driver-class-name: com.mysql.jdbc.Driver
+
+
+#show sql log
+logging:
+  level:
+    com:
+      situation:
+        analysis:
+          mapper: debug
