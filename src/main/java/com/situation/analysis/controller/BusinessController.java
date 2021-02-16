@@ -32,7 +32,7 @@ public class BusinessController {
         log.debug("start monitoring level controller");
         return monitoringService.getAllMonitoringLevels();
     }
-
+    @ResponseResult
     @PostMapping("monitoringLevel")
     public PageResult<MonitoringLevel> getMonitoringLevelsByPage(@RequestBody PageRequest pageRequest) {
         log.debug("pageNumber:{},pageSize:{}", pageRequest.getPageNum(), pageRequest.getPageSize());
