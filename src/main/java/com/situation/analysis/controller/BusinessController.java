@@ -1,7 +1,8 @@
 package com.situation.analysis.controller;
 
-import com.situation.analysis.bean.PageRequest;
-import com.situation.analysis.bean.PageResult;
+import com.situation.analysis.annotation.ResponseResult;
+import com.situation.analysis.model.PageRequest;
+import com.situation.analysis.model.PageResult;
 import com.situation.analysis.entity.MonitoringLevel;
 import com.situation.analysis.service.MonitoringService;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +26,7 @@ public class BusinessController {
     @Resource
     private MonitoringService monitoringService;
 
+    @ResponseResult
     @RequestMapping("monitoringLevel")
     public List<MonitoringLevel> getAllMonitoringLevels() {
         log.debug("start monitoring level controller");

@@ -1,7 +1,7 @@
-package com.situation.analysis.utils;
+package com.situation.analysis.util;
 
 import com.github.pagehelper.PageInfo;
-import com.situation.analysis.bean.PageResult;
+import com.situation.analysis.model.PageResult;
 
 /**
  * @description: Page utils

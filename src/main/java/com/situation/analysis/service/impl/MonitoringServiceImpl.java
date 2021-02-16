@@ -2,14 +2,13 @@ package com.situation.analysis.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.situation.analysis.bean.PageRequest;
-import com.situation.analysis.bean.PageResult;
+import com.situation.analysis.model.PageRequest;
+import com.situation.analysis.model.PageResult;
 import com.situation.analysis.entity.MonitoringLevel;
 import com.situation.analysis.mapper.MonitoringLevelMapper;
 import com.situation.analysis.service.MonitoringService;
-import com.situation.analysis.utils.PageUtils;
+import com.situation.analysis.util.PageUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

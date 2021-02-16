@@ -1,7 +1,7 @@
 package com.situation.analysis.service;
 
-import com.situation.analysis.bean.PageRequest;
-import com.situation.analysis.bean.PageResult;
+import com.situation.analysis.model.PageRequest;
+import com.situation.analysis.model.PageResult;
 import com.situation.analysis.entity.MonitoringLevel;
 
 import java.util.List;
