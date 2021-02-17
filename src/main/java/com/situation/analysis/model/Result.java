@@ -18,7 +18,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class Result<T> implements Serializable {
     private Integer code;
-    @JsonIgnore
     private String message;
     private T data;
 
@@ -29,18 +28,33 @@ public class Result<T> implements Serializable {
         return result;
     }
 
-    public static Result failure(ResultCode resultCode) {
+    public static Result error(ResultCode resultCode) {
         Result result = new Result();
-        result.setCode(ResultCode.FAIL.getCode());
-        result.setMessage(ResultCode.FAIL.getMessage());
+        result.setCode(resultCode.getCode());
+        result.setMessage(resultCode.getMessage());
         return result;
     }
 
-    public static Result failure(ResultCode resultCode, Object data) {
+    public static Result error(ResultCode resultCode, Object data) {
         Result result = new Result();
-        result.setCode(ResultCode.FAIL.getCode());
-        result.setMessage(ResultCode.FAIL.getMessage());
+        result.setCode(resultCode.getCode());
+        result.setMessage(resultCode.getMessage());
         result.setData(data);
+        return result;
+    }
+
+
+    public static Result error(int code, String message) {
+        Result result = new Result();
+        result.setCode(code);
+        result.setMessage(message);
+        return result;
+    }
+
+    public static Result error(String message) {
+        Result result = new Result();
+        result.setCode(500);
+        result.setMessage(message);
         return result;
     }
 }

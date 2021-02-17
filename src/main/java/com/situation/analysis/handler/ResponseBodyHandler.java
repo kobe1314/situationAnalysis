@@ -4,6 +4,7 @@ import com.situation.analysis.constants.CommonConstants;
 import com.situation.analysis.model.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
@@ -33,8 +34,11 @@ public class ResponseBodyHandler implements ResponseBodyAdvice {
     public boolean supports(MethodParameter methodParameter, Class aClass) {
         ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = sra.getRequest();
+        int httpStatus = sra.getResponse().getStatus();
+        log.debug(String.valueOf(httpStatus));
         Object included =  request.getAttribute(CommonConstants.INCLUDE_RESPONSE_RESULT);
-        if (ObjectUtils.isEmpty(included)) {
+
+        if (ObjectUtils.isEmpty(included) || !String.valueOf(httpStatus).startsWith("2") ) {
             return false;
         }
         return true;
