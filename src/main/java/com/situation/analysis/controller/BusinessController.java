@@ -29,6 +29,7 @@ public class BusinessController {
     @ResponseResult
     @RequestMapping("monitoringLevel")
     public List<MonitoringLevel> getAllMonitoringLevels() {
+        System.out.println("123131313");
         log.debug("start monitoring level controller");
         return monitoringService.getAllMonitoringLevels();
     }
