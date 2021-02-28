@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.situation.analysis.mapper.MonitoringLevelMapper">
-<!--    private String monitoringLevel;-->
-<!--    private BigDecimal impactFactor;-->
-<!--    private String includeMoniObjects;-->
-<!--    private int runThreshold;-->
-<!--    private String createdBy;-->
-<!--    private String createdTime;-->
-<!--    private String updatedBy;-->
-<!--    private String updatedTime;-->
     <resultMap id="BaseResultMap" type="com.situation.analysis.entity.MonitoringLevel">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="MONI_LEVEL" property="monitoringLevel"/>
