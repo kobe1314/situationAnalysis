@@ -1,13 +1,17 @@
 package com.situation.analysis.config;
 
+import com.situation.analysis.interceptor.JwtFilter;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
+import org.apache.shiro.mgt.DefaultSubjectDAO;
+import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.apache.shiro.mgt.SecurityManager;
 
+import javax.servlet.Filter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -19,30 +23,6 @@ import java.util.Map;
  */
 @Configuration
 public class ShiroConfig {
-
-
-    @Bean
-    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
-        ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
-        shiroFilter.setSecurityManager(securityManager);
-
-        //设置遇到未登录、未授权等情况时候，请求这些地址，返回相应的错误
-        //shiroFilter.setLoginUrl("/user/shiroError?errorId=" + Constant.NEED_LOGIN);
-        //shiroFilter.setUnauthorizedUrl("/user/shiroError?errorId=" + Constant.NO_UNAUTHORIZED);
-
-        //拦截器，配置访问权限 必须是LinkedHashMap，因为它必须保证有序。滤链定义，从上向下顺序执行，一般将 /**放在最为下边
-        Map<String, String> filterMap = new LinkedHashMap<String, String>();
-
-        // 配置不会被拦截的链接 顺序判断
-        filterMap.put("/user/login", "anon");
-        filterMap.put("/user/shiroError", "anon");
-
-        //剩余的请求shiro都拦截
-        filterMap.put("/**/*", "authc");
-
-        shiroFilter.setFilterChainDefinitionMap(filterMap);
-        return shiroFilter;
-    }
 
     /**
      * 凭证匹配器
@@ -63,7 +43,7 @@ public class ShiroConfig {
     @Bean
     public ShiroRealm shiroRealm() {
         ShiroRealm shiroRealm = new ShiroRealm();
-        shiroRealm.setCredentialsMatcher(hashedCredentialsMatcher());
+        //shiroRealm.setCredentialsMatcher(hashedCredentialsMatcher());
         return shiroRealm;
     }
 
@@ -77,6 +57,13 @@ public class ShiroConfig {
     public SecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(shiroRealm());
+
+        //关闭shiro自带的session
+        DefaultSubjectDAO subjectDAO = new DefaultSubjectDAO();
+        DefaultSessionStorageEvaluator evaluator = new DefaultSessionStorageEvaluator();
+        evaluator.setSessionStorageEnabled(false);
+        subjectDAO.setSessionStorageEvaluator(evaluator);
+        securityManager.setSubjectDAO(subjectDAO);
         return securityManager;
     }
 
@@ -92,5 +79,34 @@ public class ShiroConfig {
         AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
         authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
         return authorizationAttributeSourceAdvisor;
+    }
+
+    @Bean
+    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
+        ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
+        shiroFilter.setSecurityManager(securityManager);
+
+        //设置遇到未登录、未授权等情况时候，请求这些地址，返回相应的错误
+        //shiroFilter.setLoginUrl("/user/shiroError?errorId=" + Constant.NEED_LOGIN);
+        //shiroFilter.setUnauthorizedUrl("/user/shiroError?errorId=" + Constant.NO_UNAUTHORIZED);
+
+        //设置自定义的拦截器
+        Map<String, Filter> filterMap = new LinkedHashMap<>();
+        filterMap.put("jwt",new JwtFilter());
+        shiroFilter.setFilters(filterMap);
+
+        //拦截器，配置访问权限 必须是LinkedHashMap，因为它必须保证有序。滤链定义，从上向下顺序执行，一般将 /**放在最为下边
+        Map<String, String> filterRuleMap = new LinkedHashMap<String, String>();
+
+        // 配置不会被拦截的链接 顺序判断
+        filterRuleMap.put("/user/login", "anon");
+        filterRuleMap.put("/unauthorized/**","anon");
+        filterRuleMap.put("/**","jwt");
+
+        ////剩余的请求shiro都拦截
+        //filterRuleMap.put("/**/*", "authc");
+
+        shiroFilter.setFilterChainDefinitionMap(filterRuleMap);
+        return shiroFilter;
     }
 }

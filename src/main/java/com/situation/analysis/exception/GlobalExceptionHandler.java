@@ -3,6 +3,8 @@ package com.situation.analysis.exception;
 import com.situation.analysis.enums.ResultCode;
 import com.situation.analysis.model.Result;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.ShiroException;
+import org.apache.shiro.authc.AuthenticationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -21,6 +23,20 @@ import javax.servlet.http.HttpServletRequest;
 @ResponseBody
 @ControllerAdvice
 public class GlobalExceptionHandler {
+
+    /**
+     * 处理授权的异常
+     *
+     * @param req
+     * @param e
+     * @return
+     */
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler({AuthenticationException.class,ShiroException.class})
+    public Result authenticationExceptionHandler(HttpServletRequest req, Exception e) {
+        log.error("发生业务异常！原因是：{}", e.getMessage());
+        return Result.error(401, e.getMessage());
+    }
 
     /**
      * 处理自定义的业务异常
