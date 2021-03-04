@@ -12,6 +12,7 @@ import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
@@ -73,7 +74,7 @@ public class ShiroRealm extends AuthorizingRealm {
         //AuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user, user.getPassword(), credentialsSalt, this.getName());
 
         log.debug("用户{}认证成功", user.getUsername());
-        return new SimpleAuthenticationInfo(name, token, getName());
+        return new SimpleAuthenticationInfo(token, token, getName());
     }
 
     /**

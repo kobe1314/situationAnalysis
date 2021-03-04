@@ -41,8 +41,8 @@ public class UserController {
     public Result login(String username, String password) {
         User user = userService.getUserByName(username);
 
-        //if (null != user && user.getPassword().equals(Utils.encryptPassword(password,user.getSalt()))) {
-        if (null != user && user.getPassword().equals(password)) {
+        if (null != user && user.getPassword().equals(Utils.encryptPassword(password,user.getSalt()))) {
+        //if (null != user && user.getPassword().equals(password)) {
             Map<String, String> response = new HashMap();
             response.put("token", JwtUtils.createToken(user.getUsername()));
             return Result.success(response);
