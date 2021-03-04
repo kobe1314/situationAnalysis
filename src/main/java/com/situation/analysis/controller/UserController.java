@@ -49,23 +49,4 @@ public class UserController {
     public String hello() {
         return "hello";
     }
-
-    @GetMapping("/unauthorized/{message}")
-    public Result unauthorized(@PathVariable String message) {
-        return Result.error(401, message);
-    }
-
-    @GetMapping("/error")
-    public Result error(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        Exception exception = (Exception) request.getAttribute("javax.servlet.error.exception");
-        Throwable cause = exception.getCause();
-        if (cause instanceof UnsupportedTokenException) {
-            throw new UnsupportedTokenException(exception.getMessage());
-        } else if (cause instanceof AuthenticationException) {
-            throw new AuthenticationException(exception.getMessage());
-        } else {
-            throw exception;
-        }
-    }
-
 }
