@@ -6,15 +6,21 @@ import com.situation.analysis.service.UserService;
 import com.situation.analysis.util.JwtUtils;
 import com.situation.analysis.util.Utils;
 import com.situation.analysis.vo.User;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.ExpiredCredentialsException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.pam.UnsupportedTokenException;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.subject.Subject;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,8 +43,8 @@ public class UserController {
 
         //if (null != user && user.getPassword().equals(Utils.encryptPassword(password,user.getSalt()))) {
         if (null != user && user.getPassword().equals(password)) {
-            Map<String,String> response = new HashMap();
-            response.put("token",JwtUtils.createToken(user.getUsername()));
+            Map<String, String> response = new HashMap();
+            response.put("token", JwtUtils.createToken(user.getUsername()));
             return Result.success(response);
         } else {
             log.error("用户名或密码不存在");
@@ -54,6 +60,19 @@ public class UserController {
     @GetMapping("/unauthorized/{message}")
     public Result unauthorized(@PathVariable String message) {
         return Result.error(401, message);
+    }
+
+    @GetMapping("/error")
+    public Result error(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        Exception exception = (Exception) request.getAttribute("javax.servlet.error.exception");
+        Throwable cause = exception.getCause();
+        if (cause instanceof UnsupportedTokenException) {
+            throw new UnsupportedTokenException(exception.getMessage());
+        } else if (cause instanceof AuthenticationException) {
+            throw new AuthenticationException(exception.getMessage());
+        } else {
+            throw exception;
+        }
     }
 
 }
