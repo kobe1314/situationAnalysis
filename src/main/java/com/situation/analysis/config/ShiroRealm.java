@@ -2,7 +2,7 @@ package com.situation.analysis.config;
 
 import com.situation.analysis.model.JwtToken;
 import com.situation.analysis.service.UserService;
-import com.situation.analysis.util.JwtUtils;
+import com.situation.analysis.util.JwtUtil;
 import com.situation.analysis.vo.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.AuthenticationException;
@@ -12,7 +12,6 @@ import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.util.ByteSource;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
@@ -56,11 +55,11 @@ public class ShiroRealm extends AuthorizingRealm {
         log.info("user is authenticate");
         String name= (String) authenticationToken.getPrincipal();
         String token = (String) authenticationToken.getCredentials();
-        String username = JwtUtils.getUsernameFromToken(token);
+        String username = JwtUtil.getUsernameFromToken(token);
 
         User user = userService.getUserByName(username);
 
-        if (StringUtils.isEmpty(username) || !JwtUtils.verify(token, username)) {
+        if (StringUtils.isEmpty(username) || !JwtUtil.verify(token, username)) {
             log.error("token 认证失败");
             throw new AuthenticationException("token 认证失败");
         }

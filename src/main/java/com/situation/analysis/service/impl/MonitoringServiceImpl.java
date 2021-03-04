@@ -7,7 +7,7 @@ import com.situation.analysis.model.PageResult;
 import com.situation.analysis.entity.MonitoringLevel;
 import com.situation.analysis.mapper.MonitoringLevelMapper;
 import com.situation.analysis.service.MonitoringService;
-import com.situation.analysis.util.PageUtils;
+import com.situation.analysis.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +41,7 @@ public class MonitoringServiceImpl implements MonitoringService {
      */
     @Override
     public PageResult<MonitoringLevel> getMonitoringLevelsByPage(PageRequest pageRequest) {
-        return PageUtils.getPageResult(getPageInfo(pageRequest));
+        return PageUtil.getPageResult(getPageInfo(pageRequest));
     }
 
     private PageInfo<MonitoringLevel> getPageInfo(PageRequest pageRequest) {

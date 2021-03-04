@@ -1,12 +1,10 @@
 package com.situation.analysis.interceptor;
 
 import com.situation.analysis.annotation.ResponseResult;
-import com.situation.analysis.constants.CommonConstants;
-import com.situation.analysis.entity.MonitoringLevel;
+import com.situation.analysis.constants.CommonConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -14,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.util.List;
 
 /**
  * @description: response result interceptor
@@ -36,7 +33,7 @@ public class ResponseResultInterceptor implements HandlerInterceptor {
             Annotation annotationOnMethod = method.getAnnotation(ResponseResult.class);
             if(!ObjectUtils.isEmpty(annotationOnClass) || !ObjectUtils.isEmpty(annotationOnMethod)) {
                 log.debug("wrapper response");
-                request.setAttribute(CommonConstants.INCLUDE_RESPONSE_RESULT,true);
+                request.setAttribute(CommonConstant.INCLUDE_RESPONSE_RESULT,true);
             }
         }
 

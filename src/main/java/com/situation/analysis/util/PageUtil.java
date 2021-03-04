@@ -9,7 +9,7 @@ import com.situation.analysis.model.PageResult;
  * @date: 2021/2/16 上午11:00
  * @version: v1.0
  */
-public class PageUtils {
+public class PageUtil {
     /**
      * @param pageInfo  将分页信息封装到统一的接口
      * @return

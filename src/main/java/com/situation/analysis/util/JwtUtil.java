@@ -18,7 +18,7 @@ import java.util.Date;
  * @version: v1.0
  */
 @Slf4j
-public class JwtUtils {
+public class JwtUtil {
     private static final Long EXPIRE_TIME = 5 * 60 * 1000L;
 
     private static final String SECRET = "SHIRO+JWT";

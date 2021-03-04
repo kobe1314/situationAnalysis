@@ -1,21 +1,14 @@
 package com.situation.analysis.controller;
 
-import com.situation.analysis.annotation.ResponseResult;
 import com.situation.analysis.model.Result;
 import com.situation.analysis.service.UserService;
-import com.situation.analysis.util.JwtUtils;
-import com.situation.analysis.util.Utils;
+import com.situation.analysis.util.JwtUtil;
+import com.situation.analysis.util.Util;
 import com.situation.analysis.vo.User;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.ExpiredCredentialsException;
-import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authc.pam.UnsupportedTokenException;
 import org.apache.shiro.authz.UnauthenticatedException;
-import org.apache.shiro.subject.Subject;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -41,10 +34,10 @@ public class UserController {
     public Result login(String username, String password) {
         User user = userService.getUserByName(username);
 
-        if (null != user && user.getPassword().equals(Utils.encryptPassword(password,user.getSalt()))) {
+        if (null != user && user.getPassword().equals(Util.encryptPassword(password,user.getSalt()))) {
         //if (null != user && user.getPassword().equals(password)) {
             Map<String, String> response = new HashMap();
-            response.put("token", JwtUtils.createToken(user.getUsername()));
+            response.put("token", JwtUtil.createToken(user.getUsername()));
             return Result.success(response);
         } else {
             log.error("用户名或密码不存在");
