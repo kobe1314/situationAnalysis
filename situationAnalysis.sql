@@ -4,3 +4,48 @@ CREATE TABLE `situationAnalysis`.`user` (
   `password` VARCHAR(45) NOT NULL,
   `salt` VARCHAR(45) NULL,
   PRIMARY KEY (`id`));
+
+
+
+DROP TABLE IF EXISTS monitoringLevel;
+CREATE TABLE monitoringLevel(
+    ID INT NOT NULL   COMMENT 'ID' ,
+    MONI_NAME VARCHAR(32)    COMMENT '层次名称' ,
+    IMPACT_FACTOR DECIMAL(32,10)    COMMENT '影响因子' ,
+    RUN_THRESHOLD INT    COMMENT '运行阈值' ,
+    CREATED_BY VARCHAR(32)    COMMENT '创建人' ,
+    CREATED_TIME VARCHAR(32)    COMMENT '创建时间' ,
+    UPDATED_BY VARCHAR(32)    COMMENT '更新人' ,
+    UPDATED_TIME VARCHAR(32)    COMMENT '更新时间' ,
+    PRIMARY KEY (ID)
+) COMMENT = '监测层次表 ';
+
+
+
+DROP TABLE IF EXISTS monitoringObject;
+CREATE TABLE monitoringObject(
+    ID INT NOT NULL   COMMENT 'ID' ,
+    NAME VARCHAR(32)    COMMENT '对象名称' ,
+    IMPACT_FACTOR DECIMAL(32,10)    COMMENT '影响因子' ,
+    RUN_THRESHOLD INT    COMMENT '报警阈值' ,
+    L_ID INT    COMMENT '所属层次' ,
+    CREATED_BY VARCHAR(32)    COMMENT '创建人' ,
+    CREATED_TIME VARCHAR(32)    COMMENT '创建时间' ,
+    UPDATED_BY VARCHAR(32)    COMMENT '更新人' ,
+    UPDATED_TIME VARCHAR(32)    COMMENT '更新时间' ,
+    PRIMARY KEY (ID)
+) COMMENT = '监测对象表 ';
+
+
+DROP TABLE IF EXISTS indicator;
+CREATE TABLE indicator(
+    ID INT NOT NULL AUTO_INCREMENT  COMMENT 'ID' ,
+    NAME VARCHAR(32)    COMMENT '名字' ,
+    IMPACT_FACTOR DECIMAL(32,10)    COMMENT '影响因子' ,
+    O_ID INT    COMMENT '所属监测对象' ,
+    CREATED_BY VARCHAR(32)    COMMENT '创建人' ,
+    CREATED_TIME VARCHAR(32)    COMMENT '创建时间' ,
+    UPDATED_BY VARCHAR(32)    COMMENT '更新人' ,
+    UPDATED_TIME VARCHAR(32)    COMMENT '更新时间' ,
+    PRIMARY KEY (ID)
+) COMMENT = '指标 ';
