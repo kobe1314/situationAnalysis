@@ -1,7 +1,7 @@
 package com.situation.analysis.service;
 
 import com.situation.analysis.util.Util;
-import com.situation.analysis.vo.User;
+import com.situation.analysis.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package com.situation.analysis.vo;
+package com.situation.analysis.model;
 
 import lombok.Data;
 

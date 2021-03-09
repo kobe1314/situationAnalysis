@@ -16,6 +16,7 @@ public class IndicatorEntity {
     private String name;
     private BigDecimal impactedFactor;
     private int objectId;
+    private String instruction;
     private String createdBy;
     private String createdTime;
     private String updatedBy;

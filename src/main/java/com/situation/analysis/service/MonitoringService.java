@@ -3,7 +3,8 @@ package com.situation.analysis.service;
 import com.situation.analysis.model.PageRequest;
 import com.situation.analysis.model.PageResult;
 import com.situation.analysis.entity.MonitoringLevelEntity;
-import com.situation.analysis.vo.Indicator;
+import com.situation.analysis.model.IndicatorResponse;
+import com.situation.analysis.model.MonitoringLevelResponse;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public interface MonitoringService {
     /**
      * @return List<MonitoringLevel>
      */
-    List<MonitoringLevelEntity> getAllMonitoringLevels();
+    List<MonitoringLevelResponse> getAllMonitoringLevels();
 
 
     /**
@@ -26,5 +27,5 @@ public interface MonitoringService {
      */
     PageResult<MonitoringLevelEntity> getMonitoringLevelsByPage(PageRequest pageRequest);
     
-    List<Indicator> getIndicatorList();
+    List<IndicatorResponse> getIndicatorList();
 }

@@ -3,9 +3,8 @@
 <mapper namespace="com.situation.analysis.mapper.MonitoringLevelMapper">
     <resultMap id="BaseResultMap" type="com.situation.analysis.entity.MonitoringLevelEntity">
         <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="MONI_LEVEL" property="monitoringLevel"/>
+        <result column="NAME" property="name"/>
         <result column="IMPACT_FACTOR" property="impactFactor"/>
-        <result column="INCLUDE_MONI_OBJECTS" property="includeMoniObjects"/>
         <result column="RUN_THRESHOLD" property="runThreshold"/>
         <result column="CREATED_BY" property="createdBy"/>
         <result column="CREATED_TIME" property="createdTime"/>

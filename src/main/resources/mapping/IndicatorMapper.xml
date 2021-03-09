@@ -4,6 +4,7 @@
     <resultMap id="BaseResultMap" type="com.situation.analysis.entity.IndicatorEntity">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="NAME" property="name"/>
+        <result column="INSTRUCTION" property="instruction"/>
         <result column="IMPACT_FACTOR" property="impactFactor"/>
         <result column="O_ID" property="objectId"/>
         <result column="CREATED_BY" property="createdBy"/>

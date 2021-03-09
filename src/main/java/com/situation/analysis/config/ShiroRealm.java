@@ -3,7 +3,7 @@ package com.situation.analysis.config;
 import com.situation.analysis.model.JwtToken;
 import com.situation.analysis.service.UserService;
 import com.situation.analysis.util.JwtUtil;
-import com.situation.analysis.vo.User;
+import com.situation.analysis.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;

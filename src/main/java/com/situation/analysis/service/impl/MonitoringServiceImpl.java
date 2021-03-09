@@ -10,7 +10,8 @@ import com.situation.analysis.entity.MonitoringLevelEntity;
 import com.situation.analysis.mapper.MonitoringLevelMapper;
 import com.situation.analysis.service.MonitoringService;
 import com.situation.analysis.util.PageUtil;
-import com.situation.analysis.vo.Indicator;
+import com.situation.analysis.model.IndicatorResponse;
+import com.situation.analysis.model.MonitoringLevelResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cglib.beans.BeanCopier;
 import org.springframework.stereotype.Service;
@@ -39,8 +40,14 @@ public class MonitoringServiceImpl implements MonitoringService {
      * @return List<MonitoringLevel>
      */
     @Override
-    public List<MonitoringLevelEntity> getAllMonitoringLevels() {
-        return monitoringLevelMapper.selectAllMonitoringLevels();
+    public List<MonitoringLevelResponse> getAllMonitoringLevels() {
+        List<MonitoringLevelEntity> list = monitoringLevelMapper.selectAllMonitoringLevels();
+        BeanCopier copier = BeanCopier.create(MonitoringLevelEntity.class, MonitoringLevelResponse.class, false);
+        return list.stream().map(monitoringLevelEntity -> {
+            MonitoringLevelResponse monitoringLevel = new MonitoringLevelResponse();
+            copier.copy(monitoringLevelEntity, monitoringLevel, null);
+            return monitoringLevel;
+        }).collect(Collectors.toList());
     }
 
     /**
@@ -53,11 +60,11 @@ public class MonitoringServiceImpl implements MonitoringService {
     }
 
     @Override
-    public List<Indicator> getIndicatorList() {
+    public List<IndicatorResponse> getIndicatorList() {
         List<IndicatorEntity> list = indicatorMapper.getIndicatorList();
-        BeanCopier copier = BeanCopier.create(IndicatorEntity.class, Indicator.class, false);
+        BeanCopier copier = BeanCopier.create(IndicatorEntity.class, IndicatorResponse.class, false);
         return list.stream().map(indicatorEntity -> {
-            Indicator indicator = new Indicator();
+            IndicatorResponse indicator = new IndicatorResponse();
             copier.copy(indicatorEntity, indicator, null);
             return indicator;
         }).collect(Collectors.toList());

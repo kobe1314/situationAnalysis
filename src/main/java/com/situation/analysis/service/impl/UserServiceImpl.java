@@ -3,12 +3,10 @@ package com.situation.analysis.service.impl;
 import com.situation.analysis.entity.UserEntity;
 import com.situation.analysis.mapper.UserMapper;
 import com.situation.analysis.service.UserService;
-import com.situation.analysis.vo.User;
+import com.situation.analysis.model.User;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 

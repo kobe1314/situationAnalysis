@@ -4,16 +4,12 @@ import com.situation.analysis.model.Result;
 import com.situation.analysis.service.UserService;
 import com.situation.analysis.util.JwtUtil;
 import com.situation.analysis.util.Util;
-import com.situation.analysis.vo.User;
+import com.situation.analysis.model.User;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.pam.UnsupportedTokenException;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,7 +31,6 @@ public class UserController {
         User user = userService.getUserByName(username);
 
         if (null != user && user.getPassword().equals(Util.encryptPassword(password,user.getSalt()))) {
-        //if (null != user && user.getPassword().equals(password)) {
             Map<String, String> response = new HashMap();
             response.put("token", JwtUtil.createToken(user.getUsername()));
             return Result.success(response);

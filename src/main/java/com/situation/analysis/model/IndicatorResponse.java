@@ -1,4 +1,4 @@
-package com.situation.analysis.vo;
+package com.situation.analysis.model;
 
 import lombok.Data;
 
@@ -11,9 +11,10 @@ import java.math.BigDecimal;
  * @version: v1.0
  */
 @Data
-public class Indicator {
+public class IndicatorResponse {
     private int id;
     private String name;
+    private String instruction;
     //private BigDecimal impactedFactor;
     //private int objectId;
 }

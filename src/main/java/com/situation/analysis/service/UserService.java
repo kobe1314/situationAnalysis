@@ -1,6 +1,6 @@
 package com.situation.analysis.service;
 
-import com.situation.analysis.vo.User;
+import com.situation.analysis.model.User;
 
 /**
  * @description: user service
