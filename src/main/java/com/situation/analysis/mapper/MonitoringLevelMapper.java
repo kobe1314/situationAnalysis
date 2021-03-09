@@ -1,8 +1,6 @@
 package com.situation.analysis.mapper;
 
-import com.situation.analysis.entity.MonitoringLevel;
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
+import com.situation.analysis.entity.MonitoringLevelEntity;
 
 import java.util.List;
 
@@ -17,10 +15,10 @@ public interface MonitoringLevelMapper {
     /**
      * @return List<MonitoringLevel>
      */
-    List<MonitoringLevel> selectAllMonitoringLevels();
+    List<MonitoringLevelEntity> selectAllMonitoringLevels();
 
     /**
      * @return List<MonitoringLevel>
      */
-    List<MonitoringLevel> selectMonitoringLevelsByPage();
+    List<MonitoringLevelEntity> selectMonitoringLevelsByPage();
 }

@@ -4,8 +4,9 @@ import com.situation.analysis.annotation.ResponseResult;
 import com.situation.analysis.exception.BizException;
 import com.situation.analysis.model.PageRequest;
 import com.situation.analysis.model.PageResult;
-import com.situation.analysis.entity.MonitoringLevel;
+import com.situation.analysis.entity.MonitoringLevelEntity;
 import com.situation.analysis.service.MonitoringService;
+import com.situation.analysis.vo.Indicator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,15 +27,22 @@ public class BusinessController {
 
     @ResponseResult
     @GetMapping("monitoringLevel")
-    public List<MonitoringLevel> getAllMonitoringLevels() {
+    public List<MonitoringLevelEntity> getAllMonitoringLevels() {
         log.debug("start monitoring level controller");
         throw new BizException(400,"this is testing");
         //return monitoringService.getAllMonitoringLevels();
     }
     @ResponseResult
     @PostMapping("monitoringLevel")
-    public PageResult<MonitoringLevel> getMonitoringLevelsByPage(@RequestBody PageRequest pageRequest) {
+    public PageResult<MonitoringLevelEntity> getMonitoringLevelsByPage(@RequestBody PageRequest pageRequest) {
         log.debug("pageNumber:{},pageSize:{}", pageRequest.getPageNum(), pageRequest.getPageSize());
         return monitoringService.getMonitoringLevelsByPage(pageRequest);
+    }
+    
+
+    @GetMapping("indicators")
+    public List<Indicator> getIndicatorList() {
+        log.debug("start indicator list");
+        return monitoringService.getIndicatorList();
     }
 }

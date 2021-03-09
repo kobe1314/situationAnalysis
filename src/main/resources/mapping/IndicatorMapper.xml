@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.situation.analysis.mapper.IndicatorMapper">
+    <resultMap id="BaseResultMap" type="com.situation.analysis.entity.IndicatorEntity">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="NAME" property="name"/>
+        <result column="IMPACT_FACTOR" property="impactFactor"/>
+        <result column="O_ID" property="objectId"/>
+        <result column="CREATED_BY" property="createdBy"/>
+        <result column="CREATED_TIME" property="createdTime"/>
+        <result column="UPDATED_BY" property="updatedBy"/>
+        <result column="UPDATED_TIME" property="updatedTime"/>
+    </resultMap>
+
+    <select id="getIndicatorList" resultMap="BaseResultMap">
+        select * from indicator;
+    </select>
+
+
+<!--    <select id="selectMonitoringLevelsByPage" resultMap="BaseResultMap">-->
+<!--        select * from monitoringLevel-->
+<!--    </select>-->
+
+</mapper>
