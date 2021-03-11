@@ -1,6 +1,9 @@
 package com.situation.analysis.mapper;
 
 import com.situation.analysis.entity.MonitoringObjectEntity;
+import com.situation.analysis.model.ObjectInfo;
+
+import java.util.List;
 
 /**
  * @description: Monitoring object
@@ -13,4 +16,6 @@ public interface MonitoringObjectMapper {
     int addMonitoringObject(MonitoringObjectEntity objectEntity);
     
     void deleteMonitoringObject(int id);
+    
+    List<ObjectInfo> getMonitoringObjects(int lId);
 }

@@ -22,6 +22,18 @@
         <result column="UPDATED_BY" property="updatedBy"/>
         <result column="UPDATED_TIME" property="updatedTime"/>
     </resultMap>
+<!--    private String objectName;-->
+<!--    private int runThreshold;-->
+<!--    <resultMap id="BaseResultMap" type="com.situation.analysis.model.ObjectInfo">-->
+<!--        <result column="NAME" property="objectName"/>-->
+<!--        <result column="RUN_THRESHOLD" property="runThreshold"/>-->
+<!--    </resultMap>-->
+
+
+    <resultMap id="response" type="com.situation.analysis.model.MonitoringObjectListResponse">
+        <result column="NAME" property="objectName"/>
+        <result column="RUN_THRESHOLD" property="runThreshold"/>
+    </resultMap>
 
 
     <insert id="addMonitoringObject" parameterType="MonitoringObjectEntity" useGeneratedKeys="true" keyProperty="id">
@@ -33,9 +45,9 @@
         delete from monitoringObject where id = #{id};
     </delete>
 
-    <!--    <select id="selectAllMonitoringLevels" resultMap="BaseResultMap">-->
-    <!--        select * from monitoringLevel;-->
-    <!--    </select>-->
+<!--        <select id="getMonitoringObjects" resultMap="response">-->
+<!--            select * from monitoringObject where L_ID = #{lId};-->
+<!--        </select>-->
 
 
     <!--    <select id="selectMonitoringLevelsByPage" resultMap="BaseResultMap">-->

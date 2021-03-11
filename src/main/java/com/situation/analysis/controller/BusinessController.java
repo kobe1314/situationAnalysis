@@ -36,11 +36,7 @@ public class BusinessController {
     }
 
 
-    @GetMapping("indicators")
-    public List<IndicatorResponse> getIndicatorList() {
-        log.debug("start indicator list");
-        return monitoringService.getIndicatorList();
-    }
+
 
     @PostMapping("object")
     public void addObject(@RequestBody AddMonitoringObjectRequest request) {

@@ -13,8 +13,21 @@
         <result column="UPDATED_TIME" property="updatedTime"/>
     </resultMap>
 
+
+    <resultMap id="response" type="com.situation.analysis.model.IndicatorResponse">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="NAME" property="name"/>
+        <result column="INSTRUCTION" property="instruction"/>
+        <result column="IS_ORIGINAL_VALUE" property="isOriginalValue"/>
+        <result column="OBJECT_NAME" property="objectName"/>
+    </resultMap>
+
     <select id="getIndicatorList" resultMap="BaseResultMap">
         select * from indicator;
+    </select>
+
+    <select id="selectIndicatorList" resultMap="response">
+        select i.id,i.name,i.instruction,i.IS_ORIGINAL_VALUE,o.name OBJECT_NAME  from indicator i left join monitoringObject o on i.O_ID = o.ID;
     </select>
 
     <update id="batchUpdateIndicator" parameterType="list">
@@ -32,8 +45,11 @@
         update indicator set O_ID =null where O_ID = #{oId};
     </update>
 
-<!--    <select id="selectMonitoringLevelsByPage" resultMap="BaseResultMap">-->
-<!--        select * from monitoringLevel-->
-<!--    </select>-->
+    <insert id="addIndicator" parameterType="IndicatorEntity">
+        insert into indicator(NAME,IMPACT_FACTOR,O_ID,INSTRUCTION,IS_ORIGINAL_VALUE) values(#{name},#{impactFactor},#{objectId},#{instruction},#{isOriginalValue});
+    </insert>
 
+    <delete id="deleteIndicator" parameterType="int">
+        delete from indicator where id = #{id} and IS_ORIGINAL_VALUE = 'N';
+    </delete>
 </mapper>

@@ -17,6 +17,7 @@ public class IndicatorEntity {
     private BigDecimal impactFactor;
     private int objectId;
     private String instruction;
+    private String isOriginalValue;
     private String createdBy;
     private String createdTime;
     private String updatedBy;

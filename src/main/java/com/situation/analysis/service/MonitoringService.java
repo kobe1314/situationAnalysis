@@ -24,7 +24,7 @@ public interface MonitoringService {
      */
     PageResult<MonitoringLevelEntity> getMonitoringLevelsByPage(PageRequest pageRequest);
     
-    List<IndicatorResponse> getIndicatorList();
+
 
     /**
      * add object
@@ -37,6 +37,11 @@ public interface MonitoringService {
      * @param id
      */
     void deleteObject(int id);
+
+    /**
+     * @return
+     */
+    MonitoringObjectListResponse  getMonitoringObjectList();
     
     
 

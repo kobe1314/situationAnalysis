@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,9 +41,10 @@ public class MonitoringServiceImpl implements MonitoringService {
     private MonitoringLevelMapper monitoringLevelMapper;
 
     @Resource
-    private IndicatorMapper indicatorMapper;
-    @Resource
     private MonitoringObjectMapper monitoringObjectMapper;
+
+    @Resource
+    private IndicatorMapper indicatorMapper;
 
     /**
      * @return List<MonitoringLevel>
@@ -67,16 +69,7 @@ public class MonitoringServiceImpl implements MonitoringService {
         return PageUtil.getPageResult(getPageInfo(pageRequest));
     }
 
-    @Override
-    public List<IndicatorResponse> getIndicatorList() {
-        List<IndicatorEntity> list = indicatorMapper.getIndicatorList();
-        BeanCopier copier = BeanCopier.create(IndicatorEntity.class, IndicatorResponse.class, false);
-        return list.stream().map(indicatorEntity -> {
-            IndicatorResponse indicator = new IndicatorResponse();
-            copier.copy(indicatorEntity, indicator, null);
-            return indicator;
-        }).collect(Collectors.toList());
-    }
+
 
     /**
      * add object
@@ -122,6 +115,23 @@ public class MonitoringServiceImpl implements MonitoringService {
         indicatorMapper.updateIndicate(id);
         log.info("finished delete object ");
 
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public MonitoringObjectListResponse getMonitoringObjectList() {
+        MonitoringObjectListResponse response = new MonitoringObjectListResponse();
+
+        List<LevelInfo> objectList = new ArrayList<>();
+        List<MonitoringLevelEntity> list = monitoringLevelMapper.selectAllMonitoringLevels();
+        //list.stream().map(levelEntity -> {
+        //    int lId = levelEntity.getId();
+        //})
+        //private String levelName;
+        //private List<ObjectInfo> objectList;
+        return null;
     }
 
     private PageInfo<MonitoringLevelEntity> getPageInfo(PageRequest pageRequest) {

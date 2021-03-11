@@ -2,6 +2,7 @@ package com.situation.analysis.mapper;
 
 import com.situation.analysis.entity.IndicatorEntity;
 import com.situation.analysis.model.IndicatorInformation;
+import com.situation.analysis.model.IndicatorResponse;
 
 import java.util.List;
 
@@ -32,4 +33,16 @@ public interface IndicatorMapper {
      * @param oId
      */
     void updateIndicate(int oId);
+
+    List<IndicatorResponse> selectIndicatorList(String key);
+
+    /**
+     * @param indicatorEntity
+     */
+    int addIndicator(IndicatorEntity indicatorEntity);
+
+    /**
+     * @param id
+     */
+    void deleteIndicator(int id);
 }
