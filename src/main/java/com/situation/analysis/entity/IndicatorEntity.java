@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 public class IndicatorEntity {
     private int id;
     private String name;
-    private BigDecimal impactedFactor;
+    private BigDecimal impactFactor;
     private int objectId;
     private String instruction;
     private String createdBy;

@@ -15,6 +15,6 @@ public class IndicatorResponse {
     private int id;
     private String name;
     private String instruction;
-    //private BigDecimal impactedFactor;
+    //private BigDecimal impactFactor;
     //private int objectId;
 }

@@ -9,7 +9,9 @@ import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSource
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import javax.servlet.Filter;
 import java.util.LinkedHashMap;
@@ -21,6 +23,7 @@ import java.util.Map;
  * @date: 2021/2/28 下午2:34
  * @version: v1.0
  */
+@Profile("sit")
 @Configuration
 public class ShiroConfig {
 
