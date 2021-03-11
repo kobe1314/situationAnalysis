@@ -16,4 +16,5 @@ pagehelper:
 #mybatis
 mybatis:
   mapper-locations: classpath:mapping/*.xml
-  type-aliases-package: com.situation.analysis.mapper
+  #指定entity路径以后，可以在mapper里面用类名作为参数，而不必指定全路径的类名
+  type-aliases-package: com.situation.analysis.entity

@@ -23,8 +23,8 @@ CREATE TABLE monitoringLevel(
 
 
 DROP TABLE IF EXISTS monitoringObject;
-CREATE TABLE monitoringObject(
-    ID INT NOT NULL   COMMENT 'ID' ,
+CREATE TABLE monitoringObjects(
+    ID INT NOT NULL AUTO_INCREMENT  COMMENT 'ID' ,
     NAME VARCHAR(32)    COMMENT '对象名称' ,
     IMPACT_FACTOR DECIMAL(32,10)    COMMENT '影响因子' ,
     RUN_THRESHOLD INT    COMMENT '报警阈值' ,

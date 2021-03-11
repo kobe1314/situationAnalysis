@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.situation.analysis.mapper.MonitoringObjectMapper">
+
+    <!--    private int id;-->
+    <!--    private String name;-->
+    <!--    private BigDecimal impactFactor;-->
+    <!--    private int runThreshold;-->
+    <!--    private int levelId;-->
+    <!--    private String createdBy;-->
+    <!--    private String createdTime;-->
+    <!--    private String updatedBy;-->
+    <!--    private String updatedTime;-->
+    <resultMap id="BaseResultMap" type="com.situation.analysis.entity.MonitoringObjectEntity">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="NAME" property="name"/>
+        <result column="IMPACT_FACTOR" property="impactFactor"/>
+        <result column="RUN_THRESHOLD" property="runThreshold"/>
+        <result column="L_ID" property="levelId"/>
+        <result column="CREATED_BY" property="createdBy"/>
+        <result column="CREATED_TIME" property="createdTime"/>
+        <result column="UPDATED_BY" property="updatedBy"/>
+        <result column="UPDATED_TIME" property="updatedTime"/>
+    </resultMap>
+
+
+    <insert id="addMonitoringObject" parameterType="MonitoringObjectEntity" useGeneratedKeys="true" keyProperty="id">
+        insert into monitoringObject(NAME,IMPACT_FACTOR,RUN_THRESHOLD,L_ID,CREATED_BY,CREATED_TIME)
+            values(#{name},#{impactFactor},#{runThreshold},#{levelId},#{createdBy},#{createdTime});
+    </insert>
+
+    <!--    <select id="selectAllMonitoringLevels" resultMap="BaseResultMap">-->
+    <!--        select * from monitoringLevel;-->
+    <!--    </select>-->
+
+
+    <!--    <select id="selectMonitoringLevelsByPage" resultMap="BaseResultMap">-->
+    <!--        select * from monitoringLevel-->
+    <!--    </select>-->
+
+</mapper>

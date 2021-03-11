@@ -1,6 +1,7 @@
 package com.situation.analysis.mapper;
 
 import com.situation.analysis.entity.IndicatorEntity;
+import com.situation.analysis.model.IndicatorInformation;
 
 import java.util.List;
 
@@ -16,4 +17,11 @@ public interface IndicatorMapper {
      * @return List<IndicatorEntity>
      */
     List<IndicatorEntity> getIndicatorList();
+
+    /**
+     * @param indicatorEntity
+     */
+    void updateIndicator(IndicatorEntity indicatorEntity);
+
+    void batchUpdateIndicator(List<IndicatorInformation> list);
 }

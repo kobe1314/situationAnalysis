@@ -1,5 +1,7 @@
 package com.situation.analysis.model;
 
+import lombok.Data;
+
 import java.util.List;
 
 /**
@@ -8,6 +10,7 @@ import java.util.List;
  * @date: 2021/3/9 下午10:17
  * @version: v1.0
  */
+@Data
 public class AddMonitoringObjectRequest {
     private String objectName;
     private int runThreshold;

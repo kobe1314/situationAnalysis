@@ -1,10 +1,7 @@
 package com.situation.analysis.service;
 
-import com.situation.analysis.model.PageRequest;
-import com.situation.analysis.model.PageResult;
+import com.situation.analysis.model.*;
 import com.situation.analysis.entity.MonitoringLevelEntity;
-import com.situation.analysis.model.IndicatorResponse;
-import com.situation.analysis.model.MonitoringLevelResponse;
 
 import java.util.List;
 
@@ -28,4 +25,11 @@ public interface MonitoringService {
     PageResult<MonitoringLevelEntity> getMonitoringLevelsByPage(PageRequest pageRequest);
     
     List<IndicatorResponse> getIndicatorList();
+
+    /**
+     * add object
+     *
+     * @param request
+     */
+    void addObject(AddMonitoringObjectRequest request);
 }
