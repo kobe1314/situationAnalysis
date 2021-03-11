@@ -26,8 +26,9 @@
         select * from indicator;
     </select>
 
-    <select id="selectIndicatorList" resultMap="response">
-        select i.id,i.name,i.instruction,i.IS_ORIGINAL_VALUE,o.name OBJECT_NAME  from indicator i left join monitoringObject o on i.O_ID = o.ID;
+    <select id="selectIndicatorList" resultMap="response" parameterType="string">
+        select i.id,i.name,i.instruction,i.IS_ORIGINAL_VALUE,o.name OBJECT_NAME
+            from indicator i left join monitoringObject o on i.O_ID = o.ID where i.name like CONCAT('%',#{keyword},'%');
     </select>
 
     <update id="batchUpdateIndicator" parameterType="list">

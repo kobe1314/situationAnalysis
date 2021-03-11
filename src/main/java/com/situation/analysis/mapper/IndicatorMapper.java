@@ -3,6 +3,7 @@ package com.situation.analysis.mapper;
 import com.situation.analysis.entity.IndicatorEntity;
 import com.situation.analysis.model.IndicatorInformation;
 import com.situation.analysis.model.IndicatorResponse;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -34,7 +35,7 @@ public interface IndicatorMapper {
      */
     void updateIndicate(int oId);
 
-    List<IndicatorResponse> selectIndicatorList(String key);
+    List<IndicatorResponse> selectIndicatorList(@Param("keyword") String keyword);
 
     /**
      * @param indicatorEntity

@@ -5,6 +5,7 @@ import com.situation.analysis.model.AddIndicatorRequest;
 import com.situation.analysis.model.IndicatorResponse;
 import com.situation.analysis.service.IndicatorService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -25,9 +26,12 @@ public class IndicatorController {
     private IndicatorService indicatorService;
 
     @GetMapping("indicators")
-    public List<IndicatorResponse> getIndicatorList(@RequestParam(required = false) String key) {
+    public List<IndicatorResponse> getIndicatorList(@RequestParam(required = false) String keyword) {
         log.debug("start indicator list");
-        return indicatorService.getIndicatorList(key);
+        if (StringUtils.isEmpty(keyword)) {
+            keyword = "";
+        }
+        return indicatorService.getIndicatorList(keyword);
     }
 
     @PostMapping("indicator")
