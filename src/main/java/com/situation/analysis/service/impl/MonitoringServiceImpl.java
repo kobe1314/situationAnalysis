@@ -83,13 +83,13 @@ public class MonitoringServiceImpl implements MonitoringService {
      *
      * @param request
      */
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public void addObject(AddMonitoringObjectRequest request) {
 
         String token = (String) SecurityUtils.getSubject().getPrincipal();
         String username = "";
-        if(!StringUtils.isEmpty(token)) {
+        if (!StringUtils.isEmpty(token)) {
             username = JwtUtil.getUsernameFromToken(token);
         }
         MonitoringObjectEntity objectEntity = new MonitoringObjectEntity();
@@ -99,7 +99,8 @@ public class MonitoringServiceImpl implements MonitoringService {
         objectEntity.setCreatedBy(username);
         objectEntity.setCreatedTime(new Date().toLocaleString());
 
-        int insertId = monitoringObjectMapper.addMonitoringObject(objectEntity);
+        monitoringObjectMapper.addMonitoringObject(objectEntity);
+        int insertId = objectEntity.getId();
         log.info("adding object id is {}", insertId);
 
         List<IndicatorInformation> iList = request.getIndicatorInformationList();
@@ -108,6 +109,19 @@ public class MonitoringServiceImpl implements MonitoringService {
         });
         indicatorMapper.batchUpdateIndicator(iList);
         log.debug("finish add object");
+    }
+
+    /**
+     * @param id
+     */
+    @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public void deleteObject(int id) {
+        log.info("delete object id: {}", id);
+        monitoringObjectMapper.deleteMonitoringObject(id);
+        indicatorMapper.updateIndicate(id);
+        log.info("finished delete object ");
+
     }
 
     private PageInfo<MonitoringLevelEntity> getPageInfo(PageRequest pageRequest) {

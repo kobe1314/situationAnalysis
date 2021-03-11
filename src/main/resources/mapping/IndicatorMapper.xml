@@ -17,7 +17,7 @@
         select * from indicator;
     </select>
 
-    <insert id="batchUpdateIndicator" parameterType="list">
+    <update id="batchUpdateIndicator" parameterType="list">
         <foreach collection="list" item="item" index="index" open="" close="" separator=";">
             update indicator
             <set>
@@ -26,7 +26,11 @@
             </set>
             where id = ${item.id}
         </foreach>
-    </insert>
+    </update>
+
+    <update id="updateIndicate" parameterType="java.lang.Integer">
+        update indicator set O_ID =null where O_ID = #{oId};
+    </update>
 
 <!--    <select id="selectMonitoringLevelsByPage" resultMap="BaseResultMap">-->
 <!--        select * from monitoringLevel-->

@@ -18,18 +18,17 @@ import java.util.List;
  */
 @Slf4j
 @RestController
+@ResponseResult
 public class BusinessController {
     @Resource
     private MonitoringService monitoringService;
 
-    @ResponseResult
     @GetMapping("monitoringLevel")
     public List<MonitoringLevelResponse> getAllMonitoringLevels() {
         log.debug("start monitoring level controller");
         return monitoringService.getAllMonitoringLevels();
     }
 
-    @ResponseResult
     @PostMapping("monitoringLevel")
     public PageResult<MonitoringLevelEntity> getMonitoringLevelsByPage(@RequestBody PageRequest pageRequest) {
         log.debug("pageNumber:{},pageSize:{}", pageRequest.getPageNum(), pageRequest.getPageSize());
@@ -37,17 +36,21 @@ public class BusinessController {
     }
 
 
-    @ResponseResult
     @GetMapping("indicators")
     public List<IndicatorResponse> getIndicatorList() {
         log.debug("start indicator list");
         return monitoringService.getIndicatorList();
     }
 
-    @ResponseResult
     @PostMapping("object")
     public void addObject(@RequestBody AddMonitoringObjectRequest request) {
         log.debug("start add object");
         monitoringService.addObject(request);
+    }
+
+    @DeleteMapping("object")
+    public void deleteObject(@RequestParam int id) {
+        log.debug("start delete object");
+        monitoringService.deleteObject(id);
     }
 }

@@ -23,5 +23,13 @@ public interface IndicatorMapper {
      */
     void updateIndicator(IndicatorEntity indicatorEntity);
 
+    /**
+     * @param list
+     */
     void batchUpdateIndicator(List<IndicatorInformation> list);
+
+    /**
+     * @param oId
+     */
+    void updateIndicate(int oId);
 }

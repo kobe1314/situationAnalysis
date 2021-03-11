@@ -11,4 +11,6 @@ import com.situation.analysis.entity.MonitoringObjectEntity;
 public interface MonitoringObjectMapper {
 
     int addMonitoringObject(MonitoringObjectEntity objectEntity);
+    
+    void deleteMonitoringObject(int id);
 }

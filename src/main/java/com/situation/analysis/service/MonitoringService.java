@@ -32,4 +32,12 @@ public interface MonitoringService {
      * @param request
      */
     void addObject(AddMonitoringObjectRequest request);
+
+    /**
+     * @param id
+     */
+    void deleteObject(int id);
+    
+    
+
 }

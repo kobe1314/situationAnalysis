@@ -29,6 +29,10 @@
             values(#{name},#{impactFactor},#{runThreshold},#{levelId},#{createdBy},#{createdTime});
     </insert>
 
+    <delete id="deleteMonitoringObject" parameterType="java.lang.Integer">
+        delete from monitoringObject where id = #{id};
+    </delete>
+
     <!--    <select id="selectAllMonitoringLevels" resultMap="BaseResultMap">-->
     <!--        select * from monitoringLevel;-->
     <!--    </select>-->
