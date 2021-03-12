@@ -1,7 +1,9 @@
 package com.situation.analysis.controller;
 
+import com.github.pagehelper.util.StringUtil;
 import com.situation.analysis.annotation.ResponseResult;
 import com.situation.analysis.model.AddMonitoringObjectRequest;
+import com.situation.analysis.model.MonitoringObjectListResponse;
 import com.situation.analysis.service.ObjectService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -32,5 +34,13 @@ public class ObjectController {
     public void deleteObject(@RequestParam int id) {
         log.debug("start delete object");
         objectService.deleteObject(id);
+    }
+
+    @GetMapping("objects")
+    public MonitoringObjectListResponse selectObjectList(@RequestParam(required = false) String keyWord) {
+        if (StringUtil.isEmpty(keyWord)) {
+            keyWord = "";
+        }
+        return objectService.getMonitoringObjectList(keyWord);
     }
 }

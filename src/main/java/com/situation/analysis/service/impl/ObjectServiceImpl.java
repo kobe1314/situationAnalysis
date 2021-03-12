@@ -4,10 +4,7 @@ import com.situation.analysis.entity.MonitoringLevelEntity;
 import com.situation.analysis.entity.MonitoringObjectEntity;
 import com.situation.analysis.mapper.IndicatorMapper;
 import com.situation.analysis.mapper.MonitoringObjectMapper;
-import com.situation.analysis.model.AddMonitoringObjectRequest;
-import com.situation.analysis.model.IndicatorInformation;
-import com.situation.analysis.model.LevelInfo;
-import com.situation.analysis.model.MonitoringObjectListResponse;
+import com.situation.analysis.model.*;
 import com.situation.analysis.service.ObjectService;
 import com.situation.analysis.util.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -88,16 +85,11 @@ public class ObjectServiceImpl implements ObjectService {
      * @return
      */
     @Override
-    public MonitoringObjectListResponse getMonitoringObjectList() {
+    public MonitoringObjectListResponse getMonitoringObjectList(String keyWord) {
+        log.info("search object keyWord: {}", keyWord);
         MonitoringObjectListResponse response = new MonitoringObjectListResponse();
-
-        List<LevelInfo> objectList = new ArrayList<>();
-        //List<MonitoringLevelEntity> list = monitoringLevelMapper.selectAllMonitoringLevels();
-        //list.stream().map(levelEntity -> {
-        //    int lId = levelEntity.getId();
-        //})
-        //private String levelName;
-        //private List<ObjectInfo> objectList;
-        return null;
+        List<MonitoringObjectInfo> list = monitoringObjectMapper.selectObjectList(keyWord);
+        response.setObjectList(list);
+        return response;
     }
 }

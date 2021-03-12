@@ -26,5 +26,5 @@ public interface ObjectService {
     /**
      * @return
      */
-    MonitoringObjectListResponse getMonitoringObjectList();
+    MonitoringObjectListResponse getMonitoringObjectList(String keyWord);
 }

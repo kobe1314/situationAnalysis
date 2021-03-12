@@ -1,6 +1,7 @@
 package com.situation.analysis.mapper;
 
 import com.situation.analysis.entity.MonitoringObjectEntity;
+import com.situation.analysis.model.MonitoringObjectInfo;
 import com.situation.analysis.model.ObjectInfo;
 
 import java.util.List;
@@ -16,6 +17,16 @@ public interface MonitoringObjectMapper {
     int addMonitoringObject(MonitoringObjectEntity objectEntity);
     
     void deleteMonitoringObject(int id);
-    
+
+    /**
+     * @param lId 
+     * @return
+     */
     List<ObjectInfo> getMonitoringObjects(int lId);
+
+    /**
+     * @param keyWord 
+     * @return
+     */
+    List<MonitoringObjectInfo> selectObjectList(String keyWord);
 }

@@ -22,17 +22,13 @@
         <result column="UPDATED_BY" property="updatedBy"/>
         <result column="UPDATED_TIME" property="updatedTime"/>
     </resultMap>
-<!--    private String objectName;-->
-<!--    private int runThreshold;-->
-<!--    <resultMap id="BaseResultMap" type="com.situation.analysis.model.ObjectInfo">-->
-<!--        <result column="NAME" property="objectName"/>-->
-<!--        <result column="RUN_THRESHOLD" property="runThreshold"/>-->
-<!--    </resultMap>-->
 
-
-    <resultMap id="response" type="com.situation.analysis.model.MonitoringObjectListResponse">
+    <resultMap id="monitoringObjectInfo" type="com.situation.analysis.model.MonitoringObjectInfo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="NAME" property="objectName"/>
         <result column="RUN_THRESHOLD" property="runThreshold"/>
+        <result column="LEVEL_NAME" property="levelName"/>
+        <result column="INAME" property="indicatorName"/>
     </resultMap>
 
 
@@ -45,9 +41,13 @@
         delete from monitoringObject where id = #{id};
     </delete>
 
-<!--        <select id="getMonitoringObjects" resultMap="response">-->
-<!--            select * from monitoringObject where L_ID = #{lId};-->
-<!--        </select>-->
+
+    <select id="selectObjectList" resultMap="monitoringObjectInfo">
+            select o.id,o.name,o.RUN_THRESHOLD,monitoringLevel.name LEVEL_NAME, indicator.name INAME
+            from situationAnalysis.monitoringObject o
+            left join monitoringLevel  on o.l_id = monitoringLevel.id
+            left join indicator on o.id = indicator.O_ID;
+     </select>
 
 
     <!--    <select id="selectMonitoringLevelsByPage" resultMap="BaseResultMap">-->

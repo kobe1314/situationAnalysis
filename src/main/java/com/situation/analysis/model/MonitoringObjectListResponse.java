@@ -12,5 +12,5 @@ import java.util.List;
  */
 @Data
 public class MonitoringObjectListResponse {
-    private List<LevelInfo> objectList;
+    private List<MonitoringObjectInfo> objectList;
 }
