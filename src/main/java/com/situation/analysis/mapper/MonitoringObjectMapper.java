@@ -14,12 +14,24 @@ import java.util.List;
  */
 public interface MonitoringObjectMapper {
 
+    /**
+     * @param objectEntity
+     * @return insertId
+     */
     int addMonitoringObject(MonitoringObjectEntity objectEntity);
-    
+
+    /**
+     * @param id
+     */
     void deleteMonitoringObject(int id);
 
     /**
-     * @param lId 
+     * @param objectEntity
+     */
+    void updateMonitoringObject(MonitoringObjectEntity objectEntity);
+
+    /**
+     * @param lId
      * @return
      */
     List<ObjectInfo> getMonitoringObjects(int lId);

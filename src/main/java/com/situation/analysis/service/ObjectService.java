@@ -24,6 +24,11 @@ public interface ObjectService {
     void deleteObject(int id);
 
     /**
+     * @param request
+     */
+    void updateObject(AddMonitoringObjectRequest request);
+
+    /**
      * @return
      */
     MonitoringObjectListResponse getMonitoringObjectList(String keyWord);

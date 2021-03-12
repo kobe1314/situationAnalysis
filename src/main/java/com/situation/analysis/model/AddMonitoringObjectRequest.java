@@ -12,6 +12,7 @@ import java.util.List;
  */
 @Data
 public class AddMonitoringObjectRequest {
+    private int id;
     private String objectName;
     private int runThreshold;
     private int levelId;

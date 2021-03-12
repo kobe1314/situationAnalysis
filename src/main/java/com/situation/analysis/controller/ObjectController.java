@@ -40,4 +40,10 @@ public class ObjectController {
     public MonitoringObjectListResponse selectObjectList(@RequestParam(required = false) String keyWord) {
         return objectService.getMonitoringObjectList(keyWord);
     }
+
+    @PutMapping("object")
+    public void updateObject(@RequestBody AddMonitoringObjectRequest request) {
+        log.debug("start update object");
+        objectService.updateObject(request);
+    }
 }

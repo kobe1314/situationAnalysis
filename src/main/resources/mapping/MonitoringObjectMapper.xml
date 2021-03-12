@@ -41,6 +41,28 @@
         delete from monitoringObject where id = #{id};
     </delete>
 
+    <update id="updateMonitoringObject" parameterType="MonitoringObjectEntity">
+        update monitoringObject
+        <set>
+            <if test="name != null">
+                NAME = #{name},
+            </if>
+            <if test="runThreshold != null">
+                RUN_THRESHOLD = #{runThreshold},
+            </if>
+            <if test="levelId != null">
+                L_ID = #{levelId},
+            </if>
+            <if test="updatedBy != null">
+                UPDATED_BY = #{updatedBy},
+            </if>
+            <if test="updatedTime != null">
+                UPDATED_TIME = #{updatedTime}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
 
     <select id="selectObjectList" resultMap="monitoringObjectInfo">
         select o.id,o.name,o.RUN_THRESHOLD,monitoringLevel.name LEVEL_NAME, indicator.name INAME

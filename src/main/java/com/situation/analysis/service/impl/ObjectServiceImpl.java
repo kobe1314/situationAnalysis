@@ -12,6 +12,7 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
@@ -49,13 +50,7 @@ public class ObjectServiceImpl implements ObjectService {
         //if (!StringUtils.isEmpty(token)) {
         //    username = JwtUtil.getUsernameFromToken(token);
         //}
-        MonitoringObjectEntity objectEntity = new MonitoringObjectEntity();
-        objectEntity.setName(request.getObjectName());
-        objectEntity.setRunThreshold(request.getRunThreshold());
-        objectEntity.setLevelId(request.getLevelId());
-        objectEntity.setCreatedBy(username);
-        objectEntity.setCreatedTime(new Date().toLocaleString());
-
+        MonitoringObjectEntity objectEntity = createObjectEntity(request, username);
         monitoringObjectMapper.addMonitoringObject(objectEntity);
         int insertId = objectEntity.getId();
         log.info("adding object id is {}", insertId);
@@ -82,6 +77,24 @@ public class ObjectServiceImpl implements ObjectService {
     }
 
     /**
+     * @param request
+     */
+    @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public void updateObject(AddMonitoringObjectRequest request) {
+        String username = "";
+        MonitoringObjectEntity objectEntity = createObjectEntity(request, username);
+        monitoringObjectMapper.updateMonitoringObject(objectEntity);
+        log.info("finished update object ");
+
+        List<IndicatorInformation> iList = request.getIndicatorInformationList();
+        iList.stream().forEach(indicator -> {
+            indicator.setObjectId(request.getId());
+        });
+        indicatorMapper.batchUpdateIndicator(iList);
+    }
+
+    /**
      * @return
      */
     @Override
@@ -91,5 +104,23 @@ public class ObjectServiceImpl implements ObjectService {
         List<MonitoringObjectInfo> list = monitoringObjectMapper.selectObjectList(keyWord);
         response.setObjectList(list);
         return response;
+    }
+
+    private MonitoringObjectEntity createObjectEntity(AddMonitoringObjectRequest request, String username) {
+        MonitoringObjectEntity objectEntity = new MonitoringObjectEntity();
+        objectEntity.setName(request.getObjectName());
+        objectEntity.setRunThreshold(request.getRunThreshold());
+        objectEntity.setLevelId(request.getLevelId());
+
+        if (ObjectUtils.isEmpty(request.getId())) {
+            objectEntity.setCreatedBy(username);
+            objectEntity.setCreatedTime(new Date().toLocaleString());
+        } else {
+            objectEntity.setId(request.getId());
+            objectEntity.setUpdatedBy(username);
+            objectEntity.setUpdatedTime(new Date().toLocaleString());
+        }
+
+        return objectEntity;
     }
 }
