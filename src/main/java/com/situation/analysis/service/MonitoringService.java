@@ -26,22 +26,7 @@ public interface MonitoringService {
     
 
 
-    /**
-     * add object
-     *
-     * @param request
-     */
-    void addObject(AddMonitoringObjectRequest request);
 
-    /**
-     * @param id
-     */
-    void deleteObject(int id);
-
-    /**
-     * @return
-     */
-    MonitoringObjectListResponse  getMonitoringObjectList();
     
     
 

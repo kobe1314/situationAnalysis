@@ -36,17 +36,4 @@ public class BusinessController {
     }
 
 
-
-
-    @PostMapping("object")
-    public void addObject(@RequestBody AddMonitoringObjectRequest request) {
-        log.debug("start add object");
-        monitoringService.addObject(request);
-    }
-
-    @DeleteMapping("object")
-    public void deleteObject(@RequestParam int id) {
-        log.debug("start delete object");
-        monitoringService.deleteObject(id);
-    }
 }

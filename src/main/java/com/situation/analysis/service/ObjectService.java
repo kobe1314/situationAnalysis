@@ -1,5 +1,8 @@
 package com.situation.analysis.service;
 
+import com.situation.analysis.model.AddMonitoringObjectRequest;
+import com.situation.analysis.model.MonitoringObjectListResponse;
+
 /**
  * @description: object service
  * @author: Kobe
@@ -7,4 +10,21 @@ package com.situation.analysis.service;
  * @version: v1.0
  */
 public interface ObjectService {
+
+    /**
+     * add object
+     *
+     * @param request
+     */
+    void addObject(AddMonitoringObjectRequest request);
+
+    /**
+     * @param id
+     */
+    void deleteObject(int id);
+
+    /**
+     * @return
+     */
+    MonitoringObjectListResponse getMonitoringObjectList();
 }
