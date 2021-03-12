@@ -13,10 +13,10 @@ import java.util.List;
  */
 public interface IndicatorService {
     /**
-     * @param key
+     * @param keyWord
      * @return
      */
-    List<IndicatorResponse> getIndicatorList(String key);
+    List<IndicatorResponse> getIndicatorList(String keyWord);
 
     /**
      * @param request

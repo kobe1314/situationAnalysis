@@ -43,11 +43,16 @@
 
 
     <select id="selectObjectList" resultMap="monitoringObjectInfo">
-            select o.id,o.name,o.RUN_THRESHOLD,monitoringLevel.name LEVEL_NAME, indicator.name INAME
-            from situationAnalysis.monitoringObject o
-            left join monitoringLevel  on o.l_id = monitoringLevel.id
-            left join indicator on o.id = indicator.O_ID;
-     </select>
+        select o.id,o.name,o.RUN_THRESHOLD,monitoringLevel.name LEVEL_NAME, indicator.name INAME
+        from situationAnalysis.monitoringObject o
+        left join monitoringLevel on o.l_id = monitoringLevel.id
+        left join indicator on o.id = indicator.O_ID
+        <where>
+            <if test="null != keyword">
+                and o.name like CONCAT('%',#{keyword},'%')
+            </if>
+        </where>
+    </select>
 
 
     <!--    <select id="selectMonitoringLevelsByPage" resultMap="BaseResultMap">-->

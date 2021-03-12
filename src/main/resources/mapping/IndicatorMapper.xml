@@ -28,7 +28,12 @@
 
     <select id="selectIndicatorList" resultMap="response" parameterType="string">
         select i.id,i.name,i.instruction,i.IS_ORIGINAL_VALUE,o.name OBJECT_NAME
-            from indicator i left join monitoringObject o on i.O_ID = o.ID where i.name like CONCAT('%',#{keyword},'%');
+        from indicator i left join monitoringObject o on i.O_ID = o.ID
+        <where>
+            <if test="null != keyWord">
+                i.name like CONCAT('%',#{keyWord},'%')
+            </if>
+        </where>
     </select>
 
     <update id="batchUpdateIndicator" parameterType="list">

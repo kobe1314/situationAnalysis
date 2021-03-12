@@ -26,12 +26,9 @@ public class IndicatorController {
     private IndicatorService indicatorService;
 
     @GetMapping("indicators")
-    public List<IndicatorResponse> getIndicatorList(@RequestParam(required = false) String keyword) {
+    public List<IndicatorResponse> getIndicatorList(@RequestParam(required = false) String keyWord) {
         log.debug("start indicator list");
-        if (StringUtils.isEmpty(keyword)) {
-            keyword = "";
-        }
-        return indicatorService.getIndicatorList(keyword);
+        return indicatorService.getIndicatorList(keyWord);
     }
 
     @PostMapping("indicator")

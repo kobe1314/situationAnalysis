@@ -25,12 +25,12 @@ public class IndicatorServiceImpl implements IndicatorService {
     private IndicatorMapper indicatorMapper;
 
     /**
-     * @param key
+     * @param keyWord
      * @return
      */
     @Override
-    public List<IndicatorResponse> getIndicatorList(String key) {
-        return indicatorMapper.selectIndicatorList(key);
+    public List<IndicatorResponse> getIndicatorList(String keyWord) {
+        return indicatorMapper.selectIndicatorList(keyWord);
     }
 
     /**

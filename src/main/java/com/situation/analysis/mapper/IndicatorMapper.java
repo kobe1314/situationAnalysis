@@ -35,7 +35,11 @@ public interface IndicatorMapper {
      */
     void updateIndicate(int oId);
 
-    List<IndicatorResponse> selectIndicatorList(@Param("keyword") String keyword);
+    /**
+     * @param keyWord
+     * @return
+     */
+    List<IndicatorResponse> selectIndicatorList(String keyWord);
 
     /**
      * @param indicatorEntity

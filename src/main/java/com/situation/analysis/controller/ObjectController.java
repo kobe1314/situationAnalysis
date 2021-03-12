@@ -38,9 +38,6 @@ public class ObjectController {
 
     @GetMapping("objects")
     public MonitoringObjectListResponse selectObjectList(@RequestParam(required = false) String keyWord) {
-        if (StringUtil.isEmpty(keyWord)) {
-            keyWord = "";
-        }
         return objectService.getMonitoringObjectList(keyWord);
     }
 }
