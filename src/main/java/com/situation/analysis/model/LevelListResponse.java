@@ -6,12 +6,12 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * @description: Level
+ * @description: level
  * @author: Kobe
- * @date: 2021/3/9 下午9:35
+ * @date: 2021/3/12 下午12:11
  * @version: v1.0
  */
 @Data
-public class MonitoringLevelResponse {
-
+public class LevelListResponse {
+    private List<LevelInfoResponse> levelInfoList;
 }

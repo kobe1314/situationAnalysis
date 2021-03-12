@@ -12,6 +12,28 @@
         <result column="UPDATED_TIME" property="updatedTime"/>
     </resultMap>
 
+    <resultMap id="levelInfoResponse" type="com.situation.analysis.model.LevelInfoResponse">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="NAME" property="name"/>
+        <result column="IMPACT_FACTOR" property="impactFactor"/>
+        <result column="RUN_THRESHOLD" property="runThreshold"/>
+        <collection property="objectList" ofType="com.situation.analysis.model.ObjectInfo" column="id" select="getObjectList"></collection>
+    </resultMap>
+
+    <resultMap id="objectInfo" type="com.situation.analysis.model.ObjectInfo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="NAME" property="objectName"/>
+        <result column="IMPACT_FACTOR" property="impactFactor"/>
+    </resultMap>
+
+    <select id="getObjectList" parameterType="int" resultMap="objectInfo">
+        select * from monitoringObject where L_ID = #{id}
+    </select>
+
+    <select id="getLevelInfoList" resultMap="levelInfoResponse">
+        select * from monitoringLevel;
+    </select>
+
     <select id="selectAllMonitoringLevels" resultMap="BaseResultMap">
         select * from monitoringLevel;
     </select>

@@ -1,5 +1,9 @@
 package com.situation.analysis.service;
 
+import com.situation.analysis.model.LevelInfoResponse;
+
+import java.util.List;
+
 /**
  * @description: level service
  * @author: Kobe
@@ -7,4 +11,9 @@ package com.situation.analysis.service;
  * @version: v1.0
  */
 public interface LevelService {
+
+    /**
+     * @return List<LevelInfoResponse>
+     */
+    List<LevelInfoResponse> getLevelInfoList();
 }
