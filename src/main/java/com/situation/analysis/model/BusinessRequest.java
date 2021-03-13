@@ -2,22 +2,23 @@ package com.situation.analysis.model;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * @description: 添加监测对象
+ * @description: request
  * @author: Kobe
- * @date: 2021/3/9 下午10:17
+ * @date: 2021/3/13 上午11:34
  * @version: v1.0
  */
 @Data
-public class AddMonitoringObjectRequest {
+public class BusinessRequest {
     /**
      *  pass id in update request
      */
     private int id;
-    private String objectName;
+    private String name;
+    private String platform;
     private int runThreshold;
-    private int levelId;
-    private List<IndicatorInformation> indicatorInformationList;
+    private List<ObjectInfo> objectList;
 }

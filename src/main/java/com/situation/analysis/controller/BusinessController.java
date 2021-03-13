@@ -3,6 +3,7 @@ package com.situation.analysis.controller;
 import com.situation.analysis.annotation.ResponseResult;
 import com.situation.analysis.model.*;
 import com.situation.analysis.entity.MonitoringLevelEntity;
+import com.situation.analysis.service.BusinessService;
 import com.situation.analysis.service.MonitoringService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -21,19 +22,14 @@ import java.util.List;
 @ResponseResult
 public class BusinessController {
     @Resource
-    private MonitoringService monitoringService;
+    private BusinessService businessService;
 
-    //@GetMapping("monitoringLevel")
-    //public List<MonitoringLevelResponse> getAllMonitoringLevels() {
-    //    log.debug("start monitoring level controller");
-    //    return monitoringService.getAllMonitoringLevels();
-    //}
-
-    @PostMapping("monitoringLevel")
-    public PageResult<MonitoringLevelEntity> getMonitoringLevelsByPage(@RequestBody PageRequest pageRequest) {
-        log.debug("pageNumber:{},pageSize:{}", pageRequest.getPageNum(), pageRequest.getPageSize());
-        return monitoringService.getMonitoringLevelsByPage(pageRequest);
+    @PostMapping("business")
+    public void addBusines(@RequestBody BusinessRequest request) {
+        log.debug("start add business");
+        businessService.addNewBusiness(request);
     }
+
 
 
 }

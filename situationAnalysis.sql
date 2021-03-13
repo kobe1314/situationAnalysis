@@ -23,12 +23,13 @@ CREATE TABLE monitoringLevel(
 
 
 DROP TABLE IF EXISTS monitoringObject;
-CREATE TABLE monitoringObjects(
+CREATE TABLE monitoringObject(
     ID INT NOT NULL AUTO_INCREMENT  COMMENT 'ID' ,
     NAME VARCHAR(32)    COMMENT '对象名称' ,
     IMPACT_FACTOR DECIMAL(32,10)    COMMENT '影响因子' ,
     RUN_THRESHOLD INT    COMMENT '报警阈值' ,
     L_ID INT    COMMENT '所属层次' ,
+    B_ID INT    COMMENT '所属业务' ,
     CREATED_BY VARCHAR(32)    COMMENT '创建人' ,
     CREATED_TIME VARCHAR(32)    COMMENT '创建时间' ,
     UPDATED_BY VARCHAR(32)    COMMENT '更新人' ,
@@ -51,6 +52,20 @@ CREATE TABLE indicator(
     UPDATED_TIME VARCHAR(32)    COMMENT '更新时间' ,
     PRIMARY KEY (ID)
 ) COMMENT = '指标 ';
+
+DROP TABLE IF EXISTS businessSystem;
+CREATE TABLE businessSystem(
+    ID INT NOT NULL AUTO_INCREMENT  COMMENT 'ID' ,
+    NAME VARCHAR(32)    COMMENT '业务名称' ,
+    IMPACT_FACTOR DECIMAL(32,10)    COMMENT '影响因子' ,
+    PLATFORM VARCHAR(32)    COMMENT '平台' ,
+    RUN_THRESHOLD INT    COMMENT '阈值' ,
+    CREATED_BY VARCHAR(32)    COMMENT '创建人' ,
+    CREATED_TIME VARCHAR(32)    COMMENT '创建时间' ,
+    UPDATED_BY VARCHAR(32)    COMMENT '更新人' ,
+    UPDATED_TIME VARCHAR(32)    COMMENT '更新时间' ,
+    PRIMARY KEY (ID)
+) COMMENT = '业务系统管理 ';
 
 
 

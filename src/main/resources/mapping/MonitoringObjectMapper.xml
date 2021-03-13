@@ -57,8 +57,15 @@
         <foreach collection="list" item="item" index="index" open="" close="" separator=";">
             update monitoringObject
             <set>
-                L_ID=#{item.levelId},
-                IMPACT_FACTOR=#{item.impactFactor}
+                <if test="item.impactFactor != null">
+                    IMPACT_FACTOR=#{item.impactFactor},
+                </if>
+                <if test="item.levelId != 0">
+                    L_ID=#{item.levelId}
+                </if>
+                <if test="item.businessId != 0">
+                    B_ID=#{item.businessId}
+                </if>
             </set>
             where id = #{item.id}
         </foreach>
