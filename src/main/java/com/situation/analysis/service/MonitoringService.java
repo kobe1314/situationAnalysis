@@ -15,7 +15,7 @@ public interface MonitoringService {
     /**
      * @return List<MonitoringLevel>
      */
-    List<MonitoringLevelResponse> getAllMonitoringLevels();
+    //List<MonitoringLevelResponse> getAllMonitoringLevels();
 
 
     /**

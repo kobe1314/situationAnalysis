@@ -63,6 +63,17 @@
         where id = #{id}
     </update>
 
+    <update id="batchUpdateMonitoringObject" parameterType="list">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update monitoringObject
+            <set>
+                L_ID=#{item.levelId},
+                IMPACT_FACTOR=#{item.impactFactor}
+            </set>
+            where id = #{item.id}
+        </foreach>
+    </update>
+
 
     <select id="selectObjectList" resultMap="monitoringObjectInfo">
         select o.id,o.name,o.RUN_THRESHOLD,monitoringLevel.name LEVEL_NAME, indicator.name INAME

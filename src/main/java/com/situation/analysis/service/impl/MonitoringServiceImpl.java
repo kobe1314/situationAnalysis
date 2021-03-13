@@ -43,16 +43,16 @@ public class MonitoringServiceImpl implements MonitoringService {
     /**
      * @return List<MonitoringLevel>
      */
-    @Override
-    public List<MonitoringLevelResponse> getAllMonitoringLevels() {
-        List<MonitoringLevelEntity> list = monitoringLevelMapper.selectAllMonitoringLevels();
-        BeanCopier copier = BeanCopier.create(MonitoringLevelEntity.class, MonitoringLevelResponse.class, false);
-        return list.stream().map(monitoringLevelEntity -> {
-            MonitoringLevelResponse monitoringLevel = new MonitoringLevelResponse();
-            copier.copy(monitoringLevelEntity, monitoringLevel, null);
-            return monitoringLevel;
-        }).collect(Collectors.toList());
-    }
+    //@Override
+    //public List<MonitoringLevelResponse> getAllMonitoringLevels() {
+    //    List<MonitoringLevelEntity> list = monitoringLevelMapper.selectAllMonitoringLevels();
+    //    BeanCopier copier = BeanCopier.create(MonitoringLevelEntity.class, MonitoringLevelResponse.class, false);
+    //    return list.stream().map(monitoringLevelEntity -> {
+    //        MonitoringLevelResponse monitoringLevel = new MonitoringLevelResponse();
+    //        copier.copy(monitoringLevelEntity, monitoringLevel, null);
+    //        return monitoringLevel;
+    //    }).collect(Collectors.toList());
+    //}
 
     /**
      * @param pageRequest

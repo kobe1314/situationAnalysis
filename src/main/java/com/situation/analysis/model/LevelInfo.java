@@ -12,7 +12,7 @@ import java.util.List;
  * @version: v1.0
  */
 @Data
-public class LevelInfoResponse {
+public class LevelInfo {
     private int id;
     private String name;
     private BigDecimal impactFactor;

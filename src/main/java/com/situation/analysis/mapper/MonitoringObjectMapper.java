@@ -37,8 +37,13 @@ public interface MonitoringObjectMapper {
     List<ObjectInfo> getMonitoringObjects(int lId);
 
     /**
-     * @param keyWord 
+     * @param keyWord
      * @return
      */
     List<MonitoringObjectInfo> selectObjectList(String keyWord);
+
+    /**
+     * @param list 
+     */
+    void batchUpdateMonitoringObject(List<MonitoringObjectEntity> list);
 }

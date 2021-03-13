@@ -23,11 +23,11 @@ public class BusinessController {
     @Resource
     private MonitoringService monitoringService;
 
-    @GetMapping("monitoringLevel")
-    public List<MonitoringLevelResponse> getAllMonitoringLevels() {
-        log.debug("start monitoring level controller");
-        return monitoringService.getAllMonitoringLevels();
-    }
+    //@GetMapping("monitoringLevel")
+    //public List<MonitoringLevelResponse> getAllMonitoringLevels() {
+    //    log.debug("start monitoring level controller");
+    //    return monitoringService.getAllMonitoringLevels();
+    //}
 
     @PostMapping("monitoringLevel")
     public PageResult<MonitoringLevelEntity> getMonitoringLevelsByPage(@RequestBody PageRequest pageRequest) {

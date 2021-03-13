@@ -1,7 +1,7 @@
 package com.situation.analysis.mapper;
 
 import com.situation.analysis.entity.MonitoringLevelEntity;
-import com.situation.analysis.model.LevelInfoResponse;
+import com.situation.analysis.model.LevelInfo;
 
 import java.util.List;
 
@@ -27,5 +27,10 @@ public interface MonitoringLevelMapper {
     /**
      * @return List<LevelInfoResponse>
      */
-    List<LevelInfoResponse> getLevelInfoList();
+    List<LevelInfo> getLevelInfoList();
+
+    /**
+     * @param entity
+     */
+    void updateLevelInfo(MonitoringLevelEntity entity);
 }

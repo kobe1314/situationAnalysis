@@ -12,12 +12,13 @@
         <result column="UPDATED_TIME" property="updatedTime"/>
     </resultMap>
 
-    <resultMap id="levelInfoResponse" type="com.situation.analysis.model.LevelInfoResponse">
+    <resultMap id="levelInfoResponse" type="com.situation.analysis.model.LevelInfo">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="NAME" property="name"/>
         <result column="IMPACT_FACTOR" property="impactFactor"/>
         <result column="RUN_THRESHOLD" property="runThreshold"/>
-        <collection property="objectList" ofType="com.situation.analysis.model.ObjectInfo" column="id" select="getObjectList"></collection>
+        <collection property="objectList" ofType="com.situation.analysis.model.ObjectInfo" column="id"
+                    select="getObjectList"></collection>
     </resultMap>
 
     <resultMap id="objectInfo" type="com.situation.analysis.model.ObjectInfo">
@@ -42,5 +43,24 @@
     <select id="selectMonitoringLevelsByPage" resultMap="BaseResultMap">
         select * from monitoringLevel
     </select>
+
+    <update id="updateLevelInfo" parameterType="MonitoringLevelEntity">
+        update monitoringLevel
+        <set>
+            <if test="impactFactor != null">
+                IMPACT_FACTOR = #{impactFactor},
+            </if>
+            <if test="runThreshold != null">
+                RUN_THRESHOLD = #{runThreshold},
+            </if>
+            <if test="updatedBy != null">
+                UPDATED_BY = #{updatedBy},
+            </if>
+            <if test="updatedTime != null">
+                UPDATED_TIME = #{updatedTime}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 
 </mapper>
