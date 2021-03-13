@@ -11,7 +11,7 @@ import java.util.List;
  * @version: v1.0
  */
 @Data
-public class AddMonitoringObjectRequest {
+public class MonitoringObjectRequest {
     /**
      *  pass id in update request
      */

@@ -1,6 +1,9 @@
 package com.situation.analysis.mapper;
 
 import com.situation.analysis.entity.BusinessEntity;
+import com.situation.analysis.model.BusinessInfo;
+
+import java.util.List;
 
 /**
  * @description: BusinessMapper
@@ -24,8 +27,11 @@ public interface BusinessMapper {
      * @param entity 
      */
     void updateBusiness(BusinessEntity entity);
-    
-    
+
+    /**
+     * @return 
+     */
+    List<BusinessInfo> getBusinessInfoList(String keyWord);
     
     
 }

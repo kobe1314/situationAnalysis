@@ -1,6 +1,6 @@
 package com.situation.analysis.service;
 
-import com.situation.analysis.model.AddMonitoringObjectRequest;
+import com.situation.analysis.model.MonitoringObjectRequest;
 import com.situation.analysis.model.MonitoringObjectListResponse;
 import com.situation.analysis.model.Option;
 
@@ -19,7 +19,7 @@ public interface ObjectService {
      *
      * @param request
      */
-    void addObject(AddMonitoringObjectRequest request);
+    void addObject(MonitoringObjectRequest request);
 
     /**
      * @param id
@@ -29,7 +29,7 @@ public interface ObjectService {
     /**
      * @param request
      */
-    void updateObject(AddMonitoringObjectRequest request);
+    void updateObject(MonitoringObjectRequest request);
 
     /**
      * @return

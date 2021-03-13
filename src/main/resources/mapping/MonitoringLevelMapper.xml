@@ -21,13 +21,7 @@
                     select="getObjectList"></collection>
     </resultMap>
 
-    <resultMap id="objectInfo" type="com.situation.analysis.model.ObjectInfo">
-        <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="NAME" property="objectName"/>
-        <result column="IMPACT_FACTOR" property="impactFactor"/>
-    </resultMap>
-
-    <select id="getObjectList" parameterType="int" resultMap="objectInfo">
+    <select id="getObjectList" parameterType="int" resultMap="com.situation.analysis.mapper.CommonMapper.objectInfo">
         select * from monitoringObject where L_ID = #{id}
     </select>
 

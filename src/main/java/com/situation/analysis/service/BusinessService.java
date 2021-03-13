@@ -1,7 +1,11 @@
 package com.situation.analysis.service;
 
 import com.situation.analysis.entity.BusinessEntity;
+import com.situation.analysis.model.BusinessInfo;
 import com.situation.analysis.model.BusinessRequest;
+import com.situation.analysis.model.BusinessResponse;
+
+import java.util.List;
 
 /**
  * @description: Business Service
@@ -25,4 +29,9 @@ public interface BusinessService {
      * @param request
      */
     void updateBusiness(BusinessRequest request);
+
+    /**
+     * @return
+     */
+    BusinessResponse getBusinessInfoList(String keyWord);
 }

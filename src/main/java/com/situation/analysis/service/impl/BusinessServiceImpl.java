@@ -1,12 +1,11 @@
 package com.situation.analysis.service.impl;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.situation.analysis.entity.BusinessEntity;
 import com.situation.analysis.entity.MonitoringObjectEntity;
 import com.situation.analysis.mapper.BusinessMapper;
 import com.situation.analysis.mapper.MonitoringObjectMapper;
 import com.situation.analysis.model.BusinessRequest;
-import com.situation.analysis.model.LevelInfo;
+import com.situation.analysis.model.BusinessResponse;
 import com.situation.analysis.model.ObjectInfo;
 import com.situation.analysis.service.BusinessService;
 import lombok.extern.slf4j.Slf4j;
@@ -69,6 +68,18 @@ public class BusinessServiceImpl implements BusinessService {
     public void updateBusiness(BusinessRequest request) {
         businessMapper.updateBusiness(createEntity(request));
         monitoringObjectMapper.batchUpdateMonitoringObject(crateEntities(request.getObjectList(), request.getId()));
+    }
+
+    /**
+     * @param keyWord
+     * @return
+     */
+    @Override
+    public BusinessResponse getBusinessInfoList(String keyWord) {
+        log.info("search business info keyword: {}", keyWord);
+        BusinessResponse response = new BusinessResponse();
+        response.setBusinessInfoList(businessMapper.getBusinessInfoList(keyWord));
+        return response;
     }
 
     private List<MonitoringObjectEntity> crateEntities(List<ObjectInfo> objectList, int bId) {

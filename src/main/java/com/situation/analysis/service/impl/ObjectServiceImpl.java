@@ -1,22 +1,17 @@
 package com.situation.analysis.service.impl;
 
-import com.situation.analysis.entity.MonitoringLevelEntity;
 import com.situation.analysis.entity.MonitoringObjectEntity;
 import com.situation.analysis.mapper.IndicatorMapper;
 import com.situation.analysis.mapper.MonitoringObjectMapper;
 import com.situation.analysis.model.*;
 import com.situation.analysis.service.ObjectService;
-import com.situation.analysis.util.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.shiro.SecurityUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
-import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -43,7 +38,7 @@ public class ObjectServiceImpl implements ObjectService {
      */
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public void addObject(AddMonitoringObjectRequest request) {
+    public void addObject(MonitoringObjectRequest request) {
 
         //String token = (String) SecurityUtils.getSubject().getPrincipal();
         String username = "";
@@ -81,7 +76,7 @@ public class ObjectServiceImpl implements ObjectService {
      */
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public void updateObject(AddMonitoringObjectRequest request) {
+    public void updateObject(MonitoringObjectRequest request) {
         String username = "";
         MonitoringObjectEntity objectEntity = createObjectEntity(request, username);
         monitoringObjectMapper.updateMonitoringObject(objectEntity);
@@ -115,7 +110,7 @@ public class ObjectServiceImpl implements ObjectService {
         return monitoringObjectMapper.getObjectOptionList();
     }
 
-    private MonitoringObjectEntity createObjectEntity(AddMonitoringObjectRequest request, String username) {
+    private MonitoringObjectEntity createObjectEntity(MonitoringObjectRequest request, String username) {
         MonitoringObjectEntity objectEntity = new MonitoringObjectEntity();
         objectEntity.setName(request.getObjectName());
         objectEntity.setRunThreshold(request.getRunThreshold());

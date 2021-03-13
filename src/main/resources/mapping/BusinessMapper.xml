@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.situation.analysis.mapper.BusinessMapper">
-    <resultMap id="BaseResultMap" type="com.situation.analysis.entity.UserEntity">
-        <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="username" property="username"/>
-        <result column="password" property="password"/>
-        <result column="salt" property="salt"/>
-    </resultMap>
 
     <insert id="addNewBusiness" parameterType="BusinessEntity" useGeneratedKeys="true" keyProperty="id">
         insert into businessSystem(NAME,IMPACT_FACTOR,PLATFORM,RUN_THRESHOLD,CREATED_BY,CREATED_TIME)
@@ -41,10 +35,29 @@
         </set>
         where id = #{id}
     </update>
-<!--    <select id="getUserByName" resultMap="BaseResultMap" parameterType="java.lang.String">-->
-<!--        select * from user where username = #{username};-->
-<!--    </select>-->
 
+    <resultMap id="businessInfoResponse" type="com.situation.analysis.model.BusinessInfo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="NAME" property="name"/>
+        <result column="PLATFORM" property="platform"/>
+        <result column="IMPACT_FACTOR" property="impactFactor"/>
+        <result column="RUN_THRESHOLD" property="runThreshold"/>
+        <collection property="objectList" ofType="com.situation.analysis.model.ObjectInfo" column="id"
+                    select="getObjectList"></collection>
+    </resultMap>
+
+    <select id="getObjectList" parameterType="int" resultMap="com.situation.analysis.mapper.CommonMapper.objectInfo">
+        select * from monitoringObject where B_ID = #{id}
+    </select>
+
+    <select id="getBusinessInfoList" resultMap="businessInfoResponse" parameterType="string">
+        select * from businessSystem
+        <where>
+            <if test="null != keyWord">
+                name like CONCAT('%',#{keyWord},'%')
+            </if>
+        </where>
+    </select>
 
 
 </mapper>

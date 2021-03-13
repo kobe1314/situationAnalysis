@@ -41,6 +41,10 @@ public class BusinessController {
         log.debug("start update business");
         businessService.updateBusiness(request);
     }
-
+    @GetMapping("businesses")
+    public BusinessResponse getBusinessResponse(@RequestParam(required = false) String keyWord) {
+        log.debug("start get business list");
+        return businessService.getBusinessInfoList(keyWord);
+    }
 
 }
