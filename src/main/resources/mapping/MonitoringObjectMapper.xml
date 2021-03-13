@@ -89,4 +89,8 @@
         select id, name from monitoringObject where L_ID  = 0 or L_ID is null;
     </select>
 
+    <update id="unbindObjectWithBusiness" parameterType="java.lang.Integer">
+        update monitoringObject set B_ID =null where B_ID = #{bId};
+    </update>
+
 </mapper>

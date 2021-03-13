@@ -51,8 +51,11 @@ public class BusinessServiceImpl implements BusinessService {
      * @param id
      */
     @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public void deleteBusiness(int id) {
-
+        log.info("delete business id is: {}", id);
+        businessMapper.deleteBusiness(id);
+        monitoringObjectMapper.unbindObjectWithBusiness(id);
     }
 
     /**

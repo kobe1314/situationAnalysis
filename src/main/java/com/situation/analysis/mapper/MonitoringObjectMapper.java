@@ -46,4 +46,6 @@ public interface MonitoringObjectMapper {
      * @return List<Option>
      */
     List<Option> getObjectOptionList();
+    
+    void unbindObjectWithBusiness(int bId);
 }

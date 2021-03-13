@@ -25,11 +25,22 @@ public class BusinessController {
     private BusinessService businessService;
 
     @PostMapping("business")
-    public void addBusines(@RequestBody BusinessRequest request) {
+    public void addBusiness(@RequestBody BusinessRequest request) {
         log.debug("start add business");
         businessService.addNewBusiness(request);
     }
 
+    @DeleteMapping("business")
+    public void deleteBusiness(@RequestParam int id) {
+        log.debug("start delete business");
+        businessService.deleteBusiness(id);
+    }
+
+    @PutMapping("business")
+    public void updateBusiness(@RequestBody BusinessRequest request) {
+        log.debug("start delete business");
+        //businessService.deleteBusiness(id);
+    }
 
 
 }

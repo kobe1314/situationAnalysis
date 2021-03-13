@@ -13,6 +13,10 @@
         values(#{name}, #{impactFactor}, #{platform},#{runThreshold},#{createdBy},#{createdTime});
     </insert>
 
+    <delete id="deleteBusiness" parameterType="java.lang.Integer">
+        delete from businessSystem where id = #{id};
+    </delete>
+
 <!--    <select id="getUserByName" resultMap="BaseResultMap" parameterType="java.lang.String">-->
 <!--        select * from user where username = #{username};-->
 <!--    </select>-->
