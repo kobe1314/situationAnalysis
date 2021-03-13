@@ -3,6 +3,7 @@ package com.situation.analysis.mapper;
 import com.situation.analysis.entity.IndicatorEntity;
 import com.situation.analysis.model.IndicatorInformation;
 import com.situation.analysis.model.IndicatorResponse;
+import com.situation.analysis.model.Option;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -16,9 +17,9 @@ import java.util.List;
 public interface IndicatorMapper {
 
     /**
-     * @return List<IndicatorEntity>
+     * @return List<Option>
      */
-    List<IndicatorEntity> getIndicatorList();
+    List<Option> getIndicatorOptionList();
 
     /**
      * @param indicatorEntity

@@ -3,6 +3,7 @@ package com.situation.analysis.controller;
 import com.situation.analysis.annotation.ResponseResult;
 import com.situation.analysis.model.AddIndicatorRequest;
 import com.situation.analysis.model.IndicatorResponse;
+import com.situation.analysis.model.Option;
 import com.situation.analysis.service.IndicatorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
@@ -42,5 +43,10 @@ public class IndicatorController {
     public void deleteIndicator(@RequestParam int id) {
         log.debug("start delete indicator");
         indicatorService.deleteIndicator(id);
+    }
+
+    @GetMapping("indicatorOptions")
+    public List<Option> getIndicatorOptionList() {
+        return indicatorService.getIndicatorOptionList();
     }
 }

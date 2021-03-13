@@ -2,15 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.situation.analysis.mapper.MonitoringObjectMapper">
 
-    <!--    private int id;-->
-    <!--    private String name;-->
-    <!--    private BigDecimal impactFactor;-->
-    <!--    private int runThreshold;-->
-    <!--    private int levelId;-->
-    <!--    private String createdBy;-->
-    <!--    private String createdTime;-->
-    <!--    private String updatedBy;-->
-    <!--    private String updatedTime;-->
     <resultMap id="BaseResultMap" type="com.situation.analysis.entity.MonitoringObjectEntity">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="NAME" property="name"/>
@@ -30,7 +21,6 @@
         <result column="LEVEL_NAME" property="levelName"/>
         <result column="INAME" property="indicatorName"/>
     </resultMap>
-
 
     <insert id="addMonitoringObject" parameterType="MonitoringObjectEntity" useGeneratedKeys="true" keyProperty="id">
         insert into monitoringObject(NAME,IMPACT_FACTOR,RUN_THRESHOLD,L_ID,CREATED_BY,CREATED_TIME)
@@ -77,7 +67,7 @@
 
     <select id="selectObjectList" resultMap="monitoringObjectInfo">
         select o.id,o.name,o.RUN_THRESHOLD,monitoringLevel.name LEVEL_NAME, indicator.name INAME
-        from situationAnalysis.monitoringObject o
+        from monitoringObject o
         left join monitoringLevel on o.l_id = monitoringLevel.id
         left join indicator on o.id = indicator.O_ID
         <where>
@@ -88,8 +78,8 @@
     </select>
 
 
-    <!--    <select id="selectMonitoringLevelsByPage" resultMap="BaseResultMap">-->
-    <!--        select * from monitoringLevel-->
-    <!--    </select>-->
+    <select id="getObjectOptionList" resultMap="com.situation.analysis.mapper.CommonMapper.option">
+        select id, name from monitoringObject where L_ID  = 0 or L_ID is null;
+    </select>
 
 </mapper>

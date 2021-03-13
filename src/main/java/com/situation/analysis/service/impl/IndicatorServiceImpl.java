@@ -4,6 +4,7 @@ import com.situation.analysis.entity.IndicatorEntity;
 import com.situation.analysis.mapper.IndicatorMapper;
 import com.situation.analysis.model.AddIndicatorRequest;
 import com.situation.analysis.model.IndicatorResponse;
+import com.situation.analysis.model.Option;
 import com.situation.analysis.service.IndicatorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -54,5 +55,14 @@ public class IndicatorServiceImpl implements IndicatorService {
     public void deleteIndicator(int id) {
         log.info("delete indicator id is : {}",id);
         indicatorMapper.deleteIndicator(id);
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public List<Option> getIndicatorOptionList() {
+        log.info("start indicator option list");
+        return indicatorMapper.getIndicatorOptionList();
     }
 }

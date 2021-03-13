@@ -58,4 +58,8 @@
     <delete id="deleteIndicator" parameterType="int">
         delete from indicator where id = #{id} and IS_ORIGINAL_VALUE = 'N';
     </delete>
+
+    <select id="getIndicatorOptionList" resultMap="com.situation.analysis.mapper.CommonMapper.option">
+        select id, name from indicator where O_ID is null;
+    </select>
 </mapper>

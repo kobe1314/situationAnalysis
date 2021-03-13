@@ -1,6 +1,7 @@
 package com.situation.analysis.service;
 
 import com.situation.analysis.model.LevelInfo;
+import com.situation.analysis.model.Option;
 
 import java.util.List;
 
@@ -21,4 +22,9 @@ public interface LevelService {
      * @param levelInfo
      */
     void updateLevelInfo(LevelInfo levelInfo);
+
+    /**
+     * @return
+     */
+    List<Option> getLevelOptionList();
 }

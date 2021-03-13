@@ -3,6 +3,7 @@ package com.situation.analysis.mapper;
 import com.situation.analysis.entity.MonitoringObjectEntity;
 import com.situation.analysis.model.MonitoringObjectInfo;
 import com.situation.analysis.model.ObjectInfo;
+import com.situation.analysis.model.Option;
 
 import java.util.List;
 
@@ -31,19 +32,18 @@ public interface MonitoringObjectMapper {
     void updateMonitoringObject(MonitoringObjectEntity objectEntity);
 
     /**
-     * @param lId
-     * @return
-     */
-    List<ObjectInfo> getMonitoringObjects(int lId);
-
-    /**
      * @param keyWord
      * @return
      */
     List<MonitoringObjectInfo> selectObjectList(String keyWord);
 
     /**
-     * @param list 
+     * @param list
      */
     void batchUpdateMonitoringObject(List<MonitoringObjectEntity> list);
+
+    /**
+     * @return List<Option>
+     */
+    List<Option> getObjectOptionList();
 }

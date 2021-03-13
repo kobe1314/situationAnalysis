@@ -2,6 +2,7 @@ package com.situation.analysis.controller;
 
 import com.situation.analysis.annotation.ResponseResult;
 import com.situation.analysis.model.LevelInfo;
+import com.situation.analysis.model.Option;
 import com.situation.analysis.service.LevelService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,5 +37,10 @@ public class LevelController {
     public void updateLevelInfo(@RequestBody LevelInfo levelInfo) {
         log.debug("start level info ");
         levelService.updateLevelInfo(levelInfo);
+    }
+    
+    @GetMapping("levelOptions")
+    public List<Option> getLevelOptionList() {
+        return levelService.getLevelOptionList();
     }
 }

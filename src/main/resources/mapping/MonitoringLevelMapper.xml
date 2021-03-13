@@ -63,4 +63,8 @@
         where id = #{id}
     </update>
 
+    <select id="getLevelOptionList" resultMap="com.situation.analysis.mapper.CommonMapper.option">
+        select id, name from monitoringLevel;
+    </select>
+
 </mapper>

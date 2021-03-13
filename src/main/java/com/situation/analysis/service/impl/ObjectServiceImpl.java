@@ -106,6 +106,15 @@ public class ObjectServiceImpl implements ObjectService {
         return response;
     }
 
+    /**
+     * @return
+     */
+    @Override
+    public List<Option> getObjectOptionList() {
+        log.info("start object option list");
+        return monitoringObjectMapper.getObjectOptionList();
+    }
+
     private MonitoringObjectEntity createObjectEntity(AddMonitoringObjectRequest request, String username) {
         MonitoringObjectEntity objectEntity = new MonitoringObjectEntity();
         objectEntity.setName(request.getObjectName());

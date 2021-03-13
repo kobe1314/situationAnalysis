@@ -2,6 +2,9 @@ package com.situation.analysis.service;
 
 import com.situation.analysis.model.AddMonitoringObjectRequest;
 import com.situation.analysis.model.MonitoringObjectListResponse;
+import com.situation.analysis.model.Option;
+
+import java.util.List;
 
 /**
  * @description: object service
@@ -32,4 +35,10 @@ public interface ObjectService {
      * @return
      */
     MonitoringObjectListResponse getMonitoringObjectList(String keyWord);
+
+
+    /**
+     * @return 
+     */
+    List<Option> getObjectOptionList();
 }

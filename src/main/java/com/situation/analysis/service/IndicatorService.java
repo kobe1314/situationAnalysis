@@ -2,6 +2,7 @@ package com.situation.analysis.service;
 
 import com.situation.analysis.model.AddIndicatorRequest;
 import com.situation.analysis.model.IndicatorResponse;
+import com.situation.analysis.model.Option;
 
 import java.util.List;
 
@@ -27,4 +28,9 @@ public interface IndicatorService {
      * @param id
      */
     void deleteIndicator(int id);
+
+    /**
+     * @return
+     */
+    List<Option> getIndicatorOptionList();
 }

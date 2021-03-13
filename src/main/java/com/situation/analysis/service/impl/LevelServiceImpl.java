@@ -6,6 +6,7 @@ import com.situation.analysis.mapper.MonitoringLevelMapper;
 import com.situation.analysis.mapper.MonitoringObjectMapper;
 import com.situation.analysis.model.LevelInfo;
 import com.situation.analysis.model.ObjectInfo;
+import com.situation.analysis.model.Option;
 import com.situation.analysis.service.LevelService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -54,6 +55,15 @@ public class LevelServiceImpl implements LevelService {
         monitoringObjectMapper.batchUpdateMonitoringObject(crateEntities(levelInfo));
         log.info("finish update leve info");
 
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public List<Option> getLevelOptionList() {
+        log.info("start level option list");
+        return monitoringLevelMapper.getLevelOptionList();
     }
 
     private List<MonitoringObjectEntity> crateEntities(LevelInfo levelInfo) {
