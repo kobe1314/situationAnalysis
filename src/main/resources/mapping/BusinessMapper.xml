@@ -8,7 +8,7 @@
         <result column="salt" property="salt"/>
     </resultMap>
 
-    <insert id="addNewBusiness" parameterType="com.situation.analysis.entity.BusinessEntity" useGeneratedKeys="true" keyProperty="id">
+    <insert id="addNewBusiness" parameterType="BusinessEntity" useGeneratedKeys="true" keyProperty="id">
         insert into businessSystem(NAME,IMPACT_FACTOR,PLATFORM,RUN_THRESHOLD,CREATED_BY,CREATED_TIME)
         values(#{name}, #{impactFactor}, #{platform},#{runThreshold},#{createdBy},#{createdTime});
     </insert>
@@ -17,6 +17,30 @@
         delete from businessSystem where id = #{id};
     </delete>
 
+    <update id="updateBusiness" parameterType="BusinessEntity">
+        update businessSystem
+        <set>
+            <if test="name != null">
+                NAME = #{name},
+            </if>
+            <if test="impactFactor != null">
+                IMPACT_FACTOR = #{impactFactor},
+            </if>
+            <if test="runThreshold != null">
+                RUN_THRESHOLD = #{runThreshold},
+            </if>
+            <if test="platform != null">
+                PLATFORM = #{platform},
+            </if>
+            <if test="updatedBy != null">
+                UPDATED_BY = #{updatedBy},
+            </if>
+            <if test="updatedTime != null">
+                UPDATED_TIME = #{updatedTime}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 <!--    <select id="getUserByName" resultMap="BaseResultMap" parameterType="java.lang.String">-->
 <!--        select * from user where username = #{username};-->
 <!--    </select>-->

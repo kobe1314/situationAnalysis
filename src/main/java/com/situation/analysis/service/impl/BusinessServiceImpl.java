@@ -13,8 +13,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,6 +34,7 @@ public class BusinessServiceImpl implements BusinessService {
     private BusinessMapper businessMapper;
     @Resource
     private MonitoringObjectMapper monitoringObjectMapper;
+
     /**
      * @param request
      * @return the new record id
@@ -43,8 +46,8 @@ public class BusinessServiceImpl implements BusinessService {
         BusinessEntity entity = createEntity(request);
         businessMapper.addNewBusiness(entity);
         int insertId = entity.getId();
-        monitoringObjectMapper.batchUpdateMonitoringObject(crateEntities(request.getObjectList(),insertId));
-        log.info("insert new business id is : {}",insertId);
+        monitoringObjectMapper.batchUpdateMonitoringObject(crateEntities(request.getObjectList(), insertId));
+        log.info("insert new business id is : {}", insertId);
     }
 
     /**
@@ -62,11 +65,13 @@ public class BusinessServiceImpl implements BusinessService {
      * @param request
      */
     @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public void updateBusiness(BusinessRequest request) {
-
+        businessMapper.updateBusiness(createEntity(request));
+        monitoringObjectMapper.batchUpdateMonitoringObject(crateEntities(request.getObjectList(), request.getId()));
     }
 
-    private List<MonitoringObjectEntity> crateEntities(List<ObjectInfo> objectList,int bId) {
+    private List<MonitoringObjectEntity> crateEntities(List<ObjectInfo> objectList, int bId) {
 
         return objectList.stream().map(objectInfo -> {
             MonitoringObjectEntity entity = new MonitoringObjectEntity();
@@ -82,6 +87,12 @@ public class BusinessServiceImpl implements BusinessService {
         entity.setName(request.getName());
         entity.setRunThreshold(request.getRunThreshold());
         entity.setPlatform(request.getPlatform());
+        if (ObjectUtils.isEmpty(request.getId())) {
+            entity.setCreatedTime(new Date().toLocaleString());
+        } else {
+            entity.setId(request.getId());
+            entity.setUpdatedTime(new Date().toLocaleString());
+        }
         return entity;
     }
 }

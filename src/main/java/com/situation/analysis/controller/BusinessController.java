@@ -38,8 +38,8 @@ public class BusinessController {
 
     @PutMapping("business")
     public void updateBusiness(@RequestBody BusinessRequest request) {
-        log.debug("start delete business");
-        //businessService.deleteBusiness(id);
+        log.debug("start update business");
+        businessService.updateBusiness(request);
     }
 
 
