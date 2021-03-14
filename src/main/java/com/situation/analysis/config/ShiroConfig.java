@@ -23,7 +23,7 @@ import java.util.Map;
  * @date: 2021/2/28 下午2:34
  * @version: v1.0
  */
-@Profile("sit")
+@Profile("uat")
 @Configuration
 public class ShiroConfig {
 
