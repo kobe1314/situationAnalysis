@@ -18,6 +18,7 @@ public class MonitoringObjectEntity {
     private int runThreshold;
     private int levelId;
     private int businessId;
+    private String isOriginalValue;
     private String createdBy;
     private String createdTime;
     private String updatedBy;

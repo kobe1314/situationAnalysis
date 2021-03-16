@@ -15,4 +15,5 @@ public class MonitoringObjectInfo {
     private String objectName;
     private String indicatorName;
     private int runThreshold;
+    private String isOriginalValue;
 }

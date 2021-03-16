@@ -18,5 +18,6 @@ public class BusinessInfo {
     private String platform;
     private int runThreshold;
     private BigDecimal impactFactor;
+    private String isOriginalValue;
     private List<ObjectInfo> objectList;
 }

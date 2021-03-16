@@ -30,6 +30,7 @@ CREATE TABLE monitoringObject(
     RUN_THRESHOLD INT    COMMENT '报警阈值' ,
     L_ID INT    COMMENT '所属层次' ,
     B_ID INT    COMMENT '所属业务' ,
+    IS_ORIGINAL_VALUE VARCHAR(32)    COMMENT '原始指标' ,
     CREATED_BY VARCHAR(32)    COMMENT '创建人' ,
     CREATED_TIME VARCHAR(32)    COMMENT '创建时间' ,
     UPDATED_BY VARCHAR(32)    COMMENT '更新人' ,
@@ -60,12 +61,14 @@ CREATE TABLE businessSystem(
     IMPACT_FACTOR DECIMAL(32,10)    COMMENT '影响因子' ,
     PLATFORM VARCHAR(32)    COMMENT '平台' ,
     RUN_THRESHOLD INT    COMMENT '阈值' ,
+    IS_ORIGINAL_VALUE VARCHAR(32)    COMMENT '原始指标' ,
     CREATED_BY VARCHAR(32)    COMMENT '创建人' ,
     CREATED_TIME VARCHAR(32)    COMMENT '创建时间' ,
     UPDATED_BY VARCHAR(32)    COMMENT '更新人' ,
     UPDATED_TIME VARCHAR(32)    COMMENT '更新时间' ,
     PRIMARY KEY (ID)
 ) COMMENT = '业务系统管理 ';
+
 
 
 

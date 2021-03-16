@@ -20,6 +20,7 @@
         <result column="RUN_THRESHOLD" property="runThreshold"/>
         <result column="LEVEL_NAME" property="levelName"/>
         <result column="INAME" property="indicatorName"/>
+        <result column="IS_ORIGINAL_VALUE" property="isOriginalValue"/>
     </resultMap>
 
     <insert id="addMonitoringObject" parameterType="MonitoringObjectEntity" useGeneratedKeys="true" keyProperty="id">
@@ -73,7 +74,7 @@
 
 
     <select id="selectObjectList" resultMap="monitoringObjectInfo">
-        select o.id,o.name,o.RUN_THRESHOLD,monitoringLevel.name LEVEL_NAME, indicator.name INAME
+        select o.id,o.name,o.RUN_THRESHOLD,monitoringLevel.name LEVEL_NAME, indicator.name INAME,o.IS_ORIGINAL_VALUE
         from monitoringObject o
         left join monitoringLevel on o.l_id = monitoringLevel.id
         left join indicator on o.id = indicator.O_ID

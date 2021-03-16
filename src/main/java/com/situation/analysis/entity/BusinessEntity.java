@@ -17,6 +17,7 @@ public class BusinessEntity {
     private BigDecimal impactFactor;
     private String platform;
     private int runThreshold;
+    private String isOriginalValue;
     private String createdBy;
     private String createdTime;
     private String updatedBy;

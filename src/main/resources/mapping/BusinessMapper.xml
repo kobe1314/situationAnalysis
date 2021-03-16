@@ -42,6 +42,7 @@
         <result column="PLATFORM" property="platform"/>
         <result column="IMPACT_FACTOR" property="impactFactor"/>
         <result column="RUN_THRESHOLD" property="runThreshold"/>
+        <result column="IS_ORIGINAL_VALUE" property="isOriginalValue"/>
         <collection property="objectList" ofType="com.situation.analysis.model.ObjectInfo" column="id"
                     select="getObjectList"></collection>
     </resultMap>
