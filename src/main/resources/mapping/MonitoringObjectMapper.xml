@@ -61,10 +61,10 @@
                 <if test="item.impactFactor != null">
                     IMPACT_FACTOR=#{item.impactFactor},
                 </if>
-                <if test="item.levelId != 0">
+                <if test="item.levelId != 0 and item.levelId !=null">
                     L_ID=#{item.levelId}
                 </if>
-                <if test="item.businessId != 0">
+                <if test="item.businessId != 0 and item.businessId !=null">
                     B_ID=#{item.businessId}
                 </if>
             </set>
