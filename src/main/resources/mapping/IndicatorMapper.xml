@@ -40,8 +40,12 @@
         <foreach collection="list" item="item" index="index" open="" close="" separator=";">
             update indicator
             <set>
-                IMPACT_FACTOR=${item.impactFactor},
-                O_ID=${item.objectId}
+                <if test="null != item.impactFactor">
+                    IMPACT_FACTOR=${item.impactFactor},
+                </if>
+                <if test="null != item.objectId">
+                    O_ID=${item.objectId}
+                </if>
             </set>
             where id = ${item.id}
         </foreach>
