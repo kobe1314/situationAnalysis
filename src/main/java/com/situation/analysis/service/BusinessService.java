@@ -4,6 +4,7 @@ import com.situation.analysis.entity.BusinessEntity;
 import com.situation.analysis.model.BusinessInfo;
 import com.situation.analysis.model.BusinessRequest;
 import com.situation.analysis.model.BusinessResponse;
+import com.situation.analysis.model.PageResult;
 
 import java.util.List;
 
@@ -33,5 +34,5 @@ public interface BusinessService {
     /**
      * @return
      */
-    BusinessResponse getBusinessInfoList(String keyWord);
+    PageResult<BusinessInfo> getBusinessInfoList(String keyWord, int pageNum, int pageSize);
 }

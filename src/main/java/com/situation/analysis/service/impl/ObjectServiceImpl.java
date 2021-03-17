@@ -1,10 +1,13 @@
 package com.situation.analysis.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.situation.analysis.entity.MonitoringObjectEntity;
 import com.situation.analysis.mapper.IndicatorMapper;
 import com.situation.analysis.mapper.MonitoringObjectMapper;
 import com.situation.analysis.model.*;
 import com.situation.analysis.service.ObjectService;
+import com.situation.analysis.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -93,12 +96,11 @@ public class ObjectServiceImpl implements ObjectService {
      * @return
      */
     @Override
-    public MonitoringObjectListResponse getMonitoringObjectList(String keyWord) {
+    public PageResult<MonitoringObjectInfo> getMonitoringObjectList(String keyWord,int pageNum, int pageSize) {
         log.info("search object keyWord: {}", keyWord);
-        MonitoringObjectListResponse response = new MonitoringObjectListResponse();
+        PageHelper.startPage(pageNum, pageSize);
         List<MonitoringObjectInfo> list = monitoringObjectMapper.selectObjectList(keyWord);
-        response.setObjectList(list);
-        return response;
+        return PageUtil.getPageResult(new PageInfo<MonitoringObjectInfo>(list));
     }
 
     /**

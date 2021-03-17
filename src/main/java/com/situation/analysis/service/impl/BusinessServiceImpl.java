@@ -1,13 +1,14 @@
 package com.situation.analysis.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.situation.analysis.entity.BusinessEntity;
 import com.situation.analysis.entity.MonitoringObjectEntity;
 import com.situation.analysis.mapper.BusinessMapper;
 import com.situation.analysis.mapper.MonitoringObjectMapper;
-import com.situation.analysis.model.BusinessRequest;
-import com.situation.analysis.model.BusinessResponse;
-import com.situation.analysis.model.ObjectInfo;
+import com.situation.analysis.model.*;
 import com.situation.analysis.service.BusinessService;
+import com.situation.analysis.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -75,11 +76,11 @@ public class BusinessServiceImpl implements BusinessService {
      * @return
      */
     @Override
-    public BusinessResponse getBusinessInfoList(String keyWord) {
+    public PageResult<BusinessInfo> getBusinessInfoList(String keyWord,int pageNum, int pageSize) {
         log.info("search business info keyword: {}", keyWord);
-        BusinessResponse response = new BusinessResponse();
-        response.setBusinessInfoList(businessMapper.getBusinessInfoList(keyWord));
-        return response;
+        PageHelper.startPage(pageNum, pageSize);
+        List<BusinessInfo> list = businessMapper.getBusinessInfoList(keyWord);
+        return PageUtil.getPageResult(new PageInfo<BusinessInfo>(list));
     }
 
     private List<MonitoringObjectEntity> crateEntities(List<ObjectInfo> objectList, int bId) {

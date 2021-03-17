@@ -1,11 +1,13 @@
 package com.situation.analysis.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.situation.analysis.entity.IndicatorEntity;
+import com.situation.analysis.entity.MonitoringLevelEntity;
 import com.situation.analysis.mapper.IndicatorMapper;
-import com.situation.analysis.model.AddIndicatorRequest;
-import com.situation.analysis.model.IndicatorResponse;
-import com.situation.analysis.model.Option;
+import com.situation.analysis.model.*;
 import com.situation.analysis.service.IndicatorService;
+import com.situation.analysis.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -30,8 +32,10 @@ public class IndicatorServiceImpl implements IndicatorService {
      * @return
      */
     @Override
-    public List<IndicatorResponse> getIndicatorList(String keyWord) {
-        return indicatorMapper.selectIndicatorList(keyWord);
+    public PageResult<IndicatorResponse> getIndicatorList(String keyWord, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<IndicatorResponse> list = indicatorMapper.selectIndicatorList(keyWord);
+        return PageUtil.getPageResult(new PageInfo<IndicatorResponse>(list));
     }
 
     /**
@@ -53,7 +57,7 @@ public class IndicatorServiceImpl implements IndicatorService {
      */
     @Override
     public void deleteIndicator(int id) {
-        log.info("delete indicator id is : {}",id);
+        log.info("delete indicator id is : {}", id);
         indicatorMapper.deleteIndicator(id);
     }
 

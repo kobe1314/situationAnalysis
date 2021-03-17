@@ -41,10 +41,12 @@ public class BusinessController {
         log.debug("start update business");
         businessService.updateBusiness(request);
     }
+
     @GetMapping("businesses")
-    public BusinessResponse getBusinessResponse(@RequestParam(required = false) String keyWord) {
+    public PageResult<BusinessInfo> getBusinessResponse(@RequestParam(required = false) String keyWord,
+                                                @RequestParam(required = false) int pageNum, @RequestParam(required = false) int pageSize) {
         log.debug("start get business list");
-        return businessService.getBusinessInfoList(keyWord);
+        return businessService.getBusinessInfoList(keyWord, pageNum, pageSize);
     }
 
 }

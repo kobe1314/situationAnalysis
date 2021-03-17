@@ -1,9 +1,7 @@
 package com.situation.analysis.controller;
 
 import com.situation.analysis.annotation.ResponseResult;
-import com.situation.analysis.model.MonitoringObjectRequest;
-import com.situation.analysis.model.MonitoringObjectListResponse;
-import com.situation.analysis.model.Option;
+import com.situation.analysis.model.*;
 import com.situation.analysis.service.ObjectService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -38,8 +36,9 @@ public class ObjectController {
     }
 
     @GetMapping("objects")
-    public MonitoringObjectListResponse selectObjectList(@RequestParam(required = false) String keyWord) {
-        return objectService.getMonitoringObjectList(keyWord);
+    public PageResult<MonitoringObjectInfo> selectObjectList(@RequestParam(required = false) String keyWord,
+                                                             @RequestParam(required = false) int pageNum, @RequestParam(required = false) int pageSize) {
+        return objectService.getMonitoringObjectList(keyWord, pageNum, pageSize);
     }
 
     @PutMapping("object")

@@ -4,6 +4,7 @@ import com.situation.analysis.annotation.ResponseResult;
 import com.situation.analysis.model.AddIndicatorRequest;
 import com.situation.analysis.model.IndicatorResponse;
 import com.situation.analysis.model.Option;
+import com.situation.analysis.model.PageResult;
 import com.situation.analysis.service.IndicatorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
@@ -27,9 +28,10 @@ public class IndicatorController {
     private IndicatorService indicatorService;
 
     @GetMapping("indicators")
-    public List<IndicatorResponse> getIndicatorList(@RequestParam(required = false) String keyWord) {
+    public PageResult<IndicatorResponse> getIndicatorList(@RequestParam(required = false) String keyWord,
+                                                          @RequestParam(required = false) int pageNum, @RequestParam(required = false) int pageSize) {
         log.debug("start indicator list");
-        return indicatorService.getIndicatorList(keyWord);
+        return indicatorService.getIndicatorList(keyWord, pageNum, pageSize);
     }
 
     @PostMapping("indicator")

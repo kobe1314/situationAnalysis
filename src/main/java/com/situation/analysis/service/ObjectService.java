@@ -1,8 +1,6 @@
 package com.situation.analysis.service;
 
-import com.situation.analysis.model.MonitoringObjectRequest;
-import com.situation.analysis.model.MonitoringObjectListResponse;
-import com.situation.analysis.model.Option;
+import com.situation.analysis.model.*;
 
 import java.util.List;
 
@@ -34,7 +32,7 @@ public interface ObjectService {
     /**
      * @return
      */
-    MonitoringObjectListResponse getMonitoringObjectList(String keyWord);
+    PageResult<MonitoringObjectInfo> getMonitoringObjectList(String keyWord, int pageNum, int pageSize);
 
 
     /**

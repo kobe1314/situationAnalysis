@@ -3,6 +3,7 @@ package com.situation.analysis.service;
 import com.situation.analysis.model.AddIndicatorRequest;
 import com.situation.analysis.model.IndicatorResponse;
 import com.situation.analysis.model.Option;
+import com.situation.analysis.model.PageResult;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public interface IndicatorService {
      * @param keyWord
      * @return
      */
-    List<IndicatorResponse> getIndicatorList(String keyWord);
+    PageResult<IndicatorResponse> getIndicatorList(String keyWord, int pageNum, int pageSize);
 
     /**
      * @param request
