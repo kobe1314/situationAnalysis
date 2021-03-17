@@ -87,11 +87,16 @@
 
 
     <select id="getObjectOptionList" resultMap="com.situation.analysis.mapper.CommonMapper.option">
-        select id, name from monitoringObject where L_ID  = 0 or L_ID is null;
+--         select id, name from monitoringObject where L_ID  = 0 or L_ID is null;
+        select id, name from monitoringObject;
     </select>
 
     <update id="unbindObjectWithBusiness" parameterType="java.lang.Integer">
         update monitoringObject set B_ID =null where B_ID = #{bId};
+    </update>
+
+    <update id="unbindObjectWithLevel" parameterType="java.lang.Integer">
+        update monitoringObject set L_ID =null where L_ID = #{lId};
     </update>
 
 </mapper>

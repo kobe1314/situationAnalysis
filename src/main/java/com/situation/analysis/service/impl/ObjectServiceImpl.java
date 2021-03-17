@@ -69,7 +69,7 @@ public class ObjectServiceImpl implements ObjectService {
     public void deleteObject(int id) {
         log.info("delete object id: {}", id);
         monitoringObjectMapper.deleteMonitoringObject(id);
-        indicatorMapper.updateIndicate(id);
+        indicatorMapper.unbindObjectWithIndicator(id);
         log.info("finished delete object ");
 
     }
@@ -85,18 +85,23 @@ public class ObjectServiceImpl implements ObjectService {
         monitoringObjectMapper.updateMonitoringObject(objectEntity);
         log.info("finished update object ");
 
+        indicatorMapper.unbindObjectWithIndicator(request.getId());
+
         List<IndicatorInformation> iList = request.getIndicatorInformationList();
-        iList.stream().forEach(indicator -> {
-            indicator.setObjectId(request.getId());
-        });
-        indicatorMapper.batchUpdateIndicator(iList);
+        if (!ObjectUtils.isEmpty(iList)) {
+            iList.stream().forEach(indicator -> {
+                indicator.setObjectId(request.getId());
+            });
+            indicatorMapper.batchUpdateIndicator(iList);
+        }
+
     }
 
     /**
      * @return
      */
     @Override
-    public PageResult<MonitoringObjectInfo> getMonitoringObjectList(String keyWord,int pageNum, int pageSize) {
+    public PageResult<MonitoringObjectInfo> getMonitoringObjectList(String keyWord, int pageNum, int pageSize) {
         log.info("search object keyWord: {}", keyWord);
         PageHelper.startPage(pageNum, pageSize);
         List<MonitoringObjectInfo> list = monitoringObjectMapper.selectObjectList(keyWord);

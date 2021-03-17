@@ -34,7 +34,7 @@ public interface IndicatorMapper {
     /**
      * @param oId
      */
-    void updateIndicate(int oId);
+    void unbindObjectWithIndicator(int oId);
 
     /**
      * @param keyWord
@@ -51,4 +51,5 @@ public interface IndicatorMapper {
      * @param id
      */
     void deleteIndicator(int id);
+
 }

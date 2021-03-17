@@ -131,7 +131,7 @@
 
 
     <!--开发环境:打印控制台-->
-    <springProfile name="dev">
+    <springProfile name="dev,sit">
         <logger name="com.situation.analysis" level="debug"/>
         <logger name="org.springframework" level="INFO"/>
     </springProfile>

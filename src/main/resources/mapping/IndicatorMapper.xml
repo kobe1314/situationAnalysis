@@ -51,7 +51,7 @@
         </foreach>
     </update>
 
-    <update id="updateIndicate" parameterType="java.lang.Integer">
+    <update id="unbindObjectWithIndicator" parameterType="java.lang.Integer">
         update indicator set O_ID =null where O_ID = #{oId};
     </update>
 

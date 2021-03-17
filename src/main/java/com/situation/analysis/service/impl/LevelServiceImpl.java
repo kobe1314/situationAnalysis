@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -52,8 +53,13 @@ public class LevelServiceImpl implements LevelService {
         log.info("update level info");
 
         monitoringLevelMapper.updateLevelInfo(createEntity(levelInfo));
-        monitoringObjectMapper.batchUpdateMonitoringObject(crateEntities(levelInfo));
-        log.info("finish update leve info");
+        monitoringObjectMapper.unbindObjectWithLevel(levelInfo.getId());
+
+        List<MonitoringObjectEntity> list = crateEntities(levelInfo);
+        if (!ObjectUtils.isEmpty(list)) {
+            monitoringObjectMapper.batchUpdateMonitoringObject(list);
+        }
+        log.info("finish update level info");
 
     }
 
