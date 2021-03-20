@@ -17,6 +17,7 @@ import org.springframework.util.ObjectUtils;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @description: impl
@@ -53,11 +54,15 @@ public class ObjectServiceImpl implements ObjectService {
         int insertId = objectEntity.getId();
         log.info("adding object id is {}", insertId);
 
-        List<IndicatorInformation> iList = request.getIndicatorInformationList();
-        iList.stream().forEach(indicator -> {
-            indicator.setObjectId(insertId);
-        });
-        indicatorMapper.batchUpdateIndicator(iList);
+        List<IndicatorInfo> iList = request.getIndicatorInfoList();
+
+        if (!ObjectUtils.isEmpty(iList)) {
+            iList.stream().forEach(indicator -> {
+                indicator.setObjectId(insertId);
+            });
+            indicatorMapper.batchUpdateIndicator(iList);
+        }
+
         log.debug("finish add object");
     }
 
@@ -87,7 +92,7 @@ public class ObjectServiceImpl implements ObjectService {
 
         indicatorMapper.unbindObjectWithIndicator(request.getId());
 
-        List<IndicatorInformation> iList = request.getIndicatorInformationList();
+        List<IndicatorInfo> iList = request.getIndicatorInfoList();
         if (!ObjectUtils.isEmpty(iList)) {
             iList.stream().forEach(indicator -> {
                 indicator.setObjectId(request.getId());
@@ -101,10 +106,18 @@ public class ObjectServiceImpl implements ObjectService {
      * @return
      */
     @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public PageResult<MonitoringObjectInfo> getMonitoringObjectList(String keyWord, int pageNum, int pageSize) {
         log.info("search object keyWord: {}", keyWord);
         PageHelper.startPage(pageNum, pageSize);
         List<MonitoringObjectInfo> list = monitoringObjectMapper.selectObjectList(keyWord);
+
+        list = list.stream().map(objectInfo -> {
+            List<IndicatorInfo> indicatorInfoList = indicatorMapper.getIndicatorBindObject(objectInfo.getId());
+            objectInfo.setIndicatorInfoList(indicatorInfoList);
+            return objectInfo;
+        }).collect(Collectors.toList());
+
         return PageUtil.getPageResult(new PageInfo<MonitoringObjectInfo>(list));
     }
 

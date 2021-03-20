@@ -19,5 +19,5 @@ public class MonitoringObjectRequest {
     private String objectName;
     private int runThreshold;
     private int levelId;
-    private List<IndicatorInformation> indicatorInformationList;
+    private List<IndicatorInfo> indicatorInfoList;
 }

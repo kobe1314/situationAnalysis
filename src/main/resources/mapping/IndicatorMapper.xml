@@ -22,6 +22,13 @@
         <result column="OBJECT_NAME" property="objectName"/>
     </resultMap>
 
+
+    <resultMap id="indicatorInfo" type="com.situation.analysis.model.IndicatorInfo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="NAME" property="name"/>
+        <result column="IMPACT_FACTOR" property="impactFactor"/>
+    </resultMap>
+
     <select id="getIndicatorList" resultMap="BaseResultMap">
         select * from indicator;
     </select>
@@ -66,4 +73,11 @@
     <select id="getIndicatorOptionList" resultMap="com.situation.analysis.mapper.CommonMapper.option">
         select id, name from indicator where O_ID is null;
     </select>
+
+
+    <select id="getIndicatorBindObject" resultMap="indicatorInfo">
+        select * from indicator where O_ID = #{oId};
+    </select>
+
+
 </mapper>

@@ -1,10 +1,9 @@
 package com.situation.analysis.mapper;
 
 import com.situation.analysis.entity.IndicatorEntity;
-import com.situation.analysis.model.IndicatorInformation;
+import com.situation.analysis.model.IndicatorInfo;
 import com.situation.analysis.model.IndicatorResponse;
 import com.situation.analysis.model.Option;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -22,19 +21,20 @@ public interface IndicatorMapper {
     List<Option> getIndicatorOptionList();
 
     /**
-     * @param indicatorEntity
-     */
-    void updateIndicator(IndicatorEntity indicatorEntity);
-
-    /**
      * @param list
      */
-    void batchUpdateIndicator(List<IndicatorInformation> list);
+    void batchUpdateIndicator(List<IndicatorInfo> list);
 
     /**
      * @param oId
      */
     void unbindObjectWithIndicator(int oId);
+
+    /**
+     * @param oId
+     * @return
+     */
+    List<IndicatorInfo> getIndicatorBindObject(int oId);
 
     /**
      * @param keyWord

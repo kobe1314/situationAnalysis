@@ -2,6 +2,8 @@ package com.situation.analysis.model;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @description: monitoring
  * @author: Kobe
@@ -16,4 +18,5 @@ public class MonitoringObjectInfo {
     private String indicatorName;
     private int runThreshold;
     private String isOriginalValue;
+    private List<IndicatorInfo> indicatorInfoList;
 }
