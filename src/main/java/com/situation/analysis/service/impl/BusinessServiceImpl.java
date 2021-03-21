@@ -46,7 +46,11 @@ public class BusinessServiceImpl implements BusinessService {
         BusinessEntity entity = createEntity(request);
         businessMapper.addNewBusiness(entity);
         int insertId = entity.getId();
-        monitoringObjectMapper.batchUpdateMonitoringObject(crateEntities(request.getObjectList(), insertId));
+
+        List<ObjectInfo> objectList = request.getObjectList();
+        if (!ObjectUtils.isEmpty(objectList)) {
+            monitoringObjectMapper.batchUpdateMonitoringObject(crateEntities(objectList, insertId));
+        }
         log.info("insert new business id is : {}", insertId);
     }
 
@@ -76,7 +80,7 @@ public class BusinessServiceImpl implements BusinessService {
      * @return
      */
     @Override
-    public PageResult<BusinessInfo> getBusinessInfoList(String keyWord,int pageNum, int pageSize) {
+    public PageResult<BusinessInfo> getBusinessInfoList(String keyWord, int pageNum, int pageSize) {
         log.info("search business info keyword: {}", keyWord);
         PageHelper.startPage(pageNum, pageSize);
         List<BusinessInfo> list = businessMapper.getBusinessInfoList(keyWord);
