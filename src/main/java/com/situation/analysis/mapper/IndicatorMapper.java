@@ -34,7 +34,7 @@ public interface IndicatorMapper {
      * @param oId
      * @return
      */
-    List<IndicatorInfo> getIndicatorBindObject(int oId);
+    List<IndicatorInfo> getIndicatorBindObject(Object oId);
 
     /**
      * @param keyWord

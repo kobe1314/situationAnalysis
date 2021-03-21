@@ -76,7 +76,15 @@
 
 
     <select id="getIndicatorBindObject" resultMap="indicatorInfo">
-        select * from indicator where O_ID = #{oId};
+        select * from indicator
+        <where>
+            <if test="oId == null">
+                and O_ID is null
+            </if>
+            <if test="oId != null">
+                and O_ID = #{oId}
+            </if>
+        </where>
     </select>
 
 

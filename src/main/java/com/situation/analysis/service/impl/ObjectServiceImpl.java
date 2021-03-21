@@ -113,8 +113,16 @@ public class ObjectServiceImpl implements ObjectService {
         List<MonitoringObjectInfo> list = monitoringObjectMapper.selectObjectList(keyWord);
 
         list = list.stream().map(objectInfo -> {
-            List<IndicatorInfo> indicatorInfoList = indicatorMapper.getIndicatorBindObject(objectInfo.getId());
-            objectInfo.setIndicatorInfoList(indicatorInfoList);
+            //获取绑定的indicator
+            List<IndicatorInfo> chosenList = indicatorMapper.getIndicatorBindObject(objectInfo.getId());
+            //获取未绑定的indicator
+            List<IndicatorInfo> unChosenList = indicatorMapper.getIndicatorBindObject(null);
+            List<IndicatorInfo> updatedList = chosenList.stream().map(info -> {
+                info.setChosen(true);
+                return info;
+            }).collect(Collectors.toList());
+            updatedList.addAll(unChosenList);
+            objectInfo.setIndicatorInfoList(updatedList);
             return objectInfo;
         }).collect(Collectors.toList());
 
