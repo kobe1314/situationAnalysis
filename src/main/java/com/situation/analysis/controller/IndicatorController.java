@@ -48,7 +48,7 @@ public class IndicatorController {
     }
 
     @GetMapping("indicatorOptions")
-    public List<Option> getIndicatorOptionList() {
-        return indicatorService.getIndicatorOptionList();
+    public List<Option> getIndicatorOptionList(@RequestParam(required = false) Object oId) {
+        return indicatorService.getIndicatorOptionList(oId);
     }
 }

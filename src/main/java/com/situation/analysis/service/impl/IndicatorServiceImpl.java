@@ -65,8 +65,8 @@ public class IndicatorServiceImpl implements IndicatorService {
      * @return
      */
     @Override
-    public List<Option> getIndicatorOptionList() {
+    public List<Option> getIndicatorOptionList(Object oId) {
         log.info("start indicator option list");
-        return indicatorMapper.getIndicatorOptionList();
+        return indicatorMapper.getIndicatorOptionList(oId);
     }
 }

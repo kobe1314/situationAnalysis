@@ -18,7 +18,7 @@ public interface IndicatorMapper {
     /**
      * @return List<Option>
      */
-    List<Option> getIndicatorOptionList();
+    List<Option> getIndicatorOptionList(Object oId);
 
     /**
      * @param list
@@ -34,7 +34,7 @@ public interface IndicatorMapper {
      * @param oId
      * @return
      */
-    List<IndicatorInfo> getIndicatorBindObject(Object oId);
+    List<IndicatorInfo> getIndicatorBindObject(int oId);
 
     /**
      * @param keyWord

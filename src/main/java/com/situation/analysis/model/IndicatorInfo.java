@@ -18,5 +18,4 @@ public class IndicatorInfo {
     private String name;
     private BigDecimal impactFactor;
     private int objectId;
-    private boolean isChosen;
 }

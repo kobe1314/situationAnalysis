@@ -33,5 +33,5 @@ public interface IndicatorService {
     /**
      * @return
      */
-    List<Option> getIndicatorOptionList();
+    List<Option> getIndicatorOptionList(Object oId);
 }

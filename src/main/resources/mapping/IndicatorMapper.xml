@@ -71,20 +71,18 @@
     </delete>
 
     <select id="getIndicatorOptionList" resultMap="com.situation.analysis.mapper.CommonMapper.option">
-        select id, name from indicator where O_ID is null;
+        select id, name from indicator
+        <where>
+            <if test="oId != null">
+                and O_ID = #{oId}
+            </if>
+            or O_ID is null
+        </where>
     </select>
 
 
     <select id="getIndicatorBindObject" resultMap="indicatorInfo">
-        select * from indicator
-        <where>
-            <if test="oId == null">
-                and O_ID is null
-            </if>
-            <if test="oId != null">
-                and O_ID = #{oId}
-            </if>
-        </where>
+        select * from indicator where O_ID = #{oId};
     </select>
 
 
