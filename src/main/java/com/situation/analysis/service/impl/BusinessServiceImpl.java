@@ -72,7 +72,11 @@ public class BusinessServiceImpl implements BusinessService {
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public void updateBusiness(BusinessRequest request) {
         businessMapper.updateBusiness(createEntity(request));
-        monitoringObjectMapper.batchUpdateMonitoringObject(crateEntities(request.getObjectList(), request.getId()));
+        List<ObjectInfo> objectList = request.getObjectList();
+
+        if (!ObjectUtils.isEmpty(objectList)) {
+            monitoringObjectMapper.batchUpdateMonitoringObject(crateEntities(request.getObjectList(), request.getId()));
+        }
     }
 
     /**
