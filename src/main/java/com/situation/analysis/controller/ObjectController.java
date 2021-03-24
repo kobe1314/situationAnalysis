@@ -48,7 +48,7 @@ public class ObjectController {
     }
 
     @GetMapping("objectOptions")
-    public List<Option> getObjectOptionList() {
-        return objectService.getObjectOptionList();
+    public List<Option> getObjectOptionList(@RequestParam(required = false) Object lId) {
+        return objectService.getObjectOptionList(lId);
     }
 }

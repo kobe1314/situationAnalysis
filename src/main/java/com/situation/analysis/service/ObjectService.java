@@ -38,5 +38,5 @@ public interface ObjectService {
     /**
      * @return 
      */
-    List<Option> getObjectOptionList();
+    List<Option> getObjectOptionList(Object lId);
 }

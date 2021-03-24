@@ -45,7 +45,7 @@ public interface MonitoringObjectMapper {
     /**
      * @return List<Option>
      */
-    List<Option> getObjectOptionList();
+    List<Option> getObjectOptionList(Object lId);
 
     /**
      * @param bId

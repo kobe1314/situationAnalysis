@@ -127,9 +127,9 @@ public class ObjectServiceImpl implements ObjectService {
      * @return
      */
     @Override
-    public List<Option> getObjectOptionList() {
+    public List<Option> getObjectOptionList(Object lId) {
         log.info("start object option list");
-        return monitoringObjectMapper.getObjectOptionList();
+        return monitoringObjectMapper.getObjectOptionList(lId);
     }
 
     private MonitoringObjectEntity createObjectEntity(MonitoringObjectRequest request, String username) {
