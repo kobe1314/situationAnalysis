@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 public class MonitoringObjectInfo {
     private int id;
-    private int lId;
+    private int levelId;
     private String levelName;
     private String objectName;
     private String indicatorName;

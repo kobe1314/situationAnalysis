@@ -9,12 +9,14 @@ import com.situation.analysis.model.*;
 import com.situation.analysis.service.ObjectService;
 import com.situation.analysis.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -112,11 +114,11 @@ public class ObjectServiceImpl implements ObjectService {
         PageHelper.startPage(pageNum, pageSize);
         List<MonitoringObjectInfo> list = monitoringObjectMapper.selectObjectList(keyWord);
 
-        list = list.stream().map(objectInfo -> {
+        log.info("size: {}",list.size());
+        list.stream().forEach(objectInfo -> {
             List<IndicatorInfo> indicatorInfoList = indicatorMapper.getIndicatorBindObject(objectInfo.getId());
             objectInfo.setIndicatorInfoList(indicatorInfoList);
-            return objectInfo;
-        }).collect(Collectors.toList());
+        });
 
         return PageUtil.getPageResult(new PageInfo<MonitoringObjectInfo>(list));
     }

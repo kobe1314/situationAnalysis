@@ -19,7 +19,7 @@
         <result column="NAME" property="objectName"/>
         <result column="RUN_THRESHOLD" property="runThreshold"/>
         <result column="LEVEL_NAME" property="levelName"/>
-        <result column="L_ID" property="lId"/>
+        <result column="L_ID" property="levelId"/>
         <result column="INAME" property="indicatorName"/>
         <result column="IS_ORIGINAL_VALUE" property="isOriginalValue"/>
     </resultMap>
