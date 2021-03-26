@@ -1,5 +1,7 @@
 package com.situation.analysis.mapper.primary;
 
+import com.situation.analysis.entity.IndicatorEntity4ObjectA;
+
 /**
  * @description: IndicatorRecordMapper
  * @author: Kobe
@@ -8,5 +10,8 @@ package com.situation.analysis.mapper.primary;
  */
 public interface IndicatorRecordMapper {
 
-    void updateIndicatorRecord();
+    /**
+     * @param objectA
+     */
+    void addIndicatorRecord4ObjectA(IndicatorEntity4ObjectA objectA);
 }

@@ -1,6 +1,6 @@
 package com.situation.analysis.mapper.secondary;
 
-import com.situation.analysis.entity.secondary.TaskResultEntity;
+import com.situation.analysis.entity.secondary.ResultEntity;
 
 /**
  * @description: Reference data
@@ -10,5 +10,26 @@ import com.situation.analysis.entity.secondary.TaskResultEntity;
  */
 public interface ReferenceDataMapper {
 
-    TaskResultEntity checkTaskResultRecord4A12(int taskNum);
+    /**
+     * @return
+     */
+    ResultEntity checkTaskResultRecord4A11();
+
+    /**
+     * @param taskNum
+     * @return
+     */
+    ResultEntity checkTaskResultRecord4A12(int taskNum);
+
+    /**
+     * @param taskNum
+     * @return
+     */
+    ResultEntity checkTaskResultRecord4A13(int taskNum);
+
+    /**
+     * @return
+     */
+    ResultEntity checkTaskResultRecord4A14();
+
 }

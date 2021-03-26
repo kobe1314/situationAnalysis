@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * @version: v1.0
  */
 @Slf4j
-@HandlerType(22)
+@HandlerType(205)
 @Component
 public class Handler205 extends AbstractHandler{
     @Override

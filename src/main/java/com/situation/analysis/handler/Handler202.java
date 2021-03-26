@@ -15,7 +15,7 @@ import javax.annotation.Resource;
  * @version: v1.0
  */
 @Slf4j
-@HandlerType(11)
+@HandlerType(202)
 @Component
 public class Handler202 extends AbstractHandler{
 

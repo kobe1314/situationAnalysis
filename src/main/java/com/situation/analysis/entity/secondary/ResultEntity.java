@@ -9,7 +9,8 @@ import lombok.Data;
  * @version: v1.0
  */
 @Data
-public class TaskResultEntity {
+public class ResultEntity {
+    private int offlineDuration;
     private int totalRecords;
     private int failRecords;
     private int successRecords;
