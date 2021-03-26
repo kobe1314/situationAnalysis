@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @HandlerType(22)
 @Component
-public class HandlerB extends AbstractHandler{
+public class Handler205 extends AbstractHandler{
     @Override
     public void handle(int taskNo) {
         log.info("test handler B");

@@ -26,15 +26,15 @@ public class NoticeServiceImpl implements NoticeService {
     @Resource
     HandlerContext context;
 
-    @Resource
-    ApplicationContext applicationContext;
+    //@Resource
+    //ApplicationContext applicationContext;
 
     @Override
     public void updateInformation(NoticeRequest request) {
         AbstractHandler handler = context.getInstance(request.getTasktype());
         handler.handle(request.getTaskno());
 
-        applicationContext.publishEvent(new Event202(this,request.getTaskno()));
+        //applicationContext.publishEvent(new Event202(this,request.getTaskno()));
 
         log.debug("finish notice updated!");
     }

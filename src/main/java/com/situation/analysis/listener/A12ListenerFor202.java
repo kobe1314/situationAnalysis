@@ -14,8 +14,9 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class A12Listener implements ApplicationListener<Event202> {
+public class A12ListenerFor202 implements ApplicationListener<Event202> {
 
+    // A12, A13,C11,C21
     @Override
     public void onApplicationEvent(Event202 event202) {
 

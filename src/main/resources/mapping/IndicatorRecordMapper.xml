@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.situation.analysis.mapper.IndicatorRecordMapper">
+
+<!--    <insert id="addNewBusiness" parameterType="BusinessEntity" useGeneratedKeys="true" keyProperty="id">-->
+<!--        insert into businessSystem(NAME,IMPACT_FACTOR,PLATFORM,RUN_THRESHOLD,CREATED_BY,CREATED_TIME)-->
+<!--        values(#{name}, #{impactFactor}, #{platform},#{runThreshold},#{createdBy},#{createdTime});-->
+<!--    </insert>-->
+
+
+</mapper>
