@@ -1,4 +1,4 @@
-package com.situation.analysis.mapper;
+package com.situation.analysis.mapper.primary;
 
 import com.situation.analysis.entity.IndicatorEntity;
 import com.situation.analysis.model.IndicatorInfo;

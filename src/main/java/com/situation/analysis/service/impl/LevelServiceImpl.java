@@ -2,8 +2,8 @@ package com.situation.analysis.service.impl;
 
 import com.situation.analysis.entity.MonitoringLevelEntity;
 import com.situation.analysis.entity.MonitoringObjectEntity;
-import com.situation.analysis.mapper.MonitoringLevelMapper;
-import com.situation.analysis.mapper.MonitoringObjectMapper;
+import com.situation.analysis.mapper.primary.MonitoringLevelMapper;
+import com.situation.analysis.mapper.primary.MonitoringObjectMapper;
 import com.situation.analysis.model.LevelInfo;
 import com.situation.analysis.model.ObjectInfo;
 import com.situation.analysis.model.Option;

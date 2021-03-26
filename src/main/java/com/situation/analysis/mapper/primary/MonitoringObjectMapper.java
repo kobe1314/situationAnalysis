@@ -1,9 +1,10 @@
-package com.situation.analysis.mapper;
+package com.situation.analysis.mapper.primary;
 
 import com.situation.analysis.entity.MonitoringObjectEntity;
 import com.situation.analysis.model.MonitoringObjectInfo;
 import com.situation.analysis.model.ObjectInfo;
 import com.situation.analysis.model.Option;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
  * @date: 2021/3/9 下午9:03
  * @version: v1.0
  */
+@Mapper
 public interface MonitoringObjectMapper {
 
     /**

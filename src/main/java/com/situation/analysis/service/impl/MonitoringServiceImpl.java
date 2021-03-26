@@ -2,30 +2,16 @@ package com.situation.analysis.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.situation.analysis.entity.IndicatorEntity;
 import com.situation.analysis.entity.MonitoringLevelEntity;
-import com.situation.analysis.entity.MonitoringObjectEntity;
-import com.situation.analysis.mapper.IndicatorMapper;
-import com.situation.analysis.mapper.MonitoringLevelMapper;
-import com.situation.analysis.mapper.MonitoringObjectMapper;
+import com.situation.analysis.mapper.primary.MonitoringLevelMapper;
 import com.situation.analysis.model.*;
 import com.situation.analysis.service.MonitoringService;
-import com.situation.analysis.util.JwtUtil;
 import com.situation.analysis.util.PageUtil;
-import com.situation.analysis.util.Util;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.shiro.SecurityUtils;
-import org.springframework.cglib.beans.BeanCopier;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @description: Monitoring service implement

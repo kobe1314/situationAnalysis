@@ -1,4 +1,4 @@
-package com.situation.analysis.mapper;
+package com.situation.analysis.mapper.primary;
 
 /**
  * @description: IndicatorRecordMapper

@@ -1,4 +1,4 @@
-package com.situation.analysis.mapper;
+package com.situation.analysis.mapper.primary;
 
 import com.situation.analysis.entity.MonitoringLevelEntity;
 import com.situation.analysis.model.LevelInfo;
