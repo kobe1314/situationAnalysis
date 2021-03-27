@@ -2,8 +2,6 @@ package com.situation.analysis.entity;
 
 import lombok.Data;
 
-import java.math.BigDecimal;
-
 /**
  * @description: business
  * @author: Kobe
@@ -14,7 +12,7 @@ import java.math.BigDecimal;
 public class BusinessEntity {
     private int id;
     private String name;
-    private BigDecimal impactFactor;
+    private float impactFactor;
     private String platform;
     private int runThreshold;
     private String isOriginalValue;

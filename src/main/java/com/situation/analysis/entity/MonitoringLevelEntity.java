@@ -2,8 +2,6 @@ package com.situation.analysis.entity;
 
 import lombok.Data;
 
-import java.math.BigDecimal;
-
 /**
  * @description: 检测层次
  * @author: Kobe
@@ -14,7 +12,7 @@ import java.math.BigDecimal;
 public class MonitoringLevelEntity {
     private int id;
     private String name;
-    private BigDecimal impactFactor;
+    private float impactFactor;
     private int runThreshold;
     private String createdBy;
     private String createdTime;

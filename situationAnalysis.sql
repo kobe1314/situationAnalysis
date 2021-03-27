@@ -84,9 +84,142 @@ UPDATE `situationAnalysis`.`indicator` SET `INSTRUCTION`='设备使用异常数�
 
 insert into monitoringLevel(NAME) values('采集设备A'),('基础设施B'),('核心数据C'),('服务资源D'),('应用平台E');
 
+DROP TABLE IF EXISTS indicatorOfImage;
+CREATE TABLE indicatorOfImage(
+    ID INT    COMMENT 'ID' ,
+    DIAGTIME VARCHAR(32)    COMMENT '检测时间' ,
+    CODE VARCHAR(32)    COMMENT '行政区划编码' ,
+    NAME VARCHAR(32)    COMMENT '行政区名称' ,
+    ONLINE_A21 DECIMAL(32,10)    COMMENT '在线率A21' ,
+    RATE_OF_REACH_A22 DECIMAL(32,10)    COMMENT '数据量达标率A22' ,
+    EXCEPTION_A23 DECIMAL(32,10)    COMMENT '使用异常A23' ,
+    CREATED_BY VARCHAR(32)    COMMENT '创建人' ,
+    CREATED_TIME VARCHAR(32)    COMMENT '创建时间' ,
+    UPDATED_BY VARCHAR(32)    COMMENT '更新人' ,
+    UPDATED_TIME VARCHAR(32)    COMMENT '更新时间'
+) COMMENT = '图像数据采集设备的指标 ';
 
+DROP TABLE IF EXISTS image;
+CREATE TABLE image(
+    ID INT NOT NULL AUTO_INCREMENT  COMMENT 'ID' ,
+    DIAGTIME VARCHAR(32)    COMMENT '检测时间' ,
+    CODE VARCHAR(32)    COMMENT '行政区划编码' ,
+    NAME VARCHAR(32)    COMMENT '行政区名称' ,
+    IMAGE_A2 DECIMAL(32,10)    COMMENT '图像数据采集设备A2' ,
+    PRIMARY KEY (ID)
+) COMMENT = '图像数据采集设备A2 ';
 
+DROP TABLE IF EXISTS indicatorOfVideo;
+CREATE TABLE indicatorOfVideo(
+    ID INT NOT NULL AUTO_INCREMENT  COMMENT 'ID' ,
+    DIAGTIME VARCHAR(32)    COMMENT '检测时间' ,
+    CODE VARCHAR(32)    COMMENT '行政区划编码' ,
+    NAME VARCHAR(32)    COMMENT '行政区划名称' ,
+    ONLINE_RATE_A11 DECIMAL(32,10)    COMMENT '在线率 A11' ,
+    CONNECT_RATE_A12 DECIMAL(32,10)    COMMENT '连通率 A12' ,
+    DELAY_RATE_A13 DECIMAL(32,10)    COMMENT '时延超标率 A13' ,
+    EXCEPTION_A14 DECIMAL(32,10)    COMMENT '使用异常 A14' ,
+    PRIMARY KEY (ID)
+) COMMENT = '视频流采集设备的指标 ';
 
+DROP TABLE IF EXISTS video;
+CREATE TABLE video(
+    ID INT NOT NULL AUTO_INCREMENT  COMMENT 'ID' ,
+    DIAGTIME VARCHAR(32)    COMMENT '检测时间' ,
+    CODE VARCHAR(32)    COMMENT '行政区划编码' ,
+    NAME VARCHAR(32)    COMMENT '行政区划名称' ,
+    VIDEO_A1 DECIMAL(32,10)    COMMENT '视频流采集设备A1' ,
+    PRIMARY KEY (ID)
+) COMMENT = '视频流采集设备A1 ';
+
+DROP TABLE IF EXISTS indicatorRealTimeVideo;
+CREATE TABLE indicatorRealTimeVideo(
+    ID INT NOT NULL AUTO_INCREMENT  COMMENT 'ID' ,
+    DIAGTIME VARCHAR(32)    COMMENT '检测时间' ,
+    CODE VARCHAR(32)    COMMENT '行政区划编码' ,
+    NAME VARCHAR(32)    COMMENT '行政区划名称' ,
+    VIDEO_INTENSITY_RATE_C11 DECIMAL(32,10)    COMMENT '视频流完好率C11' ,
+    ANNOTATION_INTENSITY_RATE_C12 DECIMAL(32,10)    COMMENT '标注完好率C12' ,
+    PRIMARY KEY (ID)
+) COMMENT = '实时视频流质量的指标 ';
+
+DROP TABLE IF EXISTS realTimeVideo;
+CREATE TABLE realTimeVideo(
+    ID INT NOT NULL AUTO_INCREMENT  COMMENT 'ID' ,
+    DIAGTIME VARCHAR(32)    COMMENT '检测时间' ,
+    CODE VARCHAR(32)    COMMENT '行政区划编码' ,
+    NAME VARCHAR(32)    COMMENT '行政区划名称' ,
+    ONLINE_VIDEO_QUANTITY_C1 VARCHAR(32)    COMMENT '实时视频流质量C1' ,
+    PRIMARY KEY (ID)
+) COMMENT = '实时视频流质量C1 ';
+
+DROP TABLE IF EXISTS IndicatorOfHistoryVideo;
+CREATE TABLE IndicatorOfHistoryVideo(
+    ID INT NOT NULL AUTO_INCREMENT  COMMENT 'ID' ,
+    DIAGTIME VARCHAR(32)    COMMENT '检测时间' ,
+    CODE VARCHAR(32)    COMMENT '行政区划编码' ,
+    NAME VARCHAR(32)    COMMENT '行政区划名称' ,
+    VIDEO_INTENSITY_RATE_C21 DECIMAL(32,10)    COMMENT '录像完好率分值C21' ,
+    VIDEO_WHOLE_RATE_C22 DECIMAL(32,10)    COMMENT '录像完整率分值C22' ,
+    ANNOTATION_RATE_C23 DECIMAL(32,10)    COMMENT '标注率分值C23' ,
+    PRIMARY KEY (ID)
+) COMMENT = '历史视频质量的指标 ';
+
+DROP TABLE IF EXISTS historyVideo;
+CREATE TABLE historyVideo(
+    ID INT NOT NULL AUTO_INCREMENT  COMMENT 'ID' ,
+    DIAGTIME VARCHAR(32)    COMMENT '检测时间' ,
+    CODE VARCHAR(32)    COMMENT '行政区划编码' ,
+    NAME VARCHAR(32)    COMMENT '行政区划名称' ,
+    HISTORY_VIDEO_QUANTITY_C2 VARCHAR(32)    COMMENT '历史视频质量C2' ,
+    PRIMARY KEY (ID)
+) COMMENT = '历史视频质量C2 ';
+
+DROP TABLE IF EXISTS indicatorOfImageQuantity;
+CREATE TABLE indicatorOfImageQuantity(
+    ID INT NOT NULL AUTO_INCREMENT  COMMENT 'ID' ,
+    DIAGTIME VARCHAR(32)    COMMENT '检测时间' ,
+    CODE VARCHAR(32)    COMMENT '行政区划编码' ,
+    NAME VARCHAR(32)    COMMENT '行政区划名称' ,
+    IMAGE_C31 DECIMAL(32,10)    COMMENT '图像完好率C31' ,
+    IAMGE_C32 DECIMAL(32,10)    COMMENT '图像数据一致率C31' ,
+    IMAGE_C33 DECIMAL(32,10)    COMMENT '结构化数据规范C34' ,
+    IMAGE_C34 DECIMAL(32,10)    COMMENT '结构化数据稳定性C33' ,
+    PRIMARY KEY (ID)
+) COMMENT = '图像数据质量的指标 ';
+
+DROP TABLE IF EXISTS imageQuantity;
+CREATE TABLE imageQuantity(
+    ID INT NOT NULL AUTO_INCREMENT  COMMENT 'ID' ,
+    DIAGTIME VARCHAR(32)    COMMENT '检测时间' ,
+    CODE VARCHAR(32)    COMMENT '行政区划编码' ,
+    NAME VARCHAR(32)    COMMENT '行政区划名称' ,
+    IAMGE_QUANTITY_C3 DECIMAL(32,10)    COMMENT '图像数据质量C3' ,
+    PRIMARY KEY (ID)
+) COMMENT = '图像数据质量C3 ';
+
+DROP TABLE IF EXISTS indicatorOfService;
+CREATE TABLE indicatorOfService(
+    ID INT NOT NULL AUTO_INCREMENT  COMMENT 'ID' ,
+    DIAGTIME VARCHAR(32)    COMMENT '检测时间' ,
+    CODE VARCHAR(32)    COMMENT '行政区划编码' ,
+    NAME VARCHAR(32)    COMMENT '行政区划名称' ,
+    SERVICE_D11 DECIMAL(32,10)    COMMENT '服务连通率分值D11' ,
+    SERVICE_D12 DECIMAL(32,10)    COMMENT '服务完好率分值D12' ,
+    SERVICE_D13 DECIMAL(32,10)    COMMENT '服务使用率分值D13' ,
+    SERVICE_D14 DECIMAL(32,10)    COMMENT '服务时延指标分值D14' ,
+    PRIMARY KEY (ID)
+) COMMENT = '服务的指标 ';
+
+DROP TABLE IF EXISTS service;
+CREATE TABLE service(
+    ID INT NOT NULL AUTO_INCREMENT  COMMENT 'ID' ,
+    DIAGTIME VARCHAR(32)    COMMENT '检测时间' ,
+    CODE VARCHAR(32)    COMMENT '行政区划编码' ,
+    NAME VARCHAR(32)    COMMENT '行政区划名称' ,
+    SERVICE_OBEJCT_D1 DECIMAL(32,10)    COMMENT '服务对象D1' ,
+    PRIMARY KEY (ID)
+) COMMENT = '服务D1 ';
 
 
 

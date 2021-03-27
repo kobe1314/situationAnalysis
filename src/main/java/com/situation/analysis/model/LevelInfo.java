@@ -2,7 +2,6 @@ package com.situation.analysis.model;
 
 import lombok.Data;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -15,7 +14,7 @@ import java.util.List;
 public class LevelInfo {
     private int id;
     private String name;
-    private BigDecimal impactFactor;
+    private float impactFactor;
     private int runThreshold;
     private List<ObjectInfo> objectList;
 }

@@ -2,7 +2,6 @@ package com.situation.analysis.model;
 
 import lombok.Data;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -17,7 +16,7 @@ public class BusinessInfo {
     private String name;
     private String platform;
     private int runThreshold;
-    private BigDecimal impactFactor;
+    private float impactFactor;
     private String isOriginalValue;
     private List<ObjectInfo> objectList;
 }

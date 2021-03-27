@@ -2,7 +2,6 @@ package com.situation.analysis.model;
 
 import lombok.Data;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -15,5 +14,5 @@ import java.util.List;
 public class ObjectInfo {
     private int id;
     private String objectName;
-    private BigDecimal impactFactor;
+    private float impactFactor;
 }

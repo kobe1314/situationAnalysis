@@ -28,6 +28,8 @@ public class NoticeController {
         log.debug("start notice updated");
         NoticeResponse response = new NoticeResponse();
         NoticeService.updateInformation(request);
+        response.setCode(1000);
+        response.setMessage("success");
         return response;
     }
 }

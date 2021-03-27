@@ -1,10 +1,6 @@
 package com.situation.analysis.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
-
-import java.math.BigDecimal;
 
 /**
  * @description:
@@ -16,6 +12,6 @@ import java.math.BigDecimal;
 public class IndicatorInfo {
     private int id;
     private String name;
-    private BigDecimal impactFactor;
+    private float impactFactor;
     private int objectId;
 }

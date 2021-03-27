@@ -105,4 +105,9 @@
         update monitoringObject set L_ID =null where L_ID = #{lId};
     </update>
 
+
+    <select id="getObjectId" parameterType="string" resultType="java.lang.Integer">
+        select id from monitoringObject where name = #{name}
+    </select>
+
 </mapper>

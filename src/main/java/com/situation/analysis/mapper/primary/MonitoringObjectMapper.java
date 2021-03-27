@@ -58,4 +58,10 @@ public interface MonitoringObjectMapper {
      * @param lId
      */
     void unbindObjectWithLevel(int lId);
+
+    /**
+     * @param name
+     * @return
+     */
+    int getObjectId(String name);
 }

@@ -2,8 +2,6 @@ package com.situation.analysis.model;
 
 import lombok.Data;
 
-import java.math.BigDecimal;
-
 /**
  * @description: Indicator
  * @author: Kobe
