@@ -4,10 +4,16 @@ server:
 #datasource configuration
 spring:
   datasource:
-    username: root
-    password: root
-    url: jdbc:mysql://127.0.0.1:3306/situationAnalysis?allowMultiQueries=true&characterEncoding=utf8&useSSL=false
-    driver-class-name: com.mysql.jdbc.Driver
+    primary:
+      username: root
+      password: Ye#123456
+      jdbc-url: jdbc:mysql://114.115.147.134:3306/situationAnalysis?allowMultiQueries=true&characterEncoding=utf8&useSSL=false
+      driver-class-name: com.mysql.jdbc.Driver
+    secondary:
+      username: root
+      password: Ye#123456
+      jdbc-url: jdbc:mysql://114.115.147.134:3306/dynamic?allowMultiQueries=true&characterEncoding=utf8&useSSL=false
+      driver-class-name: com.mysql.jdbc.Driver
 
 
 #show sql log
