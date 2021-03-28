@@ -2,6 +2,7 @@ package com.situation.analysis.model;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -11,6 +12,6 @@ import java.util.List;
  * @version: v1.0
  */
 @Data
-public class BusinessResponse {
+public class BusinessResponse implements Serializable {
     private List<BusinessInfo> businessInfoList;
 }

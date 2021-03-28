@@ -2,6 +2,8 @@ package com.situation.analysis.entity;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @description: 对象
  * @author: Kobe
@@ -9,7 +11,7 @@ import lombok.Data;
  * @version: v1.0
  */
 @Data
-public class MonitoringObjectEntity {
+public class MonitoringObjectEntity implements Serializable {
     private int id;
     private String name;
     private float impactFactor;

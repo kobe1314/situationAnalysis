@@ -2,6 +2,7 @@ package com.situation.analysis.model;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ import java.util.List;
  * @version: v1.0
  */
 @Data
-public class LevelInfo {
+public class LevelInfo implements Serializable {
     private int id;
     private String name;
     private float impactFactor;

@@ -2,6 +2,8 @@ package com.situation.analysis.model;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @description: Indicator
  * @author: Kobe
@@ -9,7 +11,7 @@ import lombok.Data;
  * @version: v1.0
  */
 @Data
-public class IndicatorResponse {
+public class IndicatorResponse implements Serializable {
     private int id;
     private String name;
     private String instruction;

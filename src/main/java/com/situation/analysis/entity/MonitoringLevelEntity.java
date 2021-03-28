@@ -2,6 +2,8 @@ package com.situation.analysis.entity;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @description: 检测层次
  * @author: Kobe
@@ -9,7 +11,7 @@ import lombok.Data;
  * @version: v1.0
  */
 @Data
-public class MonitoringLevelEntity {
+public class MonitoringLevelEntity implements Serializable {
     private int id;
     private String name;
     private float impactFactor;

@@ -10,7 +10,7 @@ import lombok.Data;
  * @version: v1.0
  */
 @Data
-public class IndicatorEntity {
+public class IndicatorEntity implements Serializable {
     private int id;
     private String name;
     private float impactFactor;

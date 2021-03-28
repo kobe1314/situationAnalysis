@@ -9,7 +9,7 @@ import lombok.Data;
  * @version: v1.0
  */
 @Data
-public class BusinessEntity {
+public class BusinessEntity implements Serializable {
     private int id;
     private String name;
     private float impactFactor;

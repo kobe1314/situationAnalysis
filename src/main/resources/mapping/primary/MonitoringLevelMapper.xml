@@ -61,4 +61,5 @@
         select id, name from monitoringLevel;
     </select>
 
+    <cache eviction="LRU" flushInterval="600000" size="512" readOnly="true"/>
 </mapper>
