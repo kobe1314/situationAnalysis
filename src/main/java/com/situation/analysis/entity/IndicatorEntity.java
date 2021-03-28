@@ -2,6 +2,8 @@ package com.situation.analysis.entity;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 
 /**
  * @description: 指标
