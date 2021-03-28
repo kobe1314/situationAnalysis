@@ -19,7 +19,7 @@ public class HandlerContext {
     }
 
     /**
-     * 获取对应交易类型的处理类
+     * 获取对应任务类型的处理类
      * @param type
      * @return
      */
@@ -27,7 +27,7 @@ public class HandlerContext {
         Class clazz = handlerMap.get(type);
 
         if (clazz == null) {
-            throw new IllegalArgumentException("未找到订单类型【" + type + "】的处理类");
+            throw new IllegalArgumentException("未找到任务类型【" + type + "】的处理类");
         }
 
         return (AbstractHandler) SpringContextUtil.getBean(clazz);
