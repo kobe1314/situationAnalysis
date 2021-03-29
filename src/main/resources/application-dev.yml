@@ -12,7 +12,7 @@ spring:
     secondary:
       username: root
       password: Ye#123456
-      jdbc-url: jdbc:mysql://114.115.147.134:3306/dynamic?allowMultiQueries=true&characterEncoding=utf8&useSSL=false
+      jdbc-url: jdbc:mysql://114.115.147.134:3306/vims30?allowMultiQueries=true&characterEncoding=utf8&useSSL=false
       driver-class-name: com.mysql.jdbc.Driver
 
 

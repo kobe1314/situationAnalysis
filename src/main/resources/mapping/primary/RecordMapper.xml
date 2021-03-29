@@ -13,4 +13,18 @@
     </insert>
 
 
+    <insert id="addIndicatorRecord4ObjectC1" parameterType="IndicatorEntity4ObjectC1">
+        insert into indicatorRealTimeVideo(DIAGTIME,CODE,NAME,VIDEO_INTENSITY_RATE_C11,ANNOTATION_INTENSITY_RATE_C12)
+        values(#{diagTime}, #{code}, #{name},#{videoRatingC11},#{annotationRatingC12});
+    </insert>
+
+    <insert id="addRecord4ObjectC1" parameterType="ObjectEntity4Record">
+        insert into realTimeVideo(DIAGTIME,CODE,NAME,ONLINE_VIDEO_QUANTITY_C1)
+        values(#{diagTime}, #{code}, #{name},#{healthRating});
+    </insert>
+
+
+
+
+
 </mapper>

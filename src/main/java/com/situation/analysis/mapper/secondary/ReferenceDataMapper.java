@@ -2,6 +2,8 @@ package com.situation.analysis.mapper.secondary;
 
 import com.situation.analysis.entity.secondary.ResultEntity;
 
+import java.util.List;
+
 /**
  * @description: Reference data
  * @author: Kobe
@@ -31,5 +33,26 @@ public interface ReferenceDataMapper {
      * @return
      */
     ResultEntity checkTaskResultRecord4A14();
+
+
+    /**
+     * @param taskType
+     * @return
+     */
+    List<Object> getTaskIds(int taskType);
+
+    /**
+     * @param taskIds
+     * @return
+     */
+    ResultEntity checkTaskResultRecord4C11(List<Object> taskIds);
+
+    /**
+     * @param taskIds
+     * @return
+     */
+    ResultEntity checkTaskResultRecord4C12(List<Object> taskIds);
+
+
 
 }

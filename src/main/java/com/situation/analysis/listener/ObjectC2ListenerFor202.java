@@ -2,7 +2,6 @@ package com.situation.analysis.listener;
 
 import com.situation.analysis.event.Event202;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class A13ListenerFor202 implements ApplicationListener<Event202> {
+public class ObjectC2ListenerFor202 implements ApplicationListener<Event202> {
 
 
     @Override
@@ -22,3 +21,7 @@ public class A13ListenerFor202 implements ApplicationListener<Event202> {
         log.debug("a13 listener task num: {}" ,event202.getTaskNum());
     }
 }
+
+
+//C1 ----》 C11
+//c2 ----> C21

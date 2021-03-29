@@ -10,6 +10,7 @@ import com.situation.analysis.mapper.primary.MonitoringObjectMapper;
 import com.situation.analysis.mapper.primary.RecordMapper;
 import com.situation.analysis.mapper.secondary.ReferenceDataMapper;
 import com.situation.analysis.model.IndicatorInfo;
+import com.situation.analysis.util.Util;
 import lombok.extern.slf4j.Slf4j;
 import lombok.var;
 import org.springframework.context.ApplicationListener;
@@ -65,7 +66,7 @@ public class ObjectAListenerFor202 implements ApplicationListener<Event202> {
 
         //A14
         ResultEntity result4A14 = referenceDataMapper.checkTaskResultRecord4A14();
-        float exceptionRating = (float) result4A14.getFailRecords() / result4A14.getTotalRecords();
+        float exceptionRating = 1 - (float) result4A14.getFailRecords() / result4A14.getTotalRecords();
 
         IndicatorEntity4ObjectA objectA = createIndicatorEntity4ObjectA(onlineRating, connectedRating, reachedRating, exceptionRating);
 
@@ -78,33 +79,33 @@ public class ObjectAListenerFor202 implements ApplicationListener<Event202> {
         }
 
         float healthRating = calculateHealthRating(indicatorInfos, onlineRating, connectedRating, reachedRating, exceptionRating);
-        ObjectEntity4Record record = createObjectEntity4Record(healthRating);
+        ObjectEntity4Record record = Util.createObjectEntity4Record(healthRating);;
         recordMapper.addRecord4ObjectA(record);
         log.debug("add new record for object A of indicators");
 
     }
 
     private float calculateHealthRating(List<IndicatorInfo> indicatorInfos, float onlineRating, float connectedRating, float reachedRating, float exceptionRating) {
-        float onlineRatingResult = getImpactedFactor(indicatorInfos, "在线率 A11") * onlineRating;
-        float connectedRatingResult = getImpactedFactor(indicatorInfos, "连通率 A12") * connectedRating;
-        float reachedRatingResult = getImpactedFactor(indicatorInfos, "时延超标率 A13") * reachedRating;
-        float exceptionRatingResult = getImpactedFactor(indicatorInfos, "使用异常 A14") * exceptionRating;
+        float onlineRatingResult = Util.getImpactedFactor(indicatorInfos, "在线率 A11") * onlineRating;
+        float connectedRatingResult = Util.getImpactedFactor(indicatorInfos, "连通率 A12") * connectedRating;
+        float reachedRatingResult = Util.getImpactedFactor(indicatorInfos, "时延超标率 A13") * reachedRating;
+        float exceptionRatingResult = Util.getImpactedFactor(indicatorInfos, "使用异常 A14") * exceptionRating;
         float finalResult = onlineRatingResult + connectedRatingResult + reachedRatingResult + exceptionRatingResult;
         return finalResult;
     }
 
-    private float getImpactedFactor(List<IndicatorInfo> indicatorInfos, String name) {
-        log.debug("indicator name: {}", name);
-        IndicatorInfo indicator = indicatorInfos.stream().filter(indicatorInfo -> indicatorInfo.getName().equals(name)).findFirst().get();
-        return Optional.of(indicator.getImpactFactor()).orElse((float) 0);
-    }
+    //private float getImpactedFactor(List<IndicatorInfo> indicatorInfos, String name) {
+    //    log.debug("indicator name: {}", name);
+    //    IndicatorInfo indicator = indicatorInfos.stream().filter(indicatorInfo -> indicatorInfo.getName().equals(name)).findFirst().get();
+    //    return Optional.of(indicator.getImpactFactor()).orElse((float) 0);
+    //}
 
-    private ObjectEntity4Record createObjectEntity4Record(float healthRating) {
-        ObjectEntity4Record objectEntity4Record = new ObjectEntity4Record();
-        objectEntity4Record.setDiagTime(new Date().toLocaleString());
-        objectEntity4Record.setHealthRating(healthRating);
-        return objectEntity4Record;
-    }
+    //private ObjectEntity4Record createObjectEntity4Record(float healthRating) {
+    //    ObjectEntity4Record objectEntity4Record = new ObjectEntity4Record();
+    //    objectEntity4Record.setDiagTime(new Date().toLocaleString());
+    //    objectEntity4Record.setHealthRating(healthRating);
+    //    return objectEntity4Record;
+    //}
 
     private IndicatorEntity4ObjectA createIndicatorEntity4ObjectA(float onlineRating, float connectedRating, float reachedRating, float exceptionRating) {
         IndicatorEntity4ObjectA objectA = new IndicatorEntity4ObjectA();
