@@ -49,18 +49,18 @@ public class ObjectC1ListenerFor202 implements ApplicationListener<Event202> {
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public void onApplicationEvent(Event202 event202) {
 
-        log.debug("a13 listener task num: {}", event202.getTaskNum());
+        log.debug("C11 listener task num: {}", event202.getTaskNum());
         int taskNum = event202.getTaskNum();
 
         //C11
         List<Object> taskIds208 = referenceDataMapper.getTaskIds(208);
-        ResultEntity result4C11 = referenceDataMapper.checkTaskResultRecord4C11(taskIds208);
-        float c11Rating = (float) result4C11.getSuccessRecords() / result4C11.getTotalRecords();
+        ResultEntity result4C11 = referenceDataMapper.checkTaskResultRecord4C(taskIds208);
+        float c11Rating = Util.calculateRating(result4C11.getSuccessRecords(),result4C11.getTotalRecords());
 
         //C12
         List<Object> taskIds209 = referenceDataMapper.getTaskIds(209);
-        ResultEntity result4C12 = referenceDataMapper.checkTaskResultRecord4C11(taskIds209);
-        float c12Rating = (float) result4C12.getSuccessRecords() / result4C12.getTotalRecords();
+        ResultEntity result4C12 = referenceDataMapper.checkTaskResultRecord4C12(taskIds209);
+        float c12Rating = Util.calculateRating(result4C12.getSuccessRecords(),result4C12.getTotalRecords());
 
         IndicatorEntity4ObjectC1 indicators = createIndicatorEntity4ObjectC1(c11Rating, c12Rating);
         recordMapper.addIndicatorRecord4ObjectC1(indicators);

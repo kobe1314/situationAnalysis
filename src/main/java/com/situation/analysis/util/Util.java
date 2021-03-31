@@ -18,7 +18,7 @@ import java.util.Optional;
 @Slf4j
 public class Util {
 
-    public static String encryptPassword(String password,String salt) {
+    public static String encryptPassword(String password, String salt) {
         int times = 2;
         String algorithmName = "md5";
         String encodePassword = new SimpleHash(algorithmName, password, salt, times).toString();
@@ -35,7 +35,15 @@ public class Util {
 
     public static float getImpactedFactor(List<IndicatorInfo> indicatorInfos, String name) {
         log.debug("indicator name: {}", name);
-        IndicatorInfo indicator = indicatorInfos.stream().filter(indicatorInfo -> indicatorInfo.getName().equals(name)).findFirst().get();
+        IndicatorInfo indicator = indicatorInfos.stream().filter(indicatorInfo -> indicatorInfo.getName().equals(name)).findFirst().orElse(new IndicatorInfo());
         return Optional.of(indicator.getImpactFactor()).orElse((float) 0);
+    }
+
+    public static float calculateRating(int successRecords, int totalRecords) {
+
+        if (totalRecords == 0) {
+            return 0;
+        }
+        return successRecords / totalRecords;
     }
 }

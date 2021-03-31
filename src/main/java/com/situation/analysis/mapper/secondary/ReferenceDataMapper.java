@@ -42,16 +42,30 @@ public interface ReferenceDataMapper {
     List<Object> getTaskIds(int taskType);
 
     /**
+     * this is for C11 and C21
      * @param taskIds
      * @return
      */
-    ResultEntity checkTaskResultRecord4C11(List<Object> taskIds);
+    ResultEntity checkTaskResultRecord4C(List<Object> taskIds);
 
     /**
      * @param taskIds
      * @return
      */
     ResultEntity checkTaskResultRecord4C12(List<Object> taskIds);
+
+
+    /**
+     * @param taskIds
+     * @return
+     */
+    ResultEntity checkTaskResultRecord4C22(List<Object> taskIds);
+
+    /**
+     * @param taskIds
+     * @return
+     */
+    ResultEntity checkTaskResultRecord4C23(List<Object> taskIds);
 
 
 

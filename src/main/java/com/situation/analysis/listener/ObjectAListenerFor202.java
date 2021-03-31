@@ -54,19 +54,19 @@ public class ObjectAListenerFor202 implements ApplicationListener<Event202> {
         int taskNum = event202.getTaskNum();
         //A11
         ResultEntity result4A11 = referenceDataMapper.checkTaskResultRecord4A11();
-        float onlineRating = 1 - (float) result4A11.getOfflineDuration() / (24 * 60 * result4A11.getTotalRecords());
+        float onlineRating = 1 - Util.calculateRating(result4A11.getOfflineDuration(),24 * 60 * result4A11.getTotalRecords());
 
         //A12
         ResultEntity taskResult4A12 = referenceDataMapper.checkTaskResultRecord4A12(taskNum);
-        float connectedRating = (float) taskResult4A12.getSuccessRecords() / taskResult4A12.getTotalRecords();
+        float connectedRating = Util.calculateRating(taskResult4A12.getSuccessRecords(),taskResult4A12.getTotalRecords());
 
         //A13
         ResultEntity taskResult4A13 = referenceDataMapper.checkTaskResultRecord4A13(taskNum);
-        float reachedRating = 1 - (float) taskResult4A13.getFailRecords() / taskResult4A12.getTotalRecords();
+        float reachedRating = 1 - Util.calculateRating(taskResult4A13.getFailRecords(),taskResult4A12.getTotalRecords());
 
         //A14
         ResultEntity result4A14 = referenceDataMapper.checkTaskResultRecord4A14();
-        float exceptionRating = 1 - (float) result4A14.getFailRecords() / result4A14.getTotalRecords();
+        float exceptionRating = 1 - Util.calculateRating(result4A14.getFailRecords(),result4A14.getTotalRecords());
 
         IndicatorEntity4ObjectA objectA = createIndicatorEntity4ObjectA(onlineRating, connectedRating, reachedRating, exceptionRating);
 

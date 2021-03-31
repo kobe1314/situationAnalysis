@@ -24,7 +24,15 @@
     </insert>
 
 
+    <insert id="addIndicatorRecord4ObjectC2" parameterType="IndicatorEntity4ObjectC2">
+        insert into IndicatorOfHistoryVideo(DIAGTIME,CODE,NAME,VIDEO_INTENSITY_RATE_C21,VIDEO_WHOLE_RATE_C22,ANNOTATION_RATE_C23)
+        values(#{diagTime}, #{code}, #{name},#{videoRatingC21},#{completeRatingC22},#{annotationRatingC23});
+    </insert>
 
+    <insert id="addRecord4ObjectC2" parameterType="ObjectEntity4Record">
+        insert into historyVideo(DIAGTIME,CODE,NAME,HISTORY_VIDEO_QUANTITY_C2)
+        values(#{diagTime}, #{code}, #{name},#{healthRating});
+    </insert>
 
 
 </mapper>
