@@ -20,6 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -52,7 +54,9 @@ public class ObjectC2ListenerFor202 implements ApplicationListener<Event202> {
         //C21
         List<Object> taskIds210 = referenceDataMapper.getTaskIds(210);
         ResultEntity result4C21 = referenceDataMapper.checkTaskResultRecord4C(taskIds210);
-        float c21Rating = Util.calculateRating(result4C21.getSuccessRecords(),result4C21.getTotalRecords());
+        List<String> vList = referenceDataMapper.getVqdresList(taskIds210);
+        int successRecords = Util.calculateQualified(vList);
+        float c21Rating = Util.calculateRating(successRecords,result4C21.getTotalRecords());
 
         //C22
         List<Object> taskIds211 = referenceDataMapper.getTaskIds(211);
@@ -90,6 +94,7 @@ public class ObjectC2ListenerFor202 implements ApplicationListener<Event202> {
 
     private IndicatorEntity4ObjectC2 createIndicatorEntity4Object(float c21Rating, float c22Rating, float c23Rating) {
         IndicatorEntity4ObjectC2 c2 = new IndicatorEntity4ObjectC2();
+        c2.setDiagTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")));
         c2.setVideoRatingC21(c21Rating);
         c2.setCompleteRatingC22(c22Rating);
         c2.setAnnotationRatingC23(c23Rating);

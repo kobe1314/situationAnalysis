@@ -1,6 +1,7 @@
 package com.situation.analysis.mapper.secondary;
 
 import com.situation.analysis.entity.secondary.ResultEntity;
+import com.situation.analysis.entity.secondary.VideoResultEntity;
 
 import java.util.List;
 
@@ -66,6 +67,12 @@ public interface ReferenceDataMapper {
      * @return
      */
     ResultEntity checkTaskResultRecord4C23(List<Object> taskIds);
+
+    /**
+     * @param taskIds
+     * @return
+     */
+    List<String> getVqdresList(List<Object> taskIds);
 
 
 

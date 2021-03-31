@@ -5,9 +5,13 @@ import com.situation.analysis.model.IndicatorInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.crypto.hash.SimpleHash;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @description: utils
@@ -28,7 +32,7 @@ public class Util {
 
     public static ObjectEntity4Record createObjectEntity4Record(float healthRating) {
         ObjectEntity4Record objectEntity4Record = new ObjectEntity4Record();
-        objectEntity4Record.setDiagTime(new Date().toLocaleString());
+        objectEntity4Record.setDiagTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")));
         objectEntity4Record.setHealthRating(healthRating);
         return objectEntity4Record;
     }
@@ -44,6 +48,14 @@ public class Util {
         if (totalRecords == 0) {
             return 0;
         }
-        return successRecords / totalRecords;
+        return (float)successRecords / totalRecords;
+    }
+
+    public static Integer calculateQualified(List<String> vList) {
+        return vList.stream().filter(info ->
+                !Arrays.asList(info.split("\\|")).stream().anyMatch(
+                        str -> Integer.valueOf(str) >100 || Integer.valueOf(str) < 60
+                )).collect(Collectors.toList()).size();
+
     }
 }

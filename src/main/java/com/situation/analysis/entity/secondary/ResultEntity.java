@@ -2,6 +2,8 @@ package com.situation.analysis.entity.secondary;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @description: taskResult
  * @author: Kobe
@@ -14,5 +16,6 @@ public class ResultEntity {
     private int totalRecords;
     private int failRecords;
     private int successRecords;
-    private String code;
+
+
 }

@@ -26,42 +26,90 @@
         select count(*) totalRecords, count(if(status = 0 ,true,null)) failRecords from rm_outdeviceinfo;
     </select>
 
-    <select id="getTaskIds" resultType="object">
-        select taskId from rm_task where tasktype = 208;
+    <select id="getTaskIds" parameterType="int" resultType="object">
+        select taskId from rm_task where tasktype = #{taskType};
     </select>
 
     <select id="checkTaskResultRecord4C" resultMap="response">
-        select count(*) totalRecords, count(if((100 >= vqdres >= 60) ,true,null)) successRecords from rm_task_result where taskid in
-        <foreach collection="list" item="taskId" index="index"
-                 open="(" close=")" separator=",">
-            #{taskId}
-        </foreach>;
+        select count(*) totalRecords from rm_task_result where
+        <choose>
+            <when test="taskIds != null and taskIds.size > 0">
+                taskid IN
+                <foreach collection="list" item="taskId" index="index"
+                         open="(" close=")" separator=",">
+                    #{taskId}
+                </foreach>;
+            </when>
+            <otherwise>
+                1 = 2
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="getVqdresList" resultType="string">
+        select vqdres from rm_task_result where
+        <choose>
+            <when test="taskIds != null and taskIds.size > 0">
+                taskid IN
+                <foreach collection="list" item="taskId" index="index"
+                         open="(" close=")" separator=",">
+                    #{taskId}
+                </foreach>;
+            </when>
+            <otherwise>
+                1 = 2
+            </otherwise>
+        </choose>
     </select>
 
     <select id="checkTaskResultRecord4C12" resultMap="response">
-        select count(*) totalRecords, count(if(status = 1 ,true,null)) successRecords from rm_diag_osd where taskid in
-        <foreach collection="list" item="taskId" index="index"
-                 open="(" close=")" separator=",">
-            #{taskId}
-        </foreach>;
+        select count(*) totalRecords, count(if(status = 1 ,true,null)) successRecords from rm_diag_osd where
+        <choose>
+            <when test="taskIds != null and taskIds.size > 0">
+                taskid IN
+                <foreach collection="list" item="taskId" index="index"
+                         open="(" close=")" separator=",">
+                    #{taskId}
+                </foreach>;
+            </when>
+            <otherwise>
+                1 = 2
+            </otherwise>
+        </choose>
     </select>
 
 
     <select id="checkTaskResultRecord4C22" resultMap="response">
-        select count(*) totalRecords, count(if(status = 1 ,true,null)) successRecords from rm_videofull_diag_result where taskid in
-        <foreach collection="list" item="taskId" index="index"
-                 open="(" close=")" separator=",">
-            #{taskId}
-        </foreach>;
+        select count(*) totalRecords, count(if(status = 1 ,true,null)) successRecords from rm_videofull_diag_result where
+        <choose>
+            <when test="taskIds != null and taskIds.size > 0">
+                taskid IN
+                <foreach collection="list" item="taskId" index="index"
+                         open="(" close=")" separator=",">
+                    #{taskId}
+                </foreach>;
+            </when>
+            <otherwise>
+                1 = 2
+            </otherwise>
+        </choose>
     </select>
 
 
     <select id="checkTaskResultRecord4C23" resultMap="response">
-        select count(*) totalRecords, count(if(status = 1 ,true,null)) successRecords from rm_diag_osd where taskid in
-        <foreach collection="list" item="taskId" index="index"
-                 open="(" close=")" separator=",">
-            #{taskId}
-        </foreach>;
+        select count(*) totalRecords, count(if(status = 1 ,true,null)) successRecords from rm_diag_osd where
+        <choose>
+            <when test="taskIds != null and taskIds.size > 0">
+                taskid IN
+                <foreach collection="list" item="taskId" index="index"
+                         open="(" close=")" separator=",">
+                    #{taskId}
+                </foreach>;
+            </when>
+            <otherwise>
+                1 = 2
+            </otherwise>
+        </choose>
     </select>
 
 

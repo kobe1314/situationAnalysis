@@ -20,7 +20,15 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
+import java.lang.reflect.Array;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 /**
  * @description: listener
@@ -55,10 +63,12 @@ public class ObjectC1ListenerFor202 implements ApplicationListener<Event202> {
         //C11
         List<Object> taskIds208 = referenceDataMapper.getTaskIds(208);
         ResultEntity result4C11 = referenceDataMapper.checkTaskResultRecord4C(taskIds208);
-        float c11Rating = Util.calculateRating(result4C11.getSuccessRecords(),result4C11.getTotalRecords());
+        List<String> vList = referenceDataMapper.getVqdresList(taskIds208);
+        int successRecords = Util.calculateQualified(vList);
+        float c11Rating = Util.calculateRating(successRecords,result4C11.getTotalRecords());
 
         //C12
-        List<Object> taskIds209 = referenceDataMapper.getTaskIds(209);
+        List<Object> taskIds209 = Optional.of(referenceDataMapper.getTaskIds(209)).orElse(new ArrayList<>());
         ResultEntity result4C12 = referenceDataMapper.checkTaskResultRecord4C12(taskIds209);
         float c12Rating = Util.calculateRating(result4C12.getSuccessRecords(),result4C12.getTotalRecords());
 
@@ -78,6 +88,7 @@ public class ObjectC1ListenerFor202 implements ApplicationListener<Event202> {
         log.debug("add new record for object C of indicators");
     }
 
+
     private float calculateHealthRating(List<IndicatorInfo> indicatorInfos,float videoRatingC11, float annotationRatingC12 ) {
         float c11RatingResult = Util.getImpactedFactor(indicatorInfos, "视频流完好率C11") * videoRatingC11;
         float c12RatingResult = Util.getImpactedFactor(indicatorInfos, "标注完好率C12") * annotationRatingC12;
@@ -87,6 +98,7 @@ public class ObjectC1ListenerFor202 implements ApplicationListener<Event202> {
     
     private IndicatorEntity4ObjectC1 createIndicatorEntity4ObjectC1(float videoRatingC11, float annotationRatingC12) {
         IndicatorEntity4ObjectC1 c1 = new IndicatorEntity4ObjectC1();
+        c1.setDiagTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")));
         c1.setVideoRatingC11(videoRatingC11);
         c1.setAnnotationRatingC12(annotationRatingC12);
         return c1;
