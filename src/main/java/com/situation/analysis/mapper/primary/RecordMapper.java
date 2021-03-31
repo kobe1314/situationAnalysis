@@ -1,9 +1,6 @@
 package com.situation.analysis.mapper.primary;
 
-import com.situation.analysis.entity.IndicatorEntity4ObjectA;
-import com.situation.analysis.entity.IndicatorEntity4ObjectC1;
-import com.situation.analysis.entity.IndicatorEntity4ObjectC2;
-import com.situation.analysis.entity.ObjectEntity4Record;
+import com.situation.analysis.entity.*;
 
 /**
  * @description: IndicatorRecordMapper
@@ -43,5 +40,15 @@ public interface RecordMapper {
      * @param objectEntity4Record
      */
     void addRecord4ObjectC2(ObjectEntity4Record objectEntity4Record);
+
+    /**
+     * @param objectA2
+     */
+    void addIndicatorRecord4ObjectA2(IndicatorEntity4ObjectA2 objectA2);
+
+    /**
+     * @param objectEntity4Record
+     */
+    void addRecord4ObjectA2(ObjectEntity4Record objectEntity4Record);
 
 }

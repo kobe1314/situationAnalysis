@@ -21,7 +21,7 @@ public interface MonitoringObjectMapper {
      * @param objectEntity
      * @return insertId
      */
-    int addMonitoringObject(MonitoringObjectEntity objectEntity);
+    Integer addMonitoringObject(MonitoringObjectEntity objectEntity);
 
     /**
      * @param id
@@ -63,5 +63,5 @@ public interface MonitoringObjectMapper {
      * @param name
      * @return
      */
-    int getObjectId(String name);
+    Integer getObjectId(String name);
 }

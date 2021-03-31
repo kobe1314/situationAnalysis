@@ -12,6 +12,16 @@
         values(#{diagTime}, #{code}, #{name},#{healthRating});
     </insert>
 
+    <insert id="addIndicatorRecord4ObjectA2" parameterType="IndicatorEntity4ObjectA2">
+        insert into indicatorOfImage(DIAGTIME,CODE,NAME,ONLINE_A21,RATE_OF_REACH_A22,EXCEPTION_A23)
+        values(#{diagTime}, #{code}, #{name},#{onlineA21},#{completedA22},#{exceptionA23});
+    </insert>
+
+    <insert id="addRecord4ObjectA2" parameterType="ObjectEntity4Record">
+        insert into image(DIAGTIME,CODE,NAME,IMAGE_A2)
+        values(#{diagTime}, #{code}, #{name},#{healthRating});
+    </insert>
+
 
     <insert id="addIndicatorRecord4ObjectC1" parameterType="IndicatorEntity4ObjectC1">
         insert into indicatorRealTimeVideo(DIAGTIME,CODE,NAME,VIDEO_INTENSITY_RATE_C11,ANNOTATION_INTENSITY_RATE_C12)

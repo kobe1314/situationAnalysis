@@ -24,7 +24,7 @@ public class Handler202 extends AbstractHandler{
 
     @Override
     public void handle(int taskNo) {
-        log.info("test handler A");
+        log.info("start handler 202");
         applicationContext.publishEvent(new Event202(this,taskNo));
     }
 }

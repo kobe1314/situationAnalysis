@@ -112,6 +112,17 @@
         </choose>
     </select>
 
+    <select id="checkTaskResultRecord4A21" resultMap="response">
+        select sum(offlineduration) offlineDuration, count(*) totalRecords from rm_apeinfo;
+    </select>
+
+    <select id="checkTaskResultRecord4A22" resultMap="response">
+        select count(*) totalRecords, count(if(imagenum > imagestandnum ,true,null)) successRecords from rm_stk_structured_data;
+    </select>
+
+    <select id="checkTaskResultRecord4A23" resultMap="response">
+        select count(*) totalRecords, count(if(isonline = 0 ,true,null)) failRecords from rm_apeinfo;
+    </select>
 
 
 </mapper>

@@ -1,7 +1,6 @@
 package com.situation.analysis.event;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.ApplicationEvent;
 
 /**
  * @description: 202
@@ -10,10 +9,10 @@ import org.springframework.context.ApplicationEvent;
  * @version: v1.0
  */
 @Slf4j
-public class Event202 extends BasedEvent {
+public class Event205 extends BasedEvent {
 
 
-    public Event202(Object source, int taskNum) {
+    public Event205(Object source, int taskNum) {
         super(source, taskNum);
     }
 }
