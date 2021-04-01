@@ -30,7 +30,7 @@ import java.util.List;
  */
 @Slf4j
 @Component
-public class ObjectAListenerFor202 implements ApplicationListener<BasedEvent> {
+public class ObjectA1Listener implements ApplicationListener<BasedEvent> {
 
     @Resource
     ReferenceDataMapper referenceDataMapper;

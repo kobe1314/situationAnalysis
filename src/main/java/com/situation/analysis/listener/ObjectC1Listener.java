@@ -33,7 +33,7 @@ import java.util.Optional;
  */
 @Slf4j
 @Component
-public class ObjectC1ListenerFor202 implements ApplicationListener<BasedEvent> {
+public class ObjectC1Listener implements ApplicationListener<BasedEvent> {
 
     private static final Integer[] SUPPORT_EVENT_ARRAYS = new Integer[]{209, 212};
 

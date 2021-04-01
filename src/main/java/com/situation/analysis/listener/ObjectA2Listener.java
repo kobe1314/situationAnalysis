@@ -31,7 +31,7 @@ import java.util.List;
  */
 @Slf4j
 @Component
-public class ObjectA2ListenerFor205 implements ApplicationListener<BasedEvent> {
+public class ObjectA2Listener implements ApplicationListener<BasedEvent> {
 
     private static final Integer[] SUPPORT_EVENT_ARRAYS = new Integer[]{205, 216};
 
