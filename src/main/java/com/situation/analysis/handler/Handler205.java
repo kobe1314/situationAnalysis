@@ -1,8 +1,7 @@
 package com.situation.analysis.handler;
 
 import com.situation.analysis.annotation.HandlerType;
-import com.situation.analysis.event.Event202;
-import com.situation.analysis.event.Event205;
+import com.situation.analysis.event.BasedEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
@@ -27,6 +26,6 @@ public class Handler205 extends AbstractHandler {
     public void handle(int taskNo) {
 
         log.info("start handler 205");
-        applicationContext.publishEvent(new Event205(this, taskNo));
+        applicationContext.publishEvent(new BasedEvent(this, taskNo,205));
     }
 }

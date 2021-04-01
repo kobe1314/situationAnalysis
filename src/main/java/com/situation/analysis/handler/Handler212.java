@@ -15,9 +15,9 @@ import javax.annotation.Resource;
  * @version: v1.0
  */
 @Slf4j
-@HandlerType(213)
+@HandlerType(212)
 @Component
-public class Handler213 extends AbstractHandler {
+public class Handler212 extends AbstractHandler {
 
     @Resource
     ApplicationContext applicationContext;
@@ -25,7 +25,7 @@ public class Handler213 extends AbstractHandler {
     @Override
     public void handle(int taskNo) {
 
-        log.info("start handler 213");
-        applicationContext.publishEvent(new BasedEvent(this, taskNo,213));
+        log.info("start handler 212");
+        applicationContext.publishEvent(new BasedEvent(this, taskNo,212));
     }
 }

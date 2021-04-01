@@ -1,11 +1,9 @@
 package com.situation.analysis.listener;
 
-import com.situation.analysis.entity.IndicatorEntity4ObjectC2;
 import com.situation.analysis.entity.IndicatorEntity4ObjectC3;
 import com.situation.analysis.entity.ObjectEntity4Record;
 import com.situation.analysis.entity.secondary.ResultEntity;
-import com.situation.analysis.event.Event202;
-import com.situation.analysis.event.Event213;
+import com.situation.analysis.event.BasedEvent;
 import com.situation.analysis.exception.BizException;
 import com.situation.analysis.mapper.primary.IndicatorMapper;
 import com.situation.analysis.mapper.primary.MonitoringObjectMapper;
@@ -34,7 +32,9 @@ import java.util.Optional;
  */
 @Slf4j
 @Component
-public class ObjectC3ListenerFor213 implements ApplicationListener<Event213> {
+public class ObjectC3ListenerFor213 implements ApplicationListener<BasedEvent> {
+
+    private static final Integer[] SUPPORT_EVENT_ARRAYS = new Integer[]{213, 215, 216};
 
     @Resource
     ReferenceDataMapper referenceDataMapper;
@@ -50,29 +50,33 @@ public class ObjectC3ListenerFor213 implements ApplicationListener<Event213> {
 
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public void onApplicationEvent(Event213 event202) {
-        log.debug("C21 listener task num: {}", event202.getTaskNum());
+    public void onApplicationEvent(BasedEvent basedEvent) {
+        log.debug("C21 listener task num: {}", basedEvent.getTaskNum());
+
+        if(!Util.includeSpecifyTaskType(SUPPORT_EVENT_ARRAYS,basedEvent.getTaskType())) {
+            return;
+        }
 
         //C31
         List<Object> taskIds215 = referenceDataMapper.getTaskIds(215);
         ResultEntity result4C31 = referenceDataMapper.checkTaskResultRecord4C(taskIds215);
         List<String> vList = referenceDataMapper.getVqdresList4C3(taskIds215);
         int successRecords = Util.calculateQualified(vList);
-        float c31Rating = Util.calculateRating(successRecords,result4C31.getTotalRecords());
+        float c31Rating = Util.calculateRating(successRecords, result4C31.getTotalRecords());
 
         //C32
         List<Object> taskIds213 = referenceDataMapper.getTaskIds(213);
         ResultEntity result4C32 = referenceDataMapper.checkTaskResultRecord4C32Or34(taskIds213);
-        float c32Rating = Util.calculateRating(result4C32.getSuccessRecords(),result4C32.getTotalRecords());
+        float c32Rating = Util.calculateRating(result4C32.getSuccessRecords(), result4C32.getTotalRecords());
 
         //C33
         ResultEntity result4C33 = Optional.ofNullable(referenceDataMapper.checkTaskResultRecord4C33()).orElse(new ResultEntity());
-        float c33Rating = Util.calculateRating(result4C33.getSuccessRecords(),result4C33.getTotalRecords());
+        float c33Rating = Util.calculateRating(result4C33.getSuccessRecords(), result4C33.getTotalRecords());
 
         //C34
         List<Object> taskIds217 = referenceDataMapper.getTaskIds(217);
         ResultEntity result4C34 = referenceDataMapper.checkTaskResultRecord4C32Or34(taskIds217);
-        float c34Rating = Util.calculateRating(result4C34.getSuccessRecords(),result4C34.getTotalRecords());
+        float c34Rating = Util.calculateRating(result4C34.getSuccessRecords(), result4C34.getTotalRecords());
 
         IndicatorEntity4ObjectC3 indicators = createIndicatorEntity4Object(c31Rating, c32Rating, c33Rating, c34Rating);
         recordMapper.addIndicatorRecord4ObjectC3(indicators);
@@ -90,7 +94,7 @@ public class ObjectC3ListenerFor213 implements ApplicationListener<Event213> {
         log.debug("add new record for object C3 of indicators");
     }
 
-    private float calculateHealthRating(List<IndicatorInfo> indicatorInfos, float c31Rating, float c32Rating, float c33Rating,float c34Rating) {
+    private float calculateHealthRating(List<IndicatorInfo> indicatorInfos, float c31Rating, float c32Rating, float c33Rating, float c34Rating) {
         float c31RatingResult = Util.getImpactedFactor(indicatorInfos, "录像完好率C21") * c31Rating;
         float c32RatingResult = Util.getImpactedFactor(indicatorInfos, "录像完整率C22") * c32Rating;
         float c33RatingResult = Util.getImpactedFactor(indicatorInfos, "标注完好率C23") * c33Rating;

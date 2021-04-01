@@ -1,10 +1,9 @@
 package com.situation.analysis.listener;
 
-import com.situation.analysis.entity.IndicatorEntity4ObjectC1;
 import com.situation.analysis.entity.IndicatorEntity4ObjectC2;
 import com.situation.analysis.entity.ObjectEntity4Record;
 import com.situation.analysis.entity.secondary.ResultEntity;
-import com.situation.analysis.event.Event202;
+import com.situation.analysis.event.BasedEvent;
 import com.situation.analysis.exception.BizException;
 import com.situation.analysis.mapper.primary.IndicatorMapper;
 import com.situation.analysis.mapper.primary.MonitoringObjectMapper;
@@ -32,7 +31,9 @@ import java.util.List;
  */
 @Slf4j
 @Component
-public class ObjectC2ListenerFor202 implements ApplicationListener<Event202> {
+public class ObjectC2ListenerFor202 implements ApplicationListener<BasedEvent> {
+
+    private static final Integer[] SUPPORT_EVENT_ARRAYS = new Integer[]{202, 208, 209, 210, 211, 212};
 
     @Resource
     ReferenceDataMapper referenceDataMapper;
@@ -48,25 +49,29 @@ public class ObjectC2ListenerFor202 implements ApplicationListener<Event202> {
 
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public void onApplicationEvent(Event202 event202) {
+    public void onApplicationEvent(BasedEvent event202) {
         log.debug("C21 listener task num: {}", event202.getTaskNum());
+
+        if(!Util.includeSpecifyTaskType(SUPPORT_EVENT_ARRAYS,event202.getTaskType())) {
+            return;
+        }
 
         //C21
         List<Object> taskIds210 = referenceDataMapper.getTaskIds(210);
         ResultEntity result4C21 = referenceDataMapper.checkTaskResultRecord4C(taskIds210);
         List<String> vList = referenceDataMapper.getVqdresList(taskIds210);
         int successRecords = Util.calculateQualified(vList);
-        float c21Rating = Util.calculateRating(successRecords,result4C21.getTotalRecords());
+        float c21Rating = Util.calculateRating(successRecords, result4C21.getTotalRecords());
 
         //C22
         List<Object> taskIds211 = referenceDataMapper.getTaskIds(211);
         ResultEntity result4C22 = referenceDataMapper.checkTaskResultRecord4C22(taskIds211);
-        float c22Rating = Util.calculateRating(result4C22.getSuccessRecords(),result4C22.getTotalRecords());
+        float c22Rating = Util.calculateRating(result4C22.getSuccessRecords(), result4C22.getTotalRecords());
 
         //C23
         List<Object> taskIds212 = referenceDataMapper.getTaskIds(212);
         ResultEntity result4C23 = referenceDataMapper.checkTaskResultRecord4C23(taskIds212);
-        float c23Rating = Util.calculateRating(result4C23.getSuccessRecords(),result4C23.getTotalRecords());
+        float c23Rating = Util.calculateRating(result4C23.getSuccessRecords(), result4C23.getTotalRecords());
 
         IndicatorEntity4ObjectC2 indicators = createIndicatorEntity4Object(c21Rating, c22Rating, c23Rating);
         recordMapper.addIndicatorRecord4ObjectC2(indicators);

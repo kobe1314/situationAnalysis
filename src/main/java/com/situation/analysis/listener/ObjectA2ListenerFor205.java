@@ -1,11 +1,9 @@
 package com.situation.analysis.listener;
 
-import com.situation.analysis.entity.IndicatorEntity4ObjectA;
 import com.situation.analysis.entity.IndicatorEntity4ObjectA2;
 import com.situation.analysis.entity.ObjectEntity4Record;
 import com.situation.analysis.entity.secondary.ResultEntity;
-import com.situation.analysis.event.Event202;
-import com.situation.analysis.event.Event205;
+import com.situation.analysis.event.BasedEvent;
 import com.situation.analysis.exception.BizException;
 import com.situation.analysis.mapper.primary.IndicatorMapper;
 import com.situation.analysis.mapper.primary.MonitoringObjectMapper;
@@ -23,7 +21,6 @@ import org.springframework.util.ObjectUtils;
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,7 +31,9 @@ import java.util.List;
  */
 @Slf4j
 @Component
-public class ObjectA2ListenerFor205 implements ApplicationListener<Event205> {
+public class ObjectA2ListenerFor205 implements ApplicationListener<BasedEvent> {
+
+    private static final Integer[] SUPPORT_EVENT_ARRAYS = new Integer[]{205, 216};
 
     @Resource
     ReferenceDataMapper referenceDataMapper;
@@ -50,21 +49,25 @@ public class ObjectA2ListenerFor205 implements ApplicationListener<Event205> {
 
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public void onApplicationEvent(Event205 event205) {
+    public void onApplicationEvent(BasedEvent event205) {
         log.debug("start ObjectA2ListenerFor205 listener");
+
+        if(!Util.includeSpecifyTaskType(SUPPORT_EVENT_ARRAYS,event205.getTaskType())) {
+            return;
+        }
 
         int taskNum = event205.getTaskNum();
         //A21
         ResultEntity result4A21 = referenceDataMapper.checkTaskResultRecord4A21();
-        float a21Rating = 1 - Util.calculateRating(result4A21.getOfflineDuration(),24 * 60 * result4A21.getTotalRecords());
+        float a21Rating = 1 - Util.calculateRating(result4A21.getOfflineDuration(), 24 * 60 * result4A21.getTotalRecords());
 
         //A22
         ResultEntity taskResult4A22 = referenceDataMapper.checkTaskResultRecord4A22();
-        float a22Rating = Util.calculateRating(taskResult4A22.getSuccessRecords(),taskResult4A22.getTotalRecords());
+        float a22Rating = Util.calculateRating(taskResult4A22.getSuccessRecords(), taskResult4A22.getTotalRecords());
 
         //A23
         ResultEntity taskResult4A23 = referenceDataMapper.checkTaskResultRecord4A23();
-        float a23Rating = Util.calculateRating(taskResult4A23.getFailRecords(),taskResult4A23.getTotalRecords());
+        float a23Rating = Util.calculateRating(taskResult4A23.getFailRecords(), taskResult4A23.getTotalRecords());
 
         IndicatorEntity4ObjectA2 objectA2 = createIndicatorEntity4ObjectA2(a21Rating, a22Rating, a23Rating);
 
@@ -73,11 +76,12 @@ public class ObjectA2ListenerFor205 implements ApplicationListener<Event205> {
         Integer oId = monitoringObjectMapper.getObjectId("图像数据采集设备A2");
         List<IndicatorInfo> indicatorInfos = indicatorMapper.getIndicatorBindObject(oId);
         if (ObjectUtils.isEmpty(indicatorInfos)) {
-            throw new BizException(1000,"图像数据采集设备A2未发现绑定的指标");
+            throw new BizException(1000, "图像数据采集设备A2未发现绑定的指标");
         }
 
         float healthRating = calculateHealthRating(indicatorInfos, a21Rating, a22Rating, a23Rating);
-        ObjectEntity4Record record = Util.createObjectEntity4Record(healthRating);;
+        ObjectEntity4Record record = Util.createObjectEntity4Record(healthRating);
+        ;
         recordMapper.addRecord4ObjectA2(record);
         log.debug("add new record for object A2 of indicators");
 

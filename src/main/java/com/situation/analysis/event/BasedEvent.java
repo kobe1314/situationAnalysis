@@ -14,16 +14,19 @@ public class BasedEvent extends ApplicationEvent {
 
     private int taskNum;
 
-    public BasedEvent(Object source, int taskNum) {
+    public int taskType;
+
+    public BasedEvent(Object source, int taskNum, int taskType) {
         super(source);
         this.taskNum = taskNum;
+        this.taskType = taskType;
     }
 
     public int getTaskNum() {
         return taskNum;
     }
 
-    public void setTaskNum(int taskNum) {
-        this.taskNum = taskNum;
+    public int getTaskType() {
+        return taskType;
     }
 }

@@ -48,14 +48,18 @@ public class Util {
         if (totalRecords == 0) {
             return 0;
         }
-        return (float)successRecords / totalRecords;
+        return (float) successRecords / totalRecords;
     }
 
     public static Integer calculateQualified(List<String> vList) {
         return vList.stream().filter(info ->
                 !Arrays.asList(info.split("\\|")).stream().anyMatch(
-                        str -> Integer.valueOf(str) >100 || Integer.valueOf(str) < 60
+                        str -> Integer.valueOf(str) > 100 || Integer.valueOf(str) < 60
                 )).collect(Collectors.toList()).size();
 
+    }
+
+    public static boolean includeSpecifyTaskType(Integer[] contains, Integer taskType) {
+        return Arrays.asList(contains).stream().anyMatch(type -> type.equals(taskType));
     }
 }

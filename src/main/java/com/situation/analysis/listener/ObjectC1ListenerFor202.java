@@ -3,7 +3,7 @@ package com.situation.analysis.listener;
 import com.situation.analysis.entity.IndicatorEntity4ObjectC1;
 import com.situation.analysis.entity.ObjectEntity4Record;
 import com.situation.analysis.entity.secondary.ResultEntity;
-import com.situation.analysis.event.Event202;
+import com.situation.analysis.event.BasedEvent;
 import com.situation.analysis.exception.BizException;
 import com.situation.analysis.mapper.primary.IndicatorMapper;
 import com.situation.analysis.mapper.primary.MonitoringObjectMapper;
@@ -12,7 +12,6 @@ import com.situation.analysis.mapper.secondary.ReferenceDataMapper;
 import com.situation.analysis.model.IndicatorInfo;
 import com.situation.analysis.util.Util;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
@@ -20,15 +19,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
-import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 /**
  * @description: listener
@@ -38,8 +33,9 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Component
-public class ObjectC1ListenerFor202 implements ApplicationListener<Event202> {
+public class ObjectC1ListenerFor202 implements ApplicationListener<BasedEvent> {
 
+    private static final Integer[] SUPPORT_EVENT_ARRAYS = new Integer[]{209, 212};
 
     @Resource
     ReferenceDataMapper referenceDataMapper;
@@ -53,11 +49,17 @@ public class ObjectC1ListenerFor202 implements ApplicationListener<Event202> {
     @Resource
     IndicatorMapper indicatorMapper;
 
+
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public void onApplicationEvent(Event202 event202) {
+    public void onApplicationEvent(BasedEvent event202) {
 
         log.debug("C11 listener task num: {}", event202.getTaskNum());
+
+        if(!Util.includeSpecifyTaskType(SUPPORT_EVENT_ARRAYS,event202.getTaskType())) {
+            return;
+        }
+
         int taskNum = event202.getTaskNum();
 
         //C11
