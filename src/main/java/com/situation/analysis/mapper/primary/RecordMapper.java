@@ -30,7 +30,6 @@ public interface RecordMapper {
      */
     void addRecord4ObjectC1(ObjectEntity4Record objectEntity4Record);
 
-
     /**
      * @param objectC2
      */
@@ -40,6 +39,16 @@ public interface RecordMapper {
      * @param objectEntity4Record
      */
     void addRecord4ObjectC2(ObjectEntity4Record objectEntity4Record);
+
+    /**
+     * @param objectEntity4Record
+     */
+    void addRecord4ObjectC3(ObjectEntity4Record objectEntity4Record);
+
+    /**
+     * @param objectC3
+     */
+    void addIndicatorRecord4ObjectC3(IndicatorEntity4ObjectC3 objectC3);
 
     /**
      * @param objectA2

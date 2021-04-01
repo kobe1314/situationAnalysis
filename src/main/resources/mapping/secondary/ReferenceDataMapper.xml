@@ -125,4 +125,60 @@
     </select>
 
 
+
+    <select id="checkTaskResultRecord4C31" resultMap="response">
+        select count(*) totalRecords, count(if(status = 1 ,true,null)) successRecords from rm_diag_osd where
+        <choose>
+            <when test="taskIds != null and taskIds.size > 0">
+                taskid IN
+                <foreach collection="list" item="taskId" index="index"
+                         open="(" close=")" separator=",">
+                    #{taskId}
+                </foreach>;
+            </when>
+            <otherwise>
+                1 = 2
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="getVqdresList4C3" resultType="string">
+        select vqdres from rm_stk_diag_result where
+        <choose>
+            <when test="taskIds != null and taskIds.size > 0">
+                taskid IN
+                <foreach collection="list" item="taskId" index="index"
+                         open="(" close=")" separator=",">
+                    #{taskId}
+                </foreach>;
+            </when>
+            <otherwise>
+                1 = 2
+            </otherwise>
+        </choose>
+    </select>
+
+
+    <select id="checkTaskResultRecord4C32Or34" resultMap="response">
+        select count(*) totalRecords, count(if(status = 1 ,true,null)) successRecords from rm_stk_accuracy where
+        <choose>
+            <when test="taskIds != null and taskIds.size > 0">
+                taskid IN
+                <foreach collection="list" item="taskId" index="index"
+                         open="(" close=")" separator=",">
+                    #{taskId}
+                </foreach>;
+            </when>
+            <otherwise>
+                1 = 2
+            </otherwise>
+        </choose>
+    </select>
+
+
+    <select id="checkTaskResultRecord4C33" resultMap="response">
+        select count(*) totalRecords, count(if(structurednum != 0 and imagenum != 0 ,true,null)) successRecords from rm_stk_structured_data_history group by ctime;
+    </select>
+
+
 </mapper>

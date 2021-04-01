@@ -44,5 +44,15 @@
         values(#{diagTime}, #{code}, #{name},#{healthRating});
     </insert>
 
+    <insert id="addIndicatorRecord4ObjectC3" parameterType="IndicatorEntity4ObjectC3">
+        insert into indicatorOfImageQuantity(DIAGTIME,CODE,NAME,IMAGE_C31,IAMGE_C32,IMAGE_C33,IMAGE_C34)
+        values(#{diagTime}, #{code}, #{name},#{imageCompletedRatingC31},#{imageAlignRatingC32},#{stableRatingC33},#{standardRatingC34});
+    </insert>
+
+    <insert id="addRecord4ObjectC3" parameterType="ObjectEntity4Record">
+        insert into imageQuantity(DIAGTIME,CODE,NAME,IAMGE_QUANTITY_C3)
+        values(#{diagTime}, #{code}, #{name},#{healthRating});
+    </insert>
+
 
 </mapper>

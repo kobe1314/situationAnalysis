@@ -58,7 +58,7 @@ public interface ReferenceDataMapper {
     List<Object> getTaskIds(int taskType);
 
     /**
-     * this is for C11 and C21
+     * this is for C11/C21/C31
      * @param taskIds
      * @return
      */
@@ -88,6 +88,26 @@ public interface ReferenceDataMapper {
      * @return
      */
     List<String> getVqdresList(List<Object> taskIds);
+
+
+    /**
+     * @param taskIds
+     * @return
+     */
+    ResultEntity checkTaskResultRecord4C32Or34(List<Object> taskIds);
+
+    /**
+     * @param
+     * @return
+     */
+    ResultEntity checkTaskResultRecord4C33();
+
+
+    /**
+     * @param taskIds
+     * @return
+     */
+    List<String> getVqdresList4C3(List<Object> taskIds);
 
 
 
