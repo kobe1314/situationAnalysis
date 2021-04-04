@@ -9,6 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @description: impl
@@ -23,6 +26,13 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Resource
     HandlerContext context;
+
+    private final static Map<Integer, ArrayList<Integer>> RELATION_MAP;
+
+    static {
+
+        RELATION_MAP = new HashMap();
+    }
 
     @Override
     public void updateInformation(NoticeRequest request) {

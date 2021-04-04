@@ -1,5 +1,6 @@
 package com.situation.analysis.listener;
 
+import com.situation.analysis.constants.CommonConstant;
 import com.situation.analysis.entity.IndicatorEntity4ObjectC1;
 import com.situation.analysis.entity.ObjectEntity4Record;
 import com.situation.analysis.entity.secondary.ResultEntity;
@@ -35,8 +36,6 @@ import java.util.Optional;
 @Component
 public class ObjectC1Listener implements ApplicationListener<BasedEvent> {
 
-    private static final Integer[] SUPPORT_EVENT_ARRAYS = new Integer[]{209, 212};
-
     @Resource
     ReferenceDataMapper referenceDataMapper;
 
@@ -56,7 +55,7 @@ public class ObjectC1Listener implements ApplicationListener<BasedEvent> {
 
         log.debug("C11 listener task num: {}", event202.getTaskNum());
 
-        if(!Util.includeSpecifyTaskType(SUPPORT_EVENT_ARRAYS,event202.getTaskType())) {
+        if(!Util.includeSpecifyTaskType(CommonConstant.SUPPORT_EVENT_ARRAY_C1,event202.getTaskType())) {
             return;
         }
 

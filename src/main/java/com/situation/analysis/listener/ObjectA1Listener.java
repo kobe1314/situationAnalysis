@@ -1,5 +1,6 @@
 package com.situation.analysis.listener;
 
+import com.situation.analysis.constants.CommonConstant;
 import com.situation.analysis.entity.IndicatorEntity4ObjectA;
 import com.situation.analysis.entity.ObjectEntity4Record;
 import com.situation.analysis.entity.secondary.ResultEntity;
@@ -44,14 +45,12 @@ public class ObjectA1Listener implements ApplicationListener<BasedEvent> {
     @Resource
     IndicatorMapper indicatorMapper;
 
-    private static final Integer[] SUPPORT_EVENT_ARRAYS = new Integer[]{202, 208, 210};
-
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public void onApplicationEvent(BasedEvent event202) {
         log.debug("start ObjectAListenerFor202 listener");
 
-        if(!Util.includeSpecifyTaskType(SUPPORT_EVENT_ARRAYS,event202.getTaskType())) {
+        if(!Util.includeSpecifyTaskType(CommonConstant.SUPPORT_EVENT_ARRAY_A1,event202.getTaskType())) {
             return;
         }
 
