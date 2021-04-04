@@ -34,7 +34,7 @@ import java.util.Optional;
 @Component
 public class ObjectC3Listener implements ApplicationListener<BasedEvent> {
 
-    private static final Integer[] SUPPORT_EVENT_ARRAYS = new Integer[]{213, 215, 216};
+    private static final Integer[] SUPPORT_EVENT_ARRAYS = new Integer[]{213, 215, 216, 217};
 
     @Resource
     ReferenceDataMapper referenceDataMapper;
@@ -53,7 +53,7 @@ public class ObjectC3Listener implements ApplicationListener<BasedEvent> {
     public void onApplicationEvent(BasedEvent basedEvent) {
         log.debug("C21 listener task num: {}", basedEvent.getTaskNum());
 
-        if(!Util.includeSpecifyTaskType(SUPPORT_EVENT_ARRAYS,basedEvent.getTaskType())) {
+        if (!Util.includeSpecifyTaskType(SUPPORT_EVENT_ARRAYS, basedEvent.getTaskType())) {
             return;
         }
 
