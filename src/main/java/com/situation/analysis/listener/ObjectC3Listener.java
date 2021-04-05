@@ -88,7 +88,8 @@ public class ObjectC3Listener implements ApplicationListener<BasedEvent> {
 
         float healthRating = calculateHealthRating(indicatorInfos, c31Rating, c32Rating, c33Rating, c34Rating);
         ObjectEntity4Record record = Util.createObjectEntity4Record(healthRating);
-        recordMapper.addRecord4ObjectC3(record);
+        record.setOId(oId);
+        recordMapper.addRecord4Object(record);
 
         log.debug("add new record for object C3 of indicators");
     }

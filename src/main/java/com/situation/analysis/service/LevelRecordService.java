@@ -2,6 +2,8 @@ package com.situation.analysis.service;
 
 import com.situation.analysis.entity.LevelRecordEntity;
 
+import java.util.List;
+
 /**
  * @description: level record service
  * @author: Kobe
@@ -10,5 +12,11 @@ import com.situation.analysis.entity.LevelRecordEntity;
  */
 public interface LevelRecordService {
 
-    void updatedLevelRecord(LevelRecordEntity levelRecordEntity);
+    /**
+     * @param objectNames
+     */
+    void updatedLevelRecord(List<String> objectNames);
+
+
+    //void updatedLevelRecord(LevelRecordEntity levelRecordEntity);
 }

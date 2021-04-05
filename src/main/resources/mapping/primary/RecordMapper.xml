@@ -7,9 +7,9 @@
         values(#{diagTime}, #{code}, #{name},#{onlineRatingA11},#{connectRatingA12},#{delayRatingA13},#{exceptionRatingA14});
     </insert>
 
-    <insert id="addRecord4ObjectA" parameterType="ObjectEntity4Record">
-        insert into video(DIAGTIME,CODE,NAME,VIDEO_A1)
-        values(#{diagTime}, #{code}, #{name},#{healthRating});
+    <insert id="addRecord4Object" parameterType="ObjectEntity4Record">
+        insert into objectRecord(DIAGTIME,CODE,NAME,O_ID,HEALTH_RATING)
+        values(#{diagTime}, #{code}, #{name},#{oId},#{healthRating});
     </insert>
 
     <insert id="addIndicatorRecord4ObjectA2" parameterType="IndicatorEntity4ObjectA2">
@@ -17,10 +17,10 @@
         values(#{diagTime}, #{code}, #{name},#{onlineA21},#{completedA22},#{exceptionA23});
     </insert>
 
-    <insert id="addRecord4ObjectA2" parameterType="ObjectEntity4Record">
-        insert into image(DIAGTIME,CODE,NAME,IMAGE_A2)
-        values(#{diagTime}, #{code}, #{name},#{healthRating});
-    </insert>
+<!--    <insert id="addRecord4ObjectA2" parameterType="ObjectEntity4Record">-->
+<!--        insert into image(DIAGTIME,CODE,NAME,IMAGE_A2)-->
+<!--        values(#{diagTime}, #{code}, #{name},#{healthRating});-->
+<!--    </insert>-->
 
 
     <insert id="addIndicatorRecord4ObjectC1" parameterType="IndicatorEntity4ObjectC1">
@@ -28,10 +28,10 @@
         values(#{diagTime}, #{code}, #{name},#{videoRatingC11},#{annotationRatingC12});
     </insert>
 
-    <insert id="addRecord4ObjectC1" parameterType="ObjectEntity4Record">
-        insert into realTimeVideo(DIAGTIME,CODE,NAME,ONLINE_VIDEO_QUANTITY_C1)
-        values(#{diagTime}, #{code}, #{name},#{healthRating});
-    </insert>
+<!--    <insert id="addRecord4ObjectC1" parameterType="ObjectEntity4Record">-->
+<!--        insert into realTimeVideo(DIAGTIME,CODE,NAME,ONLINE_VIDEO_QUANTITY_C1)-->
+<!--        values(#{diagTime}, #{code}, #{name},#{healthRating});-->
+<!--    </insert>-->
 
 
     <insert id="addIndicatorRecord4ObjectC2" parameterType="IndicatorEntity4ObjectC2">
@@ -39,20 +39,20 @@
         values(#{diagTime}, #{code}, #{name},#{videoRatingC21},#{completeRatingC22},#{annotationRatingC23});
     </insert>
 
-    <insert id="addRecord4ObjectC2" parameterType="ObjectEntity4Record">
-        insert into historyVideo(DIAGTIME,CODE,NAME,HISTORY_VIDEO_QUANTITY_C2)
-        values(#{diagTime}, #{code}, #{name},#{healthRating});
-    </insert>
+<!--    <insert id="addRecord4ObjectC2" parameterType="ObjectEntity4Record">-->
+<!--        insert into historyVideo(DIAGTIME,CODE,NAME,HISTORY_VIDEO_QUANTITY_C2)-->
+<!--        values(#{diagTime}, #{code}, #{name},#{healthRating});-->
+<!--    </insert>-->
 
     <insert id="addIndicatorRecord4ObjectC3" parameterType="IndicatorEntity4ObjectC3">
         insert into indicatorOfImageQuantity(DIAGTIME,CODE,NAME,IMAGE_C31,IAMGE_C32,IMAGE_C33,IMAGE_C34)
         values(#{diagTime}, #{code}, #{name},#{imageCompletedRatingC31},#{imageAlignRatingC32},#{stableRatingC33},#{standardRatingC34});
     </insert>
 
-    <insert id="addRecord4ObjectC3" parameterType="ObjectEntity4Record">
-        insert into imageQuantity(DIAGTIME,CODE,NAME,IAMGE_QUANTITY_C3)
-        values(#{diagTime}, #{code}, #{name},#{healthRating});
-    </insert>
+<!--    <insert id="addRecord4ObjectC3" parameterType="ObjectEntity4Record">-->
+<!--        insert into imageQuantity(DIAGTIME,CODE,NAME,IAMGE_QUANTITY_C3)-->
+<!--        values(#{diagTime}, #{code}, #{name},#{healthRating});-->
+<!--    </insert>-->
 
 
 </mapper>

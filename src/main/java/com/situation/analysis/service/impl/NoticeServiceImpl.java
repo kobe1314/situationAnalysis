@@ -4,6 +4,7 @@ import com.situation.analysis.constants.CommonConstant;
 import com.situation.analysis.handler.AbstractHandler;
 import com.situation.analysis.model.NoticeRequest;
 import com.situation.analysis.process.HandlerContext;
+import com.situation.analysis.service.LevelRecordService;
 import com.situation.analysis.service.NoticeService;
 import com.situation.analysis.service.ObjectService;
 import lombok.Data;
@@ -40,7 +41,7 @@ public class NoticeServiceImpl implements NoticeService {
     HandlerContext context;
     
     @Resource
-    ObjectService objectService;
+    LevelRecordService levelRecordService;
 
     @Override
     public void updateInformation(NoticeRequest request) {
@@ -49,8 +50,8 @@ public class NoticeServiceImpl implements NoticeService {
         handler.handle(request.getTaskno());
 
         List<String> objectNames = getObjectNameList(tasktype);
+        levelRecordService.updatedLevelRecord(objectNames);
 
-        List<Integer> lIds = objectService.getLevelIds(objectNames);
         log.debug("finish notice updated!");
     }
 

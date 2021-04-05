@@ -80,8 +80,8 @@ public class ObjectA2Listener implements ApplicationListener<BasedEvent> {
 
         float healthRating = calculateHealthRating(indicatorInfos, a21Rating, a22Rating, a23Rating);
         ObjectEntity4Record record = Util.createObjectEntity4Record(healthRating);
-        ;
-        recordMapper.addRecord4ObjectA2(record);
+        record.setOId(oId);
+        recordMapper.addRecord4Object(record);
         log.debug("add new record for object A2 of indicators");
 
     }

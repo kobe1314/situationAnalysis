@@ -66,8 +66,8 @@ public interface MonitoringObjectMapper {
     Integer getObjectId(String name);
 
     /**
-     * @param objects
+     * @param objectNames
      * @return
      */
-    List<Integer> getLevelIds(List<String> objects);
+    List<Integer> getLevelIds(List<String> objectNames);
 }

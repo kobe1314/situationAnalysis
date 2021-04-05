@@ -11,4 +11,5 @@ import lombok.Data;
 @Data
 public class ObjectEntity4Record extends BasedEntity4Record{
     private float healthRating;
+    private int oId;
 }

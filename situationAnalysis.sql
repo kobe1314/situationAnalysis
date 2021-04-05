@@ -81,6 +81,16 @@ UPDATE `situationAnalysis`.`indicator` SET `INSTRUCTION`='时延符合要求的�
 UPDATE `situationAnalysis`.`indicator` SET `INSTRUCTION`='设备使用异常数值/设备数' WHERE `ID`='4';
 
 
+DROP TABLE IF EXISTS objectRecord;
+CREATE TABLE objectRecord(
+    ID INT NOT NULL AUTO_INCREMENT  COMMENT 'ID' ,
+    DIAGTIME VARCHAR(32)    COMMENT '检测时间' ,
+    CODE VARCHAR(32)    COMMENT '行政区划编码' ,
+    NAME VARCHAR(32)    COMMENT '行政区划名称' ,
+    O_ID INT    COMMENT '对象ID' ,
+    HEALTH_RATING FLOAT    COMMENT '健康度' ,
+    PRIMARY KEY (ID)
+) COMMENT = '对象记录表 ';
 
 
 insert into monitoringLevel(NAME) values('采集设备A'),('基础设施B'),('核心数据C'),('服务资源D'),('应用平台E');

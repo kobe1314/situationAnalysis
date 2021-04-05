@@ -18,7 +18,7 @@ public interface RecordMapper {
     /**
      * @param objectEntity4Record
      */
-    void addRecord4ObjectA(ObjectEntity4Record objectEntity4Record);
+    void addRecord4Object(ObjectEntity4Record objectEntity4Record);
 
     /**
      * @param objectC1 

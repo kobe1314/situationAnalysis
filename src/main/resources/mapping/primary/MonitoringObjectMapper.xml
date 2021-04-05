@@ -113,4 +113,20 @@
         select id from monitoringObject where name = #{name}
     </select>
 
+    <select id="getLevelIds" resultType="java.lang.Integer">
+        select L_ID from monitoringObject where
+        <choose>
+            <when test="objectNames != null and objectNames.size > 0">
+                name IN
+                <foreach collection="list" item="name" index="index"
+                         open="(" close=")" separator=",">
+                    #{name}
+                </foreach>;
+            </when>
+            <otherwise>
+                1 = 2
+            </otherwise>
+        </choose>
+    </select>
+
 </mapper>
