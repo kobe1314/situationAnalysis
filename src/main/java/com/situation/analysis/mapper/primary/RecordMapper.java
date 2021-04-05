@@ -64,12 +64,23 @@ public interface RecordMapper {
      * @param oId
      * @return
      */
-    ObjectEntity4Record getObjectValue(int oId);
+    Entity4Record getObjectValue(int oId);
 
     /**
      * @param levelRecordEntity
      */
     void addRecord4Level(LevelRecordEntity levelRecordEntity);
+
+    /**
+     * @param holographicRecordEntity
+     */
+    void addRecord4Holographic(HolographicRecordEntity holographicRecordEntity);
+
+    /**
+     * @param lId
+     * @return
+     */
+    Entity4Record getLevelValue(int lId);
 
 }
 

@@ -10,7 +10,7 @@ import java.util.List;
  * @date: 2021/4/4 下午9:56
  * @version: v1.0
  */
-public interface LevelRecordService {
+public interface RecordService {
 
     /**
      * @param objectNames
@@ -18,5 +18,5 @@ public interface LevelRecordService {
     void updatedLevelRecord(List<String> objectNames);
 
 
-    //void updatedLevelRecord(LevelRecordEntity levelRecordEntity);
+    //void updatedHolographicRecord(LevelRecordEntity levelRecordEntity);
 }

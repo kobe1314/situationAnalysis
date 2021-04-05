@@ -40,7 +40,7 @@
 
     <update id="updateLevelInfo" parameterType="MonitoringLevelEntity">
         update monitoringLevel
-        <set>
+        <set>selectAllMonitoringLevels
             <if test="impactFactor != null">
                 IMPACT_FACTOR = #{impactFactor},
             </if>

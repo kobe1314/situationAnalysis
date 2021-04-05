@@ -17,44 +17,22 @@
         values(#{diagTime}, #{code}, #{name},#{onlineA21},#{completedA22},#{exceptionA23});
     </insert>
 
-<!--    <insert id="addRecord4ObjectA2" parameterType="ObjectEntity4Record">-->
-<!--        insert into image(DIAGTIME,CODE,NAME,IMAGE_A2)-->
-<!--        values(#{diagTime}, #{code}, #{name},#{healthRating});-->
-<!--    </insert>-->
-
-
     <insert id="addIndicatorRecord4ObjectC1" parameterType="IndicatorEntity4ObjectC1">
         insert into indicatorRealTimeVideo(DIAGTIME,CODE,NAME,VIDEO_INTENSITY_RATE_C11,ANNOTATION_INTENSITY_RATE_C12)
         values(#{diagTime}, #{code}, #{name},#{videoRatingC11},#{annotationRatingC12});
     </insert>
-
-<!--    <insert id="addRecord4ObjectC1" parameterType="ObjectEntity4Record">-->
-<!--        insert into realTimeVideo(DIAGTIME,CODE,NAME,ONLINE_VIDEO_QUANTITY_C1)-->
-<!--        values(#{diagTime}, #{code}, #{name},#{healthRating});-->
-<!--    </insert>-->
-
 
     <insert id="addIndicatorRecord4ObjectC2" parameterType="IndicatorEntity4ObjectC2">
         insert into IndicatorOfHistoryVideo(DIAGTIME,CODE,NAME,VIDEO_INTENSITY_RATE_C21,VIDEO_WHOLE_RATE_C22,ANNOTATION_RATE_C23)
         values(#{diagTime}, #{code}, #{name},#{videoRatingC21},#{completeRatingC22},#{annotationRatingC23});
     </insert>
 
-<!--    <insert id="addRecord4ObjectC2" parameterType="ObjectEntity4Record">-->
-<!--        insert into historyVideo(DIAGTIME,CODE,NAME,HISTORY_VIDEO_QUANTITY_C2)-->
-<!--        values(#{diagTime}, #{code}, #{name},#{healthRating});-->
-<!--    </insert>-->
-
     <insert id="addIndicatorRecord4ObjectC3" parameterType="IndicatorEntity4ObjectC3">
         insert into indicatorOfImageQuantity(DIAGTIME,CODE,NAME,IMAGE_C31,IAMGE_C32,IMAGE_C33,IMAGE_C34)
         values(#{diagTime}, #{code}, #{name},#{imageCompletedRatingC31},#{imageAlignRatingC32},#{stableRatingC33},#{standardRatingC34});
     </insert>
 
-<!--    <insert id="addRecord4ObjectC3" parameterType="ObjectEntity4Record">-->
-<!--        insert into imageQuantity(DIAGTIME,CODE,NAME,IAMGE_QUANTITY_C3)-->
-<!--        values(#{diagTime}, #{code}, #{name},#{healthRating});-->
-<!--    </insert>-->
-
-    <resultMap id="BaseResultMap" type="com.situation.analysis.entity.ObjectEntity4Record">
+    <resultMap id="BaseResultMap" type="com.situation.analysis.entity.Entity4Record">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="HEALTH_RATING" property="healthRating"/>
     </resultMap>
@@ -66,6 +44,16 @@
     <insert id="addRecord4Level" parameterType="LevelRecordEntity">
         insert into level(DIAGTIME,CODE,NAME,L_ID,HEALTH_RATING)
         values(#{diagTime}, #{code}, #{name},#{lId},#{healthRating});
+    </insert>
+
+
+    <select id="getLevelValue" parameterType="int" resultMap="BaseResultMap">
+        select ID, HEALTH_RATING from level where L_ID = #{lId} order by id desc limit 1;
+    </select>
+
+    <insert id="addRecord4Holographic" parameterType="HolographicRecordEntity">
+        insert into holographic(DIAGTIME,CODE,NAME,HEALTH_RATING)
+        values(#{diagTime}, #{code}, #{name},#{healthRating});
     </insert>
 
 

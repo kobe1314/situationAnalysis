@@ -1,13 +1,13 @@
 package com.situation.analysis.service.impl;
 
-import com.situation.analysis.entity.LevelRecordEntity;
-import com.situation.analysis.entity.MonitoringObjectEntity;
-import com.situation.analysis.entity.ObjectEntity4Record;
+import com.situation.analysis.entity.*;
+import com.situation.analysis.mapper.primary.MonitoringLevelMapper;
 import com.situation.analysis.mapper.primary.MonitoringObjectMapper;
 import com.situation.analysis.mapper.primary.RecordMapper;
-import com.situation.analysis.service.LevelRecordService;
+import com.situation.analysis.service.RecordService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
@@ -23,11 +23,13 @@ import java.util.Optional;
  */
 @Slf4j
 @Service
-public class LevelRecordServiceImpl implements LevelRecordService {
+public class RecordServiceImpl implements RecordService {
 
     @Resource
     MonitoringObjectMapper monitoringObjectMapper;
-    
+    @Resource
+    MonitoringLevelMapper monitoringLevelMapper;
+
     @Resource
     RecordMapper recordMapper;
 
@@ -42,16 +44,33 @@ public class LevelRecordServiceImpl implements LevelRecordService {
             List<MonitoringObjectEntity> list = monitoringObjectMapper.getObjectList(lId);
             float healthRating = (float) list.stream().map(
                     entity -> {
-                        ObjectEntity4Record record = Optional.ofNullable(recordMapper.getObjectValue(entity.getId())).orElse(new ObjectEntity4Record());
+                        Entity4Record record = Optional.ofNullable(recordMapper.getObjectValue(entity.getId())).orElse(new Entity4Record());
                         return record.getHealthRating() * entity.getImpactFactor();
                     }
             ).mapToDouble(value -> value).sum();
-            log.info("层次的健康度：{}", healthRating);
+            log.info("层次的健康度: {}", healthRating);
             LevelRecordEntity lEntity = LevelRecordEntity.builder().lId(lId).healthRating(healthRating).build();
             lEntity.setDiagTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")));
             recordMapper.addRecord4Level(lEntity);
         });
+
+        if (!ObjectUtils.isEmpty(lIds)) {
+            log.info("更新全息健康度");
+            updatedHolographicRecord();
+        }
     }
-    
+
+    private void updatedHolographicRecord() {
+        List<MonitoringLevelEntity> eList = monitoringLevelMapper.selectAllMonitoringLevels();
+        float healthRating = (float) eList.stream().map(entity -> {
+            Entity4Record record = Optional.ofNullable(recordMapper.getLevelValue(entity.getId())).orElse(new Entity4Record());
+            return record.getHealthRating() * entity.getImpactFactor();
+        }).mapToDouble(value -> value).sum();
+        log.info("更新全息健康度: {}", healthRating);
+        HolographicRecordEntity hEntity = HolographicRecordEntity.builder().healthRating(healthRating).build();
+        hEntity.setDiagTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")));
+        recordMapper.addRecord4Holographic(hEntity);
+    }
+
 
 }
