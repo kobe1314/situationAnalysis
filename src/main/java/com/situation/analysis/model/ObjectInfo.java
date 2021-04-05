@@ -16,4 +16,5 @@ public class ObjectInfo implements Serializable {
     private int id;
     private String objectName;
     private float impactFactor;
+    private float businessImpactFactor;
 }

@@ -97,7 +97,7 @@ public class BusinessServiceImpl implements BusinessService {
             MonitoringObjectEntity entity = new MonitoringObjectEntity();
             entity.setId(objectInfo.getId());
             entity.setBusinessId(bId);
-            entity.setImpactFactor(objectInfo.getImpactFactor());
+            entity.setBusinessImpactFactor(objectInfo.getImpactFactor());
             return entity;
         }).collect(Collectors.toList());
     }
@@ -105,6 +105,7 @@ public class BusinessServiceImpl implements BusinessService {
     private BusinessEntity createEntity(BusinessRequest request) {
         BusinessEntity entity = new BusinessEntity();
         entity.setName(request.getName());
+        entity.setImpactFactor(request.getImpactFactor());
         entity.setRunThreshold(request.getRunThreshold());
         entity.setPlatform(request.getPlatform());
         if (ObjectUtils.isEmpty(request.getId())) {

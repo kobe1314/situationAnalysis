@@ -1,17 +1,17 @@
 package com.situation.analysis.service.impl;
 
+import com.situation.analysis.constants.CommonConstant;
 import com.situation.analysis.handler.AbstractHandler;
 import com.situation.analysis.model.NoticeRequest;
 import com.situation.analysis.process.HandlerContext;
 import com.situation.analysis.service.NoticeService;
+import com.situation.analysis.service.ObjectService;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @description: impl
@@ -24,21 +24,43 @@ import java.util.Map;
 @Service
 public class NoticeServiceImpl implements NoticeService {
 
-    @Resource
-    HandlerContext context;
 
-    private final static Map<Integer, ArrayList<Integer>> RELATION_MAP;
+    private final static Map<String, Integer[]> RELATION_MAP;
 
     static {
-
         RELATION_MAP = new HashMap();
+        RELATION_MAP.put("视频流采集设备A1", CommonConstant.SUPPORT_EVENT_ARRAY_A1);
+        RELATION_MAP.put("图像数据采集设备A2", CommonConstant.SUPPORT_EVENT_ARRAY_A2);
+        RELATION_MAP.put("实时视频流质量C1", CommonConstant.SUPPORT_EVENT_ARRAY_C1);
+        RELATION_MAP.put("历史视频质量C2", CommonConstant.SUPPORT_EVENT_ARRAY_C2);
+        RELATION_MAP.put("图像数据质量C3", CommonConstant.SUPPORT_EVENT_ARRAY_C3);
     }
+
+    @Resource
+    HandlerContext context;
+    
+    @Resource
+    ObjectService objectService;
 
     @Override
     public void updateInformation(NoticeRequest request) {
-        AbstractHandler handler = context.getInstance(request.getTasktype());
+        int tasktype = request.getTasktype();
+        AbstractHandler handler = context.getInstance(tasktype);
         handler.handle(request.getTaskno());
 
+        List<String> objectNames = getObjectNameList(tasktype);
+
+        List<Integer> lIds = objectService.getLevelIds(objectNames);
         log.debug("finish notice updated!");
+    }
+
+    private List<String> getObjectNameList(int tasktype) {
+        List<String> objects = new ArrayList();
+        RELATION_MAP.forEach((key,value) -> {
+            if(Arrays.asList(value).contains(tasktype))  {
+                objects.add(key);
+            }
+        });
+        return objects;
     }
 }

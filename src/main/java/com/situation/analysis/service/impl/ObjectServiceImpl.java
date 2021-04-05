@@ -129,6 +129,16 @@ public class ObjectServiceImpl implements ObjectService {
         return monitoringObjectMapper.getObjectOptionList(lId);
     }
 
+    /**
+     * @param objectNames
+     * @return
+     */
+    @Override
+    public List<Integer> getLevelIds(List<String> objectNames) {
+        log.info("start get level id list");
+        return monitoringObjectMapper.getLevelIds(objectNames);
+    }
+
     private MonitoringObjectEntity createObjectEntity(MonitoringObjectRequest request, String username) {
         MonitoringObjectEntity objectEntity = new MonitoringObjectEntity();
         objectEntity.setName(request.getObjectName());

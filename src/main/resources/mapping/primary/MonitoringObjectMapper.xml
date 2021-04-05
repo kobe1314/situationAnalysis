@@ -59,11 +59,14 @@
         <foreach collection="list" item="item" index="index" open="" close="" separator=";">
             update monitoringObject
             <set>
-                <if test="item.impactFactor != null">
+                <if test="item.impactFactor != 0 and item.impactFactor != null">
                     IMPACT_FACTOR=#{item.impactFactor},
                 </if>
+                <if test="item.businessImpactFactor != 0 and item.businessImpactFactor != null">
+                    BUSINESS_IMPACT_FACTOR=#{item.businessImpactFactor},
+                </if>
                 <if test="item.levelId != 0 and item.levelId !=null">
-                    L_ID=#{item.levelId}
+                    L_ID=#{item.levelId},
                 </if>
                 <if test="item.businessId != 0 and item.businessId !=null">
                     B_ID=#{item.businessId}

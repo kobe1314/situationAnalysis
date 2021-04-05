@@ -15,6 +15,7 @@ public class MonitoringObjectEntity implements Serializable {
     private int id;
     private String name;
     private float impactFactor;
+    private float businessImpactFactor;
     private int runThreshold;
     private int levelId;
     private int businessId;

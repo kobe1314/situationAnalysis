@@ -39,4 +39,10 @@ public interface ObjectService {
      * @return 
      */
     List<Option> getObjectOptionList(Object lId);
+
+    /**
+     * @param objects
+     * @return
+     */
+    List<Integer> getLevelIds(List<String> objects);
 }

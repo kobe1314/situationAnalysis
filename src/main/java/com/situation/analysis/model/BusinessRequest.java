@@ -19,5 +19,6 @@ public class BusinessRequest {
     private String name;
     private String platform;
     private int runThreshold;
+    private float impactFactor;
     private List<ObjectInfo> objectList;
 }
