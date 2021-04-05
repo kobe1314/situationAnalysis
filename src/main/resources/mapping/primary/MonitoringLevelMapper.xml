@@ -6,10 +6,6 @@
         <result column="NAME" property="name"/>
         <result column="IMPACT_FACTOR" property="impactFactor"/>
         <result column="RUN_THRESHOLD" property="runThreshold"/>
-        <result column="CREATED_BY" property="createdBy"/>
-        <result column="CREATED_TIME" property="createdTime"/>
-        <result column="UPDATED_BY" property="updatedBy"/>
-        <result column="UPDATED_TIME" property="updatedTime"/>
     </resultMap>
 
     <resultMap id="levelInfoResponse" type="com.situation.analysis.model.LevelInfo">
@@ -45,13 +41,7 @@
                 IMPACT_FACTOR = #{impactFactor},
             </if>
             <if test="runThreshold != null">
-                RUN_THRESHOLD = #{runThreshold},
-            </if>
-            <if test="updatedBy != null">
-                UPDATED_BY = #{updatedBy},
-            </if>
-            <if test="updatedTime != null">
-                UPDATED_TIME = #{updatedTime}
+                RUN_THRESHOLD = #{runThreshold}
             </if>
         </set>
         where id = #{id}

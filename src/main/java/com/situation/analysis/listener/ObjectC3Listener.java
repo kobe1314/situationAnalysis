@@ -56,6 +56,8 @@ public class ObjectC3Listener implements ApplicationListener<BasedEvent> {
             return;
         }
 
+        int code = basedEvent.getCityCode();
+
         //C31
         List<Object> taskIds215 = referenceDataMapper.getTaskIds(215);
         ResultEntity result4C31 = referenceDataMapper.checkTaskResultRecord4C(taskIds215);
@@ -77,7 +79,7 @@ public class ObjectC3Listener implements ApplicationListener<BasedEvent> {
         ResultEntity result4C34 = referenceDataMapper.checkTaskResultRecord4C32Or34(taskIds217);
         float c34Rating = Util.calculateRating(result4C34.getSuccessRecords(), result4C34.getTotalRecords());
 
-        IndicatorEntity4ObjectC3 indicators = createIndicatorEntity4Object(c31Rating, c32Rating, c33Rating, c34Rating);
+        IndicatorEntity4ObjectC3 indicators = createIndicatorEntity4Object(c31Rating, c32Rating, c33Rating, c34Rating,code);
         recordMapper.addIndicatorRecord4ObjectC3(indicators);
 
         Integer oId = monitoringObjectMapper.getObjectId("图像数据质量C3");
@@ -88,6 +90,7 @@ public class ObjectC3Listener implements ApplicationListener<BasedEvent> {
 
         float healthRating = calculateHealthRating(indicatorInfos, c31Rating, c32Rating, c33Rating, c34Rating);
         ObjectEntity4Record record = Util.createObjectEntity4Record(healthRating);
+        record.setCode(code);
         record.setOId(oId);
         recordMapper.addRecord4Object(record);
 
@@ -103,13 +106,14 @@ public class ObjectC3Listener implements ApplicationListener<BasedEvent> {
         return finalResult;
     }
 
-    private IndicatorEntity4ObjectC3 createIndicatorEntity4Object(float c31Rating, float c32Rating, float c33Rating, float c34Rating) {
+    private IndicatorEntity4ObjectC3 createIndicatorEntity4Object(float c31Rating, float c32Rating, float c33Rating, float c34Rating,int code) {
         IndicatorEntity4ObjectC3 c3 = new IndicatorEntity4ObjectC3();
         c3.setDiagTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")));
         c3.setImageCompletedRatingC31(c31Rating);
         c3.setImageAlignRatingC32(c32Rating);
         c3.setStableRatingC33(c33Rating);
         c3.setStandardRatingC34(c34Rating);
+        c3.setCode(code);
         return c3;
     }
 }

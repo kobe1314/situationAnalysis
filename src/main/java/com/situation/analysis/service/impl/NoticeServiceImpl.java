@@ -1,6 +1,7 @@
 package com.situation.analysis.service.impl;
 
 import com.situation.analysis.constants.CommonConstant;
+import com.situation.analysis.event.BasedEvent;
 import com.situation.analysis.handler.AbstractHandler;
 import com.situation.analysis.model.NoticeRequest;
 import com.situation.analysis.process.HandlerContext;
@@ -8,6 +9,7 @@ import com.situation.analysis.service.RecordService;
 import com.situation.analysis.service.NoticeService;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -42,14 +44,17 @@ public class NoticeServiceImpl implements NoticeService {
     @Resource
     RecordService recordService;
 
+    @Resource
+    ApplicationContext applicationContext;
+
     @Override
     public void updateInformation(NoticeRequest request) {
         int tasktype = request.getTasktype();
-        AbstractHandler handler = context.getInstance(tasktype);
-        handler.handle(request.getTaskno());
+        int cityCode = request.getCityCode();
+        applicationContext.publishEvent(new BasedEvent(this, request.getTaskno(),tasktype,cityCode));
 
         List<String> objectNames = getObjectNameList(tasktype);
-        recordService.updatedLevelRecord(objectNames);
+        recordService.updatedLevelRecord(objectNames,cityCode);
 
         log.debug("finish notice updated!");
     }

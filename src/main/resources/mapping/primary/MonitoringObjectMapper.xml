@@ -21,8 +21,8 @@
     </resultMap>
 
     <insert id="addMonitoringObject" parameterType="MonitoringObjectEntity" useGeneratedKeys="true" keyProperty="id">
-        insert into monitoringObject(NAME,IMPACT_FACTOR,RUN_THRESHOLD,L_ID,CREATED_BY,CREATED_TIME)
-            values(#{name},#{impactFactor},#{runThreshold},#{levelId},#{createdBy},#{createdTime});
+        insert into monitoringObject(NAME,IMPACT_FACTOR,RUN_THRESHOLD,L_ID)
+            values(#{name},#{impactFactor},#{runThreshold},#{levelId});
     </insert>
 
     <delete id="deleteMonitoringObject" parameterType="java.lang.Integer">
@@ -39,13 +39,7 @@
                 RUN_THRESHOLD = #{runThreshold},
             </if>
             <if test="levelId != null">
-                L_ID = #{levelId},
-            </if>
-            <if test="updatedBy != null">
-                UPDATED_BY = #{updatedBy},
-            </if>
-            <if test="updatedTime != null">
-                UPDATED_TIME = #{updatedTime}
+                L_ID = #{levelId}
             </if>
         </set>
         where id = #{id}

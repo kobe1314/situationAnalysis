@@ -56,6 +56,7 @@ public class ObjectA2Listener implements ApplicationListener<BasedEvent> {
         }
 
         int taskNum = event205.getTaskNum();
+        int code = event205.getCityCode();
         //A21
         ResultEntity result4A21 = referenceDataMapper.checkTaskResultRecord4A21();
         float a21Rating = 1 - Util.calculateRating(result4A21.getOfflineDuration(), 24 * 60 * result4A21.getTotalRecords());
@@ -68,7 +69,7 @@ public class ObjectA2Listener implements ApplicationListener<BasedEvent> {
         ResultEntity taskResult4A23 = referenceDataMapper.checkTaskResultRecord4A23();
         float a23Rating = Util.calculateRating(taskResult4A23.getFailRecords(), taskResult4A23.getTotalRecords());
 
-        IndicatorEntity4ObjectA2 objectA2 = createIndicatorEntity4ObjectA2(a21Rating, a22Rating, a23Rating);
+        IndicatorEntity4ObjectA2 objectA2 = createIndicatorEntity4ObjectA2(a21Rating, a22Rating, a23Rating,code);
 
         recordMapper.addIndicatorRecord4ObjectA2(objectA2);
 
@@ -80,6 +81,7 @@ public class ObjectA2Listener implements ApplicationListener<BasedEvent> {
 
         float healthRating = calculateHealthRating(indicatorInfos, a21Rating, a22Rating, a23Rating);
         ObjectEntity4Record record = Util.createObjectEntity4Record(healthRating);
+        record.setCode(code);
         record.setOId(oId);
         recordMapper.addRecord4Object(record);
         log.debug("add new record for object A2 of indicators");
@@ -94,8 +96,9 @@ public class ObjectA2Listener implements ApplicationListener<BasedEvent> {
         return finalResult;
     }
 
-    private IndicatorEntity4ObjectA2 createIndicatorEntity4ObjectA2(float a21Rating, float a22Rating, float a23Rating) {
+    private IndicatorEntity4ObjectA2 createIndicatorEntity4ObjectA2(float a21Rating, float a22Rating, float a23Rating,int code) {
         IndicatorEntity4ObjectA2 objectA2 = new IndicatorEntity4ObjectA2();
+        objectA2.setCode(code);
         objectA2.setOnlineA21(a21Rating);
         objectA2.setCompletedA22(a22Rating);
         objectA2.setExceptionA23(a23Rating);

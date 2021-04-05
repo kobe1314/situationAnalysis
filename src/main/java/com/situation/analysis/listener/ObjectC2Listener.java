@@ -55,6 +55,7 @@ public class ObjectC2Listener implements ApplicationListener<BasedEvent> {
             return;
         }
 
+        int code = event202.getCityCode();
         //C21
         List<Object> taskIds210 = referenceDataMapper.getTaskIds(210);
         ResultEntity result4C21 = referenceDataMapper.checkTaskResultRecord4C(taskIds210);
@@ -72,7 +73,7 @@ public class ObjectC2Listener implements ApplicationListener<BasedEvent> {
         ResultEntity result4C23 = referenceDataMapper.checkTaskResultRecord4C23(taskIds212);
         float c23Rating = Util.calculateRating(result4C23.getSuccessRecords(), result4C23.getTotalRecords());
 
-        IndicatorEntity4ObjectC2 indicators = createIndicatorEntity4Object(c21Rating, c22Rating, c23Rating);
+        IndicatorEntity4ObjectC2 indicators = createIndicatorEntity4Object(c21Rating, c22Rating, c23Rating,code);
         recordMapper.addIndicatorRecord4ObjectC2(indicators);
 
         int oId = monitoringObjectMapper.getObjectId("历史视频质量C2");
@@ -83,6 +84,7 @@ public class ObjectC2Listener implements ApplicationListener<BasedEvent> {
 
         float healthRating = calculateHealthRating(indicatorInfos, c21Rating, c22Rating, c23Rating);
         ObjectEntity4Record record = Util.createObjectEntity4Record(healthRating);
+        record.setCode(code);
         record.setOId(oId);
         recordMapper.addRecord4Object(record);
 
@@ -97,12 +99,13 @@ public class ObjectC2Listener implements ApplicationListener<BasedEvent> {
         return finalResult;
     }
 
-    private IndicatorEntity4ObjectC2 createIndicatorEntity4Object(float c21Rating, float c22Rating, float c23Rating) {
+    private IndicatorEntity4ObjectC2 createIndicatorEntity4Object(float c21Rating, float c22Rating, float c23Rating,int code) {
         IndicatorEntity4ObjectC2 c2 = new IndicatorEntity4ObjectC2();
         c2.setDiagTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")));
         c2.setVideoRatingC21(c21Rating);
         c2.setCompleteRatingC22(c22Rating);
         c2.setAnnotationRatingC23(c23Rating);
+        c2.setCode(code);
         return c2;
     }
 }

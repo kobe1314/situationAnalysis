@@ -33,8 +33,10 @@ public class NoticeController {
     //}
 
     @PostMapping("/api/data_notify")
-    public NoticeResponse noticeUpdated(@RequestBody NoticeRequest request) {
+    public NoticeResponse noticeUpdated(@RequestBody NoticeRequest request, @CookieValue("vims_civilCode") Integer cityCode ) {
         log.debug("start notice updated");
+        log.info("city code : {}", cityCode);
+        request.setCityCode(cityCode);
         NoticeResponse response = new NoticeResponse();
         NoticeService.updateInformation(request);
         response.setCode(1000);

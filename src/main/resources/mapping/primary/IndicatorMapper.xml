@@ -7,10 +7,6 @@
         <result column="INSTRUCTION" property="instruction"/>
         <result column="IMPACT_FACTOR" property="impactFactor"/>
         <result column="O_ID" property="objectId"/>
-        <result column="CREATED_BY" property="createdBy"/>
-        <result column="CREATED_TIME" property="createdTime"/>
-        <result column="UPDATED_BY" property="updatedBy"/>
-        <result column="UPDATED_TIME" property="updatedTime"/>
     </resultMap>
 
 

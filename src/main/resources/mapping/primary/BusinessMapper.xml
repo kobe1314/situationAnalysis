@@ -3,8 +3,8 @@
 <mapper namespace="com.situation.analysis.mapper.primary.BusinessMapper">
 
     <insert id="addNewBusiness" parameterType="BusinessEntity" useGeneratedKeys="true" keyProperty="id">
-        insert into businessSystem(NAME,IMPACT_FACTOR,PLATFORM,RUN_THRESHOLD,CREATED_BY,CREATED_TIME)
-        values(#{name}, #{impactFactor}, #{platform},#{runThreshold},#{createdBy},#{createdTime});
+        insert into businessSystem(NAME,IMPACT_FACTOR,PLATFORM,RUN_THRESHOLD)
+        values(#{name}, #{impactFactor}, #{platform},#{runThreshold});
     </insert>
 
     <delete id="deleteBusiness" parameterType="java.lang.Integer">
@@ -25,12 +25,6 @@
             </if>
             <if test="platform != null">
                 PLATFORM = #{platform},
-            </if>
-            <if test="updatedBy != null">
-                UPDATED_BY = #{updatedBy},
-            </if>
-            <if test="updatedTime != null">
-                UPDATED_TIME = #{updatedTime}
             </if>
         </set>
         where id = #{id}

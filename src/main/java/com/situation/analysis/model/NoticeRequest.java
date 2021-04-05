@@ -12,4 +12,5 @@ import lombok.Data;
 public class NoticeRequest {
     private int taskno;
     private int tasktype;
+    private int cityCode;
 }

@@ -15,7 +15,7 @@ public interface RecordService {
     /**
      * @param objectNames
      */
-    void updatedLevelRecord(List<String> objectNames);
+    void updatedLevelRecord(List<String> objectNames, int cityCode);
 
 
     //void updatedHolographicRecord(LevelRecordEntity levelRecordEntity);

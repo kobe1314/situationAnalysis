@@ -13,6 +13,6 @@ import lombok.Data;
 public class BasedEntity4Record {
     private int id;
     private String diagTime;
-    private String code;
+    private Integer code;
     private String name;
 }

@@ -55,6 +55,7 @@ public class ObjectA1Listener implements ApplicationListener<BasedEvent> {
         }
 
         int taskNum = event202.getTaskNum();
+        int code = event202.getCityCode();
         //A11
         ResultEntity result4A11 = referenceDataMapper.checkTaskResultRecord4A11();
         float onlineRating = 1 - Util.calculateRating(result4A11.getOfflineDuration(), 24 * 60 * result4A11.getTotalRecords());
@@ -71,7 +72,7 @@ public class ObjectA1Listener implements ApplicationListener<BasedEvent> {
         ResultEntity result4A14 = referenceDataMapper.checkTaskResultRecord4A14();
         float exceptionRating = 1 - Util.calculateRating(result4A14.getFailRecords(), result4A14.getTotalRecords());
 
-        IndicatorEntity4ObjectA objectA = createIndicatorEntity4ObjectA(onlineRating, connectedRating, reachedRating, exceptionRating);
+        IndicatorEntity4ObjectA objectA = createIndicatorEntity4ObjectA(onlineRating, connectedRating, reachedRating, exceptionRating,code);
 
         recordMapper.addIndicatorRecord4ObjectA(objectA);
 
@@ -83,6 +84,7 @@ public class ObjectA1Listener implements ApplicationListener<BasedEvent> {
 
         float healthRating = calculateHealthRating(indicatorInfos, onlineRating, connectedRating, reachedRating, exceptionRating);
         ObjectEntity4Record record = Util.createObjectEntity4Record(healthRating);
+        record.setCode(code);
         record.setOId(oId);
         recordMapper.addRecord4Object(record);
         log.debug("add new record for object A of indicators");
@@ -111,8 +113,9 @@ public class ObjectA1Listener implements ApplicationListener<BasedEvent> {
     //    return objectEntity4Record;
     //}
 
-    private IndicatorEntity4ObjectA createIndicatorEntity4ObjectA(float onlineRating, float connectedRating, float reachedRating, float exceptionRating) {
+    private IndicatorEntity4ObjectA createIndicatorEntity4ObjectA(float onlineRating, float connectedRating, float reachedRating, float exceptionRating,int code) {
         IndicatorEntity4ObjectA objectA = new IndicatorEntity4ObjectA();
+        objectA.setCode(code);
         objectA.setOnlineRatingA11(onlineRating);
         objectA.setConnectRatingA12(connectedRating);
         objectA.setDelayRatingA13(reachedRating);

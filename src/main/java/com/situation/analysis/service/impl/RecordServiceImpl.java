@@ -37,7 +37,7 @@ public class RecordServiceImpl implements RecordService {
      * @param objectNames
      */
     @Override
-    public void updatedLevelRecord(List<String> objectNames) {
+    public void updatedLevelRecord(List<String> objectNames,int cityCode) {
         List<Integer> lIds = monitoringObjectMapper.getLevelIds(objectNames);
 
         lIds.stream().forEach(lId -> {
@@ -51,16 +51,17 @@ public class RecordServiceImpl implements RecordService {
             log.info("层次的健康度: {}", healthRating);
             LevelRecordEntity lEntity = LevelRecordEntity.builder().lId(lId).healthRating(healthRating).build();
             lEntity.setDiagTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")));
+            lEntity.setCode(cityCode);
             recordMapper.addRecord4Level(lEntity);
         });
 
         if (!ObjectUtils.isEmpty(lIds)) {
             log.info("更新全息健康度");
-            updatedHolographicRecord();
+            updatedHolographicRecord(cityCode);
         }
     }
 
-    private void updatedHolographicRecord() {
+    private void updatedHolographicRecord(int cityCode) {
         List<MonitoringLevelEntity> eList = monitoringLevelMapper.selectAllMonitoringLevels();
         float healthRating = (float) eList.stream().map(entity -> {
             Entity4Record record = Optional.ofNullable(recordMapper.getLevelValue(entity.getId())).orElse(new Entity4Record());
@@ -69,6 +70,7 @@ public class RecordServiceImpl implements RecordService {
         log.info("更新全息健康度: {}", healthRating);
         HolographicRecordEntity hEntity = HolographicRecordEntity.builder().healthRating(healthRating).build();
         hEntity.setDiagTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")));
+        hEntity.setCode(cityCode);
         recordMapper.addRecord4Holographic(hEntity);
     }
 

@@ -60,6 +60,7 @@ public class ObjectC1Listener implements ApplicationListener<BasedEvent> {
         }
 
         int taskNum = event202.getTaskNum();
+        int code = event202.getCityCode();
 
         //C11
         List<Object> taskIds208 = referenceDataMapper.getTaskIds(208);
@@ -73,7 +74,7 @@ public class ObjectC1Listener implements ApplicationListener<BasedEvent> {
         ResultEntity result4C12 = referenceDataMapper.checkTaskResultRecord4C12(taskIds209);
         float c12Rating = Util.calculateRating(result4C12.getSuccessRecords(),result4C12.getTotalRecords());
 
-        IndicatorEntity4ObjectC1 indicators = createIndicatorEntity4ObjectC1(c11Rating, c12Rating);
+        IndicatorEntity4ObjectC1 indicators = createIndicatorEntity4ObjectC1(c11Rating, c12Rating,code);
         recordMapper.addIndicatorRecord4ObjectC1(indicators);
 
         int oId = monitoringObjectMapper.getObjectId("实时视频流质量C1");
@@ -84,6 +85,7 @@ public class ObjectC1Listener implements ApplicationListener<BasedEvent> {
 
         float healthRating = calculateHealthRating(indicatorInfos, c11Rating, c12Rating);
         ObjectEntity4Record record = Util.createObjectEntity4Record(healthRating);;
+        record.setCode(code);
         record.setOId(oId);
         recordMapper.addRecord4Object(record);
 
@@ -98,11 +100,12 @@ public class ObjectC1Listener implements ApplicationListener<BasedEvent> {
         return finalResult;
     }
     
-    private IndicatorEntity4ObjectC1 createIndicatorEntity4ObjectC1(float videoRatingC11, float annotationRatingC12) {
+    private IndicatorEntity4ObjectC1 createIndicatorEntity4ObjectC1(float videoRatingC11, float annotationRatingC12,int code) {
         IndicatorEntity4ObjectC1 c1 = new IndicatorEntity4ObjectC1();
         c1.setDiagTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")));
         c1.setVideoRatingC11(videoRatingC11);
         c1.setAnnotationRatingC12(annotationRatingC12);
+        c1.setCode(code);
         return c1;
     }
     
