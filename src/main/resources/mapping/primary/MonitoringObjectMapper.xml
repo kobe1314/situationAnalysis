@@ -8,10 +8,6 @@
         <result column="IMPACT_FACTOR" property="impactFactor"/>
         <result column="RUN_THRESHOLD" property="runThreshold"/>
         <result column="L_ID" property="levelId"/>
-        <result column="CREATED_BY" property="createdBy"/>
-        <result column="CREATED_TIME" property="createdTime"/>
-        <result column="UPDATED_BY" property="updatedBy"/>
-        <result column="UPDATED_TIME" property="updatedTime"/>
     </resultMap>
 
     <resultMap id="monitoringObjectInfo" type="com.situation.analysis.model.MonitoringObjectInfo">
@@ -114,7 +110,7 @@
     </select>
 
     <select id="getLevelIds" resultType="java.lang.Integer">
-        select L_ID from monitoringObject where
+        select L_ID from monitoringObject where L_ID is not null and
         <choose>
             <when test="objectNames != null and objectNames.size > 0">
                 name IN
@@ -127,6 +123,10 @@
                 1 = 2
             </otherwise>
         </choose>
+    </select>
+
+    <select id="getObjectList" resultMap="BaseResultMap">
+        select * from monitoringObject where L_ID = #{lId}
     </select>
 
 </mapper>

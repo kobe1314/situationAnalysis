@@ -54,5 +54,19 @@
 <!--        values(#{diagTime}, #{code}, #{name},#{healthRating});-->
 <!--    </insert>-->
 
+    <resultMap id="BaseResultMap" type="com.situation.analysis.entity.ObjectEntity4Record">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="HEALTH_RATING" property="healthRating"/>
+    </resultMap>
+
+    <select id="getObjectValue" parameterType="int" resultMap="BaseResultMap">
+        select ID, HEALTH_RATING from objectRecord where O_ID = #{oId} order by id desc limit 1;
+    </select>
+
+    <insert id="addRecord4Level" parameterType="LevelRecordEntity">
+        insert into level(DIAGTIME,CODE,NAME,L_ID,HEALTH_RATING)
+        values(#{diagTime}, #{code}, #{name},#{lId},#{healthRating});
+    </insert>
+
 
 </mapper>

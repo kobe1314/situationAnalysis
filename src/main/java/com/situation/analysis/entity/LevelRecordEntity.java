@@ -1,5 +1,6 @@
 package com.situation.analysis.entity;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -11,6 +12,7 @@ import java.io.Serializable;
  * @version: v1.0
  */
 @Data
+@Builder
 public class LevelRecordEntity extends BasedEntity4Record implements Serializable {
     private int lId;
     private float healthRating;

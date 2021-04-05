@@ -70,4 +70,10 @@ public interface MonitoringObjectMapper {
      * @return
      */
     List<Integer> getLevelIds(List<String> objectNames);
+
+    /**
+     * @param lId
+     * @return
+     */
+    List<MonitoringObjectEntity> getObjectList(int lId);
 }

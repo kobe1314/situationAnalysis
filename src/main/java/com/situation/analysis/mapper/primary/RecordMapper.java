@@ -60,4 +60,17 @@ public interface RecordMapper {
      */
     void addRecord4ObjectA2(ObjectEntity4Record objectEntity4Record);
 
+    /**
+     * @param oId
+     * @return
+     */
+    ObjectEntity4Record getObjectValue(int oId);
+
+    /**
+     * @param levelRecordEntity
+     */
+    void addRecord4Level(LevelRecordEntity levelRecordEntity);
+
 }
+
+

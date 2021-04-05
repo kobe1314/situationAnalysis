@@ -1,5 +1,6 @@
 package com.situation.analysis.entity;
 
+import lombok.Builder;
 import lombok.Data;
 
 /**
