@@ -120,7 +120,31 @@
     </select>
 
     <select id="getObjectList" resultMap="BaseResultMap">
-        select * from monitoringObject where L_ID = #{lId}
+        select * from monitoringObject
+        <where>
+            <if test="lId != null">
+                and L_ID = #{lId}
+            </if>
+            <if test="bId != null">
+                and B_ID = #{bId}
+            </if>
+        </where>
+    </select>
+
+    <select id="getBusinessIds" resultType="java.lang.Integer">
+        select B_ID from monitoringObject where B_ID is not null and
+        <choose>
+            <when test="objectNames != null and objectNames.size > 0">
+                name IN
+                <foreach collection="list" item="name" index="index"
+                         open="(" close=")" separator=",">
+                    #{name}
+                </foreach>;
+            </when>
+            <otherwise>
+                1 = 2
+            </otherwise>
+        </choose>
     </select>
 
 </mapper>

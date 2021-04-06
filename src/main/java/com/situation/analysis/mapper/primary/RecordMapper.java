@@ -82,6 +82,11 @@ public interface RecordMapper {
      */
     Entity4Record getLevelValue(int lId);
 
+    /**
+     * @param businessRecordEntity
+     */
+    void addRecord4Business(BusinessRecordEntity businessRecordEntity);
+
 }
 
 

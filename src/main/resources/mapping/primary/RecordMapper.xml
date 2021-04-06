@@ -56,5 +56,10 @@
         values(#{diagTime}, #{code}, #{name},#{healthRating});
     </insert>
 
+    <insert id="addRecord4Business" parameterType="BusinessRecordEntity">
+        insert into business(DIAGTIME,CODE,NAME,B_ID,HEALTH_RATING)
+        values(#{diagTime}, #{code}, #{name},#{bId},#{healthRating});
+    </insert>
+
 
 </mapper>

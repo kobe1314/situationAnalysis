@@ -5,6 +5,7 @@ import com.situation.analysis.model.MonitoringObjectInfo;
 import com.situation.analysis.model.ObjectInfo;
 import com.situation.analysis.model.Option;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -75,5 +76,11 @@ public interface MonitoringObjectMapper {
      * @param lId
      * @return
      */
-    List<MonitoringObjectEntity> getObjectList(int lId);
+    List<MonitoringObjectEntity> getObjectList(@Param("lId") Integer lId, @Param("bId") Integer bId);
+
+    /**
+     * @param objectNames
+     * @return
+     */
+    List<Integer> getBusinessIds(List<String> objectNames);
 }

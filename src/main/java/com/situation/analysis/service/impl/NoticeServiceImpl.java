@@ -40,7 +40,7 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Resource
     HandlerContext context;
-    
+
     @Resource
     RecordService recordService;
 
@@ -54,7 +54,10 @@ public class NoticeServiceImpl implements NoticeService {
         applicationContext.publishEvent(new BasedEvent(this, request.getTaskno(),tasktype,cityCode));
 
         List<String> objectNames = getObjectNameList(tasktype);
+        log.info("添加层级记录开始");
         recordService.updatedLevelRecord(objectNames,cityCode);
+        log.info("添加业务记录开始");
+        recordService.updatedBusinessRecord(objectNames,cityCode);
 
         log.debug("finish notice updated!");
     }
