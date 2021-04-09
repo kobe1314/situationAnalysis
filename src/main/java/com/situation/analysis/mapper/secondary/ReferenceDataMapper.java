@@ -109,6 +109,26 @@ public interface ReferenceDataMapper {
      */
     List<String> getVqdresList4C3(List<Object> taskIds);
 
+    /**
+     * @return
+     */
+    ResultEntity checkTaskResultRecord4D();
+
+    /**
+     * @return
+     */
+    List<ResultEntity> checkTaskResultRecord4D11();
+
+    /**
+     * @return
+     */
+    List<ResultEntity> checkTaskResultRecord4D12();
+
+
+    /**
+     * @return
+     */
+    List<ResultEntity> checkTaskResultRecord4D14();
 
 
 }

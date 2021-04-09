@@ -87,6 +87,11 @@ public interface RecordMapper {
      */
     void addRecord4Business(BusinessRecordEntity businessRecordEntity);
 
+    /**
+     * @param objectD1
+     */
+    void addIndicatorRecord4ObjectD1(IndicatorEntity4ObjectD1 objectD1);
+
 }
 
 

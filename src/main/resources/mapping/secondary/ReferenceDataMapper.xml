@@ -181,4 +181,22 @@
     </select>
 
 
+    <select id="checkTaskResultRecord4D" resultMap="response">
+        select count(*) totalRecords from rm_srv;
+    </select>
+
+    <select id="checkTaskResultRecord4D11" resultMap="response">
+        select serviceconnectivitys totalRecords, serviceconnectivity successRecords from rm_srv_link;
+    </select>
+
+    <select id="checkTaskResultRecord4D12" resultMap="response">
+        select totalvisits totalRecords, accessfailed failRecords from rm_srv_visits;
+    </select>
+
+
+    <select id="checkTaskResultRecord4D14" resultMap="response">
+        select callnum totalRecords, callerr failRecords from rm_srv_call;
+    </select>
+
+
 </mapper>

@@ -19,6 +19,10 @@ target/
 *.iml
 *.ipr
 static/
+static_prod/
+static_uat_withHeader/
+static_uat_withoutHeader/
+
 
 ### NetBeans ###
 /nbproject/private/

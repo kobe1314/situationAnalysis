@@ -16,6 +16,4 @@ public class ResultEntity {
     private int totalRecords;
     private int failRecords;
     private int successRecords;
-
-
 }

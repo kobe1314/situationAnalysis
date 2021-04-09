@@ -7,11 +7,6 @@
         values(#{diagTime}, #{code}, #{name},#{onlineRatingA11},#{connectRatingA12},#{delayRatingA13},#{exceptionRatingA14});
     </insert>
 
-    <insert id="addRecord4Object" parameterType="ObjectEntity4Record">
-        insert into objectRecord(DIAGTIME,CODE,NAME,O_ID,HEALTH_RATING)
-        values(#{diagTime}, #{code}, #{name},#{oId},#{healthRating});
-    </insert>
-
     <insert id="addIndicatorRecord4ObjectA2" parameterType="IndicatorEntity4ObjectA2">
         insert into indicatorOfImage(DIAGTIME,CODE,NAME,ONLINE_A21,RATE_OF_REACH_A22,EXCEPTION_A23)
         values(#{diagTime}, #{code}, #{name},#{onlineA21},#{completedA22},#{exceptionA23});
@@ -30,6 +25,16 @@
     <insert id="addIndicatorRecord4ObjectC3" parameterType="IndicatorEntity4ObjectC3">
         insert into indicatorOfImageQuantity(DIAGTIME,CODE,NAME,IMAGE_C31,IAMGE_C32,IMAGE_C33,IMAGE_C34)
         values(#{diagTime}, #{code}, #{name},#{imageCompletedRatingC31},#{imageAlignRatingC32},#{stableRatingC33},#{standardRatingC34});
+    </insert>
+
+    <insert id="addIndicatorRecord4ObjectD1" parameterType="IndicatorEntity4ObjectD1">
+        insert into indicatorOfService(DIAGTIME,CODE,NAME,SERVICE_D11,SERVICE_D12,SERVICE_D13,SERVICE_D14)
+        values(#{diagTime}, #{code}, #{name},#{serviceConnectedRatingD11},#{serviceCompletedRatingD12},#{serviceUsingRatingD13},#{serviceDelayRatingD14});
+    </insert>
+
+    <insert id="addRecord4Object" parameterType="ObjectEntity4Record">
+        insert into objectRecord(DIAGTIME,CODE,NAME,O_ID,HEALTH_RATING)
+        values(#{diagTime}, #{code}, #{name},#{oId},#{healthRating});
     </insert>
 
     <resultMap id="BaseResultMap" type="com.situation.analysis.entity.Entity4Record">
@@ -60,6 +65,7 @@
         insert into business(DIAGTIME,CODE,NAME,B_ID,HEALTH_RATING)
         values(#{diagTime}, #{code}, #{name},#{bId},#{healthRating});
     </insert>
+
 
 
 </mapper>

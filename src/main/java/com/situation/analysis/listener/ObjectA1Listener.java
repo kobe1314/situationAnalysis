@@ -92,10 +92,10 @@ public class ObjectA1Listener implements ApplicationListener<BasedEvent> {
     }
 
     private float calculateHealthRating(List<IndicatorInfo> indicatorInfos, float onlineRating, float connectedRating, float reachedRating, float exceptionRating) {
-        float onlineRatingResult = Util.getImpactedFactor(indicatorInfos, "在线率 A11") * onlineRating;
-        float connectedRatingResult = Util.getImpactedFactor(indicatorInfos, "连通率 A12") * connectedRating;
-        float reachedRatingResult = Util.getImpactedFactor(indicatorInfos, "时延超标率 A13") * reachedRating;
-        float exceptionRatingResult = Util.getImpactedFactor(indicatorInfos, "使用异常 A14") * exceptionRating;
+        float onlineRatingResult = Util.getImpactedFactor(indicatorInfos, "在线率A11") * onlineRating;
+        float connectedRatingResult = Util.getImpactedFactor(indicatorInfos, "连通率A12") * connectedRating;
+        float reachedRatingResult = Util.getImpactedFactor(indicatorInfos, "时延超标率A13") * reachedRating;
+        float exceptionRatingResult = Util.getImpactedFactor(indicatorInfos, "使用异常A14") * exceptionRating;
         float finalResult = onlineRatingResult + connectedRatingResult + reachedRatingResult + exceptionRatingResult;
         return finalResult;
     }
