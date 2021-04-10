@@ -42,7 +42,7 @@
     </resultMap>
 
     <select id="getObjectList" parameterType="int" resultMap="com.situation.analysis.mapper.CommonMapper.objectInfo">
-        select * from monitoringObject where B_ID = #{id}
+        select id, NAME, BUSINESS_IMPACT_FACTOR IMPACT_FACTOR from monitoringObject where B_ID = #{id}
     </select>
 
     <select id="getBusinessInfoList" resultMap="businessInfoResponse" parameterType="string">
@@ -53,6 +53,5 @@
             </if>
         </where>
     </select>
-
 
 </mapper>

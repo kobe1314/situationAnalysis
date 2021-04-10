@@ -25,7 +25,7 @@
             values(#{name},#{impactFactor},#{runThreshold},#{levelId});
     </insert>
 
-    <delete id="deleteMonitoringObject" parameterType="java.lang.Integer">
+    <delete id="deleteMonitoringObject" parameterType="java.lang.Integer">getBusinessInfoList
         delete from monitoringObject where id = #{id};
     </delete>
 
