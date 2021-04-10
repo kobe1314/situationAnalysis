@@ -3,6 +3,7 @@
 <mapper namespace="com.situation.analysis.mapper.secondary.ReferenceDataMapper">
 
     <resultMap id="response" type="ResultEntity">
+        <result column="civilcode" property="civilcode"/>
         <result column="totalRecords" property="totalRecords"/>
         <result column="successRecords" property="successRecords"/>
         <result column="failRecords" property="failRecords"/>
@@ -13,8 +14,16 @@
         select sum(offlineduration) offlineDuration, count(*) totalRecords from rm_outdeviceinfo;
     </select>
 
+    <select id="checkTaskResultRecord4A11ByGroup" resultMap="response">
+        select civilcode, sum(offlineduration) offlineDuration, count(*) totalRecords from rm_outdeviceinfo group by civilcode;
+    </select>
+
     <select id="checkTaskResultRecord4A12" parameterType="int" resultMap="response">
         select count(*) totalRecords, count(if(errcode = 200,true,null)) successRecords from rm_task_result where taskno = #{taskNum};
+    </select>
+
+    <select id="checkTaskResultRecord4A12ByGroup" parameterType="int" resultMap="response">
+        select civilcode, count(*) totalRecords, count(if(errcode = 200,true,null)) successRecords from rm_task_result where taskno = #{taskNum} group by civilcode;
     </select>
 
 
@@ -22,8 +31,16 @@
         select count(*) totalRecords, count(if(errcode in(904,905,907),true,null)) failRecords from rm_task_result where taskno = #{taskNum};
     </select>
 
+    <select id="checkTaskResultRecord4A13ByGroup" parameterType="int" resultMap="response">
+        select civilcode, count(*) totalRecords, count(if(errcode in(904,905,907),true,null)) failRecords from rm_task_result where taskno = #{taskNum} group by civilcode;
+    </select>
+
     <select id="checkTaskResultRecord4A14" resultMap="response">
         select count(*) totalRecords, count(if(status = 0 ,true,null)) failRecords from rm_outdeviceinfo;
+    </select>
+
+    <select id="checkTaskResultRecord4A14ByGroup" resultMap="response">
+        select civilcode, count(*) totalRecords, count(if(status = 0 ,true,null)) failRecords from rm_outdeviceinfo group by civilcode;
     </select>
 
     <select id="getTaskIds" parameterType="int" resultType="object">

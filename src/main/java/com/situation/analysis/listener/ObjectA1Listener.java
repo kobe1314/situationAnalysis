@@ -50,32 +50,49 @@ public class ObjectA1Listener implements ApplicationListener<BasedEvent> {
     public void onApplicationEvent(BasedEvent event202) {
         log.debug("start ObjectAListenerFor202 listener");
 
-        if(!Util.includeSpecifyTaskType(CommonConstant.SUPPORT_EVENT_ARRAY_A1,event202.getTaskType())) {
+        if (!Util.includeSpecifyTaskType(CommonConstant.SUPPORT_EVENT_ARRAY_A1, event202.getTaskType())) {
             return;
         }
 
         int taskNum = event202.getTaskNum();
-        int code = event202.getCityCode();
-        //A11
+        //A11,A12,A13,A14
         ResultEntity result4A11 = referenceDataMapper.checkTaskResultRecord4A11();
-        float onlineRating = 1 - Util.calculateRating(result4A11.getOfflineDuration(), 24 * 60 * result4A11.getTotalRecords());
-
-        //A12
         ResultEntity taskResult4A12 = referenceDataMapper.checkTaskResultRecord4A12(taskNum);
-        float connectedRating = Util.calculateRating(taskResult4A12.getSuccessRecords(), taskResult4A12.getTotalRecords());
-
-        //A13
         ResultEntity taskResult4A13 = referenceDataMapper.checkTaskResultRecord4A13(taskNum);
-        float reachedRating = 1 - Util.calculateRating(taskResult4A13.getFailRecords(), taskResult4A12.getTotalRecords());
-
-        //A14
         ResultEntity result4A14 = referenceDataMapper.checkTaskResultRecord4A14();
+        calculateIndicatorObject(null,result4A11,taskResult4A12,taskResult4A13,result4A14);
+
+        List<ResultEntity> result4A11List = referenceDataMapper.checkTaskResultRecord4A11ByGroup();
+        List<ResultEntity> taskResult4A12List = referenceDataMapper.checkTaskResultRecord4A12ByGroup(taskNum);
+        List<ResultEntity> taskResult4A13List = referenceDataMapper.checkTaskResultRecord4A13ByGroup(taskNum);
+        List<ResultEntity> result4A14List = referenceDataMapper.checkTaskResultRecord4A14ByGroup();
+
+        result4A11List.stream().forEach(entity -> {
+            Integer code = entity.getCivilcode();
+            log.info("添加区域：{}的指标",code);
+            ResultEntity taskResult4A12l = Util.getResultEntity(taskResult4A12List,code);
+            ResultEntity taskResult4A13l = Util.getResultEntity(taskResult4A13List,code);
+            ResultEntity taskResult4A14l = Util.getResultEntity(result4A14List,code);
+            calculateIndicatorObject(code,entity,taskResult4A12l,taskResult4A13l,taskResult4A14l);
+        });
+
+
+
+        log.debug("add new record for object A of indicators");
+
+    }
+
+    private void calculateIndicatorObject(Integer code, ResultEntity result4A11, ResultEntity taskResult4A12, ResultEntity taskResult4A13, ResultEntity result4A14) {
+        float onlineRating = 1 - Util.calculateRating(result4A11.getOfflineDuration(), 24 * 60 * result4A11.getTotalRecords());
+        float connectedRating = Util.calculateRating(taskResult4A12.getSuccessRecords(), taskResult4A12.getTotalRecords());
+        float reachedRating = 1 - Util.calculateRating(taskResult4A13.getFailRecords(), taskResult4A12.getTotalRecords());
         float exceptionRating = 1 - Util.calculateRating(result4A14.getFailRecords(), result4A14.getTotalRecords());
-
-        IndicatorEntity4ObjectA objectA = createIndicatorEntity4ObjectA(onlineRating, connectedRating, reachedRating, exceptionRating,code);
-
+        IndicatorEntity4ObjectA objectA = createIndicatorEntity4ObjectA(onlineRating, connectedRating, reachedRating, exceptionRating, code);
         recordMapper.addIndicatorRecord4ObjectA(objectA);
+        updateRecordObject(code,onlineRating, connectedRating, reachedRating, exceptionRating);
+    }
 
+    private void updateRecordObject(Integer code, float onlineRating, float connectedRating, float reachedRating, float exceptionRating) {
         int oId = monitoringObjectMapper.getObjectId("视频流采集设备A1");
         List<IndicatorInfo> indicatorInfos = indicatorMapper.getIndicatorBindObject(oId);
         if (ObjectUtils.isEmpty(indicatorInfos)) {
@@ -87,8 +104,6 @@ public class ObjectA1Listener implements ApplicationListener<BasedEvent> {
         record.setCode(code);
         record.setOId(oId);
         recordMapper.addRecord4Object(record);
-        log.debug("add new record for object A of indicators");
-
     }
 
     private float calculateHealthRating(List<IndicatorInfo> indicatorInfos, float onlineRating, float connectedRating, float reachedRating, float exceptionRating) {
@@ -100,20 +115,7 @@ public class ObjectA1Listener implements ApplicationListener<BasedEvent> {
         return finalResult;
     }
 
-    //private float getImpactedFactor(List<IndicatorInfo> indicatorInfos, String name) {
-    //    log.debug("indicator name: {}", name);
-    //    IndicatorInfo indicator = indicatorInfos.stream().filter(indicatorInfo -> indicatorInfo.getName().equals(name)).findFirst().get();
-    //    return Optional.of(indicator.getImpactFactor()).orElse((float) 0);
-    //}
-
-    //private ObjectEntity4Record createObjectEntity4Record(float healthRating) {
-    //    ObjectEntity4Record objectEntity4Record = new ObjectEntity4Record();
-    //    objectEntity4Record.setDiagTime(new Date().toLocaleString());
-    //    objectEntity4Record.setHealthRating(healthRating);
-    //    return objectEntity4Record;
-    //}
-
-    private IndicatorEntity4ObjectA createIndicatorEntity4ObjectA(float onlineRating, float connectedRating, float reachedRating, float exceptionRating,int code) {
+    private IndicatorEntity4ObjectA createIndicatorEntity4ObjectA(float onlineRating, float connectedRating, float reachedRating, float exceptionRating, Integer code) {
         IndicatorEntity4ObjectA objectA = new IndicatorEntity4ObjectA();
         objectA.setCode(code);
         objectA.setOnlineRatingA11(onlineRating);

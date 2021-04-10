@@ -12,6 +12,7 @@ import java.util.List;
  */
 @Data
 public class ResultEntity {
+    private int civilcode;
     private int offlineDuration;
     private int totalRecords;
     private int failRecords;

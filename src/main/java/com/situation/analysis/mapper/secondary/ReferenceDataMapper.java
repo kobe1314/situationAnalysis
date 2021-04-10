@@ -19,6 +19,11 @@ public interface ReferenceDataMapper {
     ResultEntity checkTaskResultRecord4A11();
 
     /**
+     * @return
+     */
+    List<ResultEntity> checkTaskResultRecord4A11ByGroup();
+
+    /**
      * @param taskNum
      * @return
      */
@@ -28,12 +33,29 @@ public interface ReferenceDataMapper {
      * @param taskNum
      * @return
      */
+    List<ResultEntity> checkTaskResultRecord4A12ByGroup(int taskNum);
+
+    /**
+     * @param taskNum
+     * @return
+     */
     ResultEntity checkTaskResultRecord4A13(int taskNum);
+
+    /**
+     * @param taskNum
+     * @return
+     */
+    List<ResultEntity> checkTaskResultRecord4A13ByGroup(int taskNum);
 
     /**
      * @return
      */
     ResultEntity checkTaskResultRecord4A14();
+
+    /**
+     * @return
+     */
+    List<ResultEntity> checkTaskResultRecord4A14ByGroup();
 
     /**
      * @return

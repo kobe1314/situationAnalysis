@@ -11,7 +11,7 @@ import lombok.Data;
  */
 @Data
 public class BasedEntity4Record {
-    private int id;
+    private Integer id;
     private String diagTime;
     private Integer code;
     private String name;

@@ -36,6 +36,7 @@ public class NoticeServiceImpl implements NoticeService {
         RELATION_MAP.put("实时视频流质量C1", CommonConstant.SUPPORT_EVENT_ARRAY_C1);
         RELATION_MAP.put("历史视频质量C2", CommonConstant.SUPPORT_EVENT_ARRAY_C2);
         RELATION_MAP.put("图像数据质量C3", CommonConstant.SUPPORT_EVENT_ARRAY_C3);
+        RELATION_MAP.put("服务D1", CommonConstant.SUPPORT_EVENT_ARRAY_D1);
     }
 
     @Resource

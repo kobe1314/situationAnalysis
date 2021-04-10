@@ -1,6 +1,7 @@
 package com.situation.analysis.util;
 
 import com.situation.analysis.entity.ObjectEntity4Record;
+import com.situation.analysis.entity.secondary.ResultEntity;
 import com.situation.analysis.model.IndicatorInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -61,5 +62,9 @@ public class Util {
 
     public static boolean includeSpecifyTaskType(Integer[] contains, Integer taskType) {
         return Arrays.asList(contains).stream().anyMatch(type -> type.equals(taskType));
+    }
+
+    public static ResultEntity getResultEntity(List<ResultEntity> resultList, Integer code) {
+        return resultList.stream().filter(result -> result.getCivilcode() == code).findFirst().orElse(new ResultEntity());
     }
 }
