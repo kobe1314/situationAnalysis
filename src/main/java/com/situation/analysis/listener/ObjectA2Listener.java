@@ -1,6 +1,7 @@
 package com.situation.analysis.listener;
 
 import com.situation.analysis.constants.CommonConstant;
+import com.situation.analysis.entity.IndicatorEntity4ObjectA;
 import com.situation.analysis.entity.IndicatorEntity4ObjectA2;
 import com.situation.analysis.entity.ObjectEntity4Record;
 import com.situation.analysis.entity.secondary.ResultEntity;
@@ -56,23 +57,36 @@ public class ObjectA2Listener implements ApplicationListener<BasedEvent> {
         }
 
         int taskNum = event205.getTaskNum();
-        int code = event205.getCityCode();
-        //A21
+        //A21、A22、A23
         ResultEntity result4A21 = referenceDataMapper.checkTaskResultRecord4A21();
-        float a21Rating = 1 - Util.calculateRating(result4A21.getOfflineDuration(), 24 * 60 * result4A21.getTotalRecords());
-
-        //A22
         ResultEntity taskResult4A22 = referenceDataMapper.checkTaskResultRecord4A22();
-        float a22Rating = Util.calculateRating(taskResult4A22.getSuccessRecords(), taskResult4A22.getTotalRecords());
-
-        //A23
         ResultEntity taskResult4A23 = referenceDataMapper.checkTaskResultRecord4A23();
+        log.info("添加所有区域A2对象的指标");
+        calculateIndicatorObject(null,result4A21,taskResult4A22,taskResult4A23);
+
+        List<ResultEntity> result4A21List = referenceDataMapper.checkTaskResultRecord4A21ByGroup();
+        List<ResultEntity> taskResult4A22List = referenceDataMapper.checkTaskResultRecord4A22ByGroup();
+        List<ResultEntity> taskResult4A23List = referenceDataMapper.checkTaskResultRecord4A23ByGroup();
+
+        result4A21List.stream().forEach(entity -> {
+            Integer code = entity.getCivilcode();
+            log.info("对象A2添加区域：{}的指标",code);
+            ResultEntity taskResult4A22l = Util.getResultEntity(taskResult4A22List,code);
+            ResultEntity taskResult4A23l = Util.getResultEntity(taskResult4A23List,code);
+            calculateIndicatorObject(code,entity,taskResult4A22l,taskResult4A23l);
+        });
+    }
+
+    private void calculateIndicatorObject(Integer code, ResultEntity result4A21, ResultEntity taskResult4A22, ResultEntity taskResult4A23) {
+        float a21Rating = 1 - Util.calculateRating(result4A21.getOfflineDuration(), 24 * 60 * result4A21.getTotalRecords());
+        float a22Rating = Util.calculateRating(taskResult4A22.getSuccessRecords(), taskResult4A22.getTotalRecords());
         float a23Rating = Util.calculateRating(taskResult4A23.getFailRecords(), taskResult4A23.getTotalRecords());
-
         IndicatorEntity4ObjectA2 objectA2 = createIndicatorEntity4ObjectA2(a21Rating, a22Rating, a23Rating,code);
-
         recordMapper.addIndicatorRecord4ObjectA2(objectA2);
+        updateRecordObject(code,a21Rating, a22Rating, a23Rating);
+    }
 
+    private void updateRecordObject(Integer code, float a21Rating, float a22Rating, float a23Rating) {
         Integer oId = monitoringObjectMapper.getObjectId("图像数据采集设备A2");
         List<IndicatorInfo> indicatorInfos = indicatorMapper.getIndicatorBindObject(oId);
         if (ObjectUtils.isEmpty(indicatorInfos)) {
@@ -84,8 +98,6 @@ public class ObjectA2Listener implements ApplicationListener<BasedEvent> {
         record.setCode(code);
         record.setOId(oId);
         recordMapper.addRecord4Object(record);
-        log.debug("add new record for object A2 of indicators");
-
     }
 
     private float calculateHealthRating(List<IndicatorInfo> indicatorInfos, float a21Rating, float a22Rating, float a23Rating) {
@@ -96,7 +108,7 @@ public class ObjectA2Listener implements ApplicationListener<BasedEvent> {
         return finalResult;
     }
 
-    private IndicatorEntity4ObjectA2 createIndicatorEntity4ObjectA2(float a21Rating, float a22Rating, float a23Rating,int code) {
+    private IndicatorEntity4ObjectA2 createIndicatorEntity4ObjectA2(float a21Rating, float a22Rating, float a23Rating,Integer code) {
         IndicatorEntity4ObjectA2 objectA2 = new IndicatorEntity4ObjectA2();
         objectA2.setCode(code);
         objectA2.setOnlineA21(a21Rating);

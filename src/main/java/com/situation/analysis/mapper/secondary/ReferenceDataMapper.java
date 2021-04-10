@@ -72,6 +72,21 @@ public interface ReferenceDataMapper {
      */
     ResultEntity checkTaskResultRecord4A23();
 
+    /**
+     * @return
+     */
+    List<ResultEntity> checkTaskResultRecord4A21ByGroup();
+
+    /**
+     * @return
+     */
+    List<ResultEntity> checkTaskResultRecord4A22ByGroup();
+
+    /**
+     * @return
+     */
+    List<ResultEntity> checkTaskResultRecord4A23ByGroup();
+
 
     /**
      * @param taskType

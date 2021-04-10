@@ -60,6 +60,7 @@ public class ObjectA1Listener implements ApplicationListener<BasedEvent> {
         ResultEntity taskResult4A12 = referenceDataMapper.checkTaskResultRecord4A12(taskNum);
         ResultEntity taskResult4A13 = referenceDataMapper.checkTaskResultRecord4A13(taskNum);
         ResultEntity result4A14 = referenceDataMapper.checkTaskResultRecord4A14();
+        log.info("添加所有区域A1对象的指标");
         calculateIndicatorObject(null,result4A11,taskResult4A12,taskResult4A13,result4A14);
 
         List<ResultEntity> result4A11List = referenceDataMapper.checkTaskResultRecord4A11ByGroup();
@@ -69,14 +70,12 @@ public class ObjectA1Listener implements ApplicationListener<BasedEvent> {
 
         result4A11List.stream().forEach(entity -> {
             Integer code = entity.getCivilcode();
-            log.info("添加区域：{}的指标",code);
+            log.info("对象A1添加区域：{}的指标",code);
             ResultEntity taskResult4A12l = Util.getResultEntity(taskResult4A12List,code);
             ResultEntity taskResult4A13l = Util.getResultEntity(taskResult4A13List,code);
             ResultEntity taskResult4A14l = Util.getResultEntity(result4A14List,code);
             calculateIndicatorObject(code,entity,taskResult4A12l,taskResult4A13l,taskResult4A14l);
         });
-
-
 
         log.debug("add new record for object A of indicators");
 
