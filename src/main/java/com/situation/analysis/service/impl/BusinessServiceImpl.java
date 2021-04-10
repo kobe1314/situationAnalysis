@@ -72,6 +72,8 @@ public class BusinessServiceImpl implements BusinessService {
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public void updateBusiness(BusinessRequest request) {
         businessMapper.updateBusiness(createEntity(request));
+        monitoringObjectMapper.unbindObjectWithBusiness(request.getId());
+
         List<ObjectInfo> objectList = request.getObjectList();
 
         if (!ObjectUtils.isEmpty(objectList)) {
