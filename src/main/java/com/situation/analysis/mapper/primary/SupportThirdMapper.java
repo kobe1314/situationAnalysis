@@ -1,6 +1,8 @@
 package com.situation.analysis.mapper.primary;
 
 import com.situation.analysis.entity.HolographicRecordEntity;
+import com.situation.analysis.entity.IndicatorEntity4ObjectC1;
+import com.situation.analysis.entity.IndicatorEntity4ObjectC2;
 import com.situation.analysis.entity.UserEntity;
 
 /**
@@ -14,5 +16,9 @@ public interface SupportThirdMapper {
      * @param code
      */
     HolographicRecordEntity getHolographic(String code);
+
+    IndicatorEntity4ObjectC1 getIndicatorRecord4ObjectC1(String code);
+
+    IndicatorEntity4ObjectC2 getIndicatorRecord4ObjectC2(String code);
 
 }

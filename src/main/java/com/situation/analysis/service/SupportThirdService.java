@@ -1,5 +1,9 @@
 package com.situation.analysis.service;
 
+import com.situation.analysis.model.KernelDataResponse;
+
+import java.util.List;
+
 /**
  * @description: third interface
  * @author: Kobe
@@ -9,4 +13,7 @@ package com.situation.analysis.service;
 public interface SupportThirdService {
 
     String getHolographic(String code);
+
+    List<KernelDataResponse> getKernelData(String code);
+
 }
