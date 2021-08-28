@@ -4,7 +4,7 @@
 
 
 
-    <resultMap id="BaseResultMap" type="com.situation.analysis.entity.HolographicRecordEntity">
+    <resultMap id="BaseResultMap" type="com.situation.analysis.entity.Entity4Record">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="HEALTH_RATING" property="healthRating"/>
     </resultMap>
@@ -20,6 +20,7 @@
         <result column="ANNOTATION_RATE_C23" property="annotationRatingC23"/>
     </resultMap>
 
+
     <select id="getHolographic" parameterType="string" resultMap="BaseResultMap">
         select ID, HEALTH_RATING from holographic where code = #{code} order by id desc limit 1;
     </select>
@@ -31,6 +32,23 @@
     <select id="getIndicatorRecord4ObjectC2" parameterType="string" resultMap="IndicatorC2">
         select VIDEO_INTENSITY_RATE_C21,VIDEO_WHOLE_RATE_C22,ANNOTATION_RATE_C23 from IndicatorOfHistoryVideo where code = #{code} order by id desc limit 1;
     </select>
+
+    <select id="getObject" resultMap="BaseResultMap">
+        select HEALTH_RATING from objectRecord o,monitoringObject mo where mo.NAME = #{object_name} and mo.ID = o.O_ID and o.code = #{code} order by o.id desc limit 1;
+    </select>
+
+<!--    <select id="getObjectC1" parameterType="string" resultMap="BaseObject">-->
+<!--        select VIDEO_INTENSITY_RATE_C11,ANNOTATION_INTENSITY_RATE_C12 from realTimeVideo where code = #{code} order by id desc limit 1;-->
+<!--    </select>-->
+
+<!--    <select id="getObjectC2" parameterType="string" resultMap="BaseObject">-->
+<!--        select VIDEO_INTENSITY_RATE_C21,VIDEO_WHOLE_RATE_C22,ANNOTATION_RATE_C23 from historyVideo where code = #{code} order by id desc limit 1;-->
+<!--    </select>-->
+
+<!--    <select id="getObjectD1" parameterType="string" resultMap="BaseObject">-->
+<!--        select VIDEO_INTENSITY_RATE_C21,VIDEO_WHOLE_RATE_C22,ANNOTATION_RATE_C23 from service where code = #{code} order by id desc limit 1;-->
+<!--    </select>-->
+
 
 
 

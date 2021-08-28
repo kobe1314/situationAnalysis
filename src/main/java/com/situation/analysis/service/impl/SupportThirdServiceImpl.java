@@ -1,5 +1,6 @@
 package com.situation.analysis.service.impl;
 
+import com.situation.analysis.entity.Entity4Record;
 import com.situation.analysis.entity.HolographicRecordEntity;
 import com.situation.analysis.entity.IndicatorEntity4ObjectC1;
 import com.situation.analysis.entity.IndicatorEntity4ObjectC2;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -29,7 +31,7 @@ public class SupportThirdServiceImpl implements SupportThirdService {
     @Override
     public String getHolographic(String code) {
         log.info("start getHolographic code: {}", code);
-        HolographicRecordEntity holographic = supportThirdMapper.getHolographic(code);
+        Entity4Record holographic = supportThirdMapper.getHolographic(code);
         return Float.toString(holographic.getHealthRating());
     }
 
@@ -62,6 +64,29 @@ public class SupportThirdServiceImpl implements SupportThirdService {
             completeRatingC22.setName("录像完整率");
             completeRatingC22.setThreshold(c2.getCompleteRatingC22());
             list.add(completeRatingC22);
+        }
+        return list;
+    }
+
+    @Override
+    public List<KernelDataResponse> getNetworkSharePlatform(String code) {
+
+        List<KernelDataResponse> list = new ArrayList<>();
+        Entity4Record a1 = supportThirdMapper.getObject(code, "视频流采集设备A1");
+        if(null != a1) {
+            list.add(KernelDataResponse.builder().name("视频流采集设备").threshold(a1.getHealthRating()).build());
+        }
+        Entity4Record c1 = supportThirdMapper.getObject(code, "实时视频流质量C1");
+        if(null != a1) {
+            list.add(KernelDataResponse.builder().name("实时视频流质量").threshold(c1.getHealthRating()).build());
+        }
+        Entity4Record c2 = supportThirdMapper.getObject(code, "历史视频质量C2");
+        if(null != a1) {
+            list.add(KernelDataResponse.builder().name("历史视频质量").threshold(c2.getHealthRating()).build());
+        }
+        Entity4Record d1 = supportThirdMapper.getObject(code, "服务D1");
+        if(null != a1) {
+            list.add(KernelDataResponse.builder().name("联网/共享服务").threshold(d1.getHealthRating()).build());
         }
         return list;
     }

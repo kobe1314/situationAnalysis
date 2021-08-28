@@ -40,4 +40,10 @@ public class SupportThirdController {
         log.debug("start getKernelData, code is {}",code);
         return supportThirdService.getKernelData(code);
     }
+
+    @GetMapping("/holographic/networkSharePlatform")
+    public List<KernelDataResponse> getNetworkSharePlatform(@RequestParam String code){
+        log.debug("start getNetworkSharePlatform, code is {}",code);
+        return supportThirdService.getNetworkSharePlatform(code);
+    }
 }
