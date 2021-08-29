@@ -16,6 +16,8 @@ public interface SupportThirdService {
 
     List<KernelDataResponse> selectListByGroup(String code);
 
+    List<KernelDataResponse> getAnalysisSystemData(String code);
+
     List<KernelDataResponse> getKernelData(String code);
 
     List<KernelDataResponse> getNetworkSharePlatform(String code);

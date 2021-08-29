@@ -36,9 +36,15 @@ public class SupportThirdController {
     }
 
     @GetMapping("/holographic/selectListByGroup")
-    public List<KernelDataResponse> selectListByGroup (@RequestParam String code){
+    public List<KernelDataResponse> selectListByGroup(@RequestParam String code){
         log.debug("start selectListByGroup, code is {}",code);
         return supportThirdService.selectListByGroup(code);
+    }
+
+    @GetMapping("/holographic/getAnalysisSystemData")
+    public List<KernelDataResponse> getAnalysisSystemData(@RequestParam String code){
+        log.debug("start selectListByGroup, code is {}",code);
+        return supportThirdService.getAnalysisSystemData(code);
     }
 
     @GetMapping("/holographic/getKernelData")

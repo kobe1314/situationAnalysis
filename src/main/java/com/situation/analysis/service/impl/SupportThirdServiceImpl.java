@@ -59,6 +59,21 @@ public class SupportThirdServiceImpl implements SupportThirdService {
     }
 
     @Override
+    public List<KernelDataResponse> getAnalysisSystemData(String code) {
+        log.info("start getAnalysisSystemData code: {}", code);
+        List<KernelDataResponse> list = new ArrayList<>();
+        Entity4Record a1 = supportThirdMapper.getObject(code, "图像数据采集设备A2");
+        if(null != a1) {
+            list.add(KernelDataResponse.builder().name("图像数据采集设备").threshold(a1.getHealthRating()).build());
+        }
+        Entity4Record c1 = supportThirdMapper.getObject(code, "图像数据质量C3");
+        if(null != c1) {
+            list.add(KernelDataResponse.builder().name("图像数据质量").threshold(c1.getHealthRating()).build());
+        }
+        return list;
+    }
+
+    @Override
     public List<KernelDataResponse> getKernelData(String code) {
         log.info("start getKernelData code: {}", code);
         List<KernelDataResponse> list = new ArrayList<>();
@@ -100,15 +115,15 @@ public class SupportThirdServiceImpl implements SupportThirdService {
             list.add(KernelDataResponse.builder().name("视频流采集设备").threshold(a1.getHealthRating()).build());
         }
         Entity4Record c1 = supportThirdMapper.getObject(code, "实时视频流质量C1");
-        if(null != a1) {
+        if(null != c1) {
             list.add(KernelDataResponse.builder().name("实时视频流质量").threshold(c1.getHealthRating()).build());
         }
         Entity4Record c2 = supportThirdMapper.getObject(code, "历史视频质量C2");
-        if(null != a1) {
+        if(null != c2) {
             list.add(KernelDataResponse.builder().name("历史视频质量").threshold(c2.getHealthRating()).build());
         }
         Entity4Record d1 = supportThirdMapper.getObject(code, "服务D1");
-        if(null != a1) {
+        if(null != d1) {
             list.add(KernelDataResponse.builder().name("联网/共享服务").threshold(d1.getHealthRating()).build());
         }
         return list;
