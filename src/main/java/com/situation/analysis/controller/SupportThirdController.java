@@ -35,6 +35,12 @@ public class SupportThirdController {
         return map;
     }
 
+    @GetMapping("/holographic/selectListByGroup")
+    public List<KernelDataResponse> selectListByGroup (@RequestParam String code){
+        log.debug("start selectListByGroup, code is {}",code);
+        return supportThirdService.selectListByGroup(code);
+    }
+
     @GetMapping("/holographic/getKernelData")
     public List<KernelDataResponse> getKernelData(@RequestParam String code){
         log.debug("start getKernelData, code is {}",code);

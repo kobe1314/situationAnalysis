@@ -14,8 +14,10 @@ public interface SupportThirdService {
 
     String getHolographic(String code);
 
+    List<KernelDataResponse> selectListByGroup(String code);
+
     List<KernelDataResponse> getKernelData(String code);
-    
+
     List<KernelDataResponse> getNetworkSharePlatform(String code);
 
 }

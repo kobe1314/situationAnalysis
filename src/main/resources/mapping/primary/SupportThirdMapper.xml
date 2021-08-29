@@ -37,9 +37,9 @@
         select HEALTH_RATING from objectRecord o,monitoringObject mo where mo.NAME = #{object_name} and mo.ID = o.O_ID and o.code = #{code} order by o.id desc limit 1;
     </select>
 
-<!--    <select id="getObjectC1" parameterType="string" resultMap="BaseObject">-->
-<!--        select VIDEO_INTENSITY_RATE_C11,ANNOTATION_INTENSITY_RATE_C12 from realTimeVideo where code = #{code} order by id desc limit 1;-->
-<!--    </select>-->
+    <select id="getBusinessRecord" resultMap="BaseResultMap">
+        select HEALTH_RATING from business b,businessSystem bs where bs.NAME = #{business_name} and bs.ID = b.B_ID and b.code = #{code} order by b.id desc limit 1;
+    </select>
 
 <!--    <select id="getObjectC2" parameterType="string" resultMap="BaseObject">-->
 <!--        select VIDEO_INTENSITY_RATE_C21,VIDEO_WHOLE_RATE_C22,ANNOTATION_RATE_C23 from historyVideo where code = #{code} order by id desc limit 1;-->
@@ -48,6 +48,8 @@
 <!--    <select id="getObjectD1" parameterType="string" resultMap="BaseObject">-->
 <!--        select VIDEO_INTENSITY_RATE_C21,VIDEO_WHOLE_RATE_C22,ANNOTATION_RATE_C23 from service where code = #{code} order by id desc limit 1;-->
 <!--    </select>-->
+
+
 
 
 

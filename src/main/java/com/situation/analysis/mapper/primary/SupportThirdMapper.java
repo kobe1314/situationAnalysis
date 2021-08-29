@@ -21,6 +21,6 @@ public interface SupportThirdMapper {
 
     Entity4Record getObject(@Param("code") String code, @Param("object_name") String object_name);
 
-    IndicatorEntity4ObjectD1 getIndicatorRecord4ObjectD1(String code);
+    Entity4Record getBusinessRecord(@Param("code") String code, @Param("business_name") String business_name);
 
 }

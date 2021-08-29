@@ -36,6 +36,29 @@ public class SupportThirdServiceImpl implements SupportThirdService {
     }
 
     @Override
+    public List<KernelDataResponse> selectListByGroup(String code) {
+        log.info("start selectListByGroup code: {}", code);
+        List<KernelDataResponse> list = new ArrayList<>();
+
+        Entity4Record record1 = supportThirdMapper.getBusinessRecord(code, "视频监控联网/共享平台Y1");
+        if (null != record1) {
+            KernelDataResponse onlineRating = new KernelDataResponse();
+            onlineRating.setName("联网平台");
+            onlineRating.setThreshold(record1.getHealthRating());
+            list.add(onlineRating);
+        }
+
+        Entity4Record record = supportThirdMapper.getBusinessRecord(code, "视频图像信息解析系统Y2");
+        if (null != record) {
+            KernelDataResponse videoRating = new KernelDataResponse();
+            videoRating.setName("解析系统");
+            videoRating.setThreshold(record.getHealthRating());
+            list.add(videoRating);
+        }
+        return list;
+    }
+
+    @Override
     public List<KernelDataResponse> getKernelData(String code) {
         log.info("start getKernelData code: {}", code);
         List<KernelDataResponse> list = new ArrayList<>();
