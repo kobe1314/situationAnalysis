@@ -1,6 +1,7 @@
 package com.situation.analysis.mapper.secondary;
 
 import com.situation.analysis.entity.secondary.ResultEntity;
+import com.situation.analysis.entity.secondary.ThirdResultEntity;
 import com.situation.analysis.entity.secondary.VideoResultEntity;
 
 import java.util.List;
@@ -166,6 +167,12 @@ public interface ReferenceDataMapper {
      * @return
      */
     List<ResultEntity> checkTaskResultRecord4D14();
+
+
+    List<ThirdResultEntity> getChildrenCode(String  code);
+
+
+    String getAreaName(String code);
 
 
 }

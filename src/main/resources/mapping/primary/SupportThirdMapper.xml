@@ -20,6 +20,13 @@
         <result column="ANNOTATION_RATE_C23" property="annotationRatingC23"/>
     </resultMap>
 
+    <resultMap id="HolographicRecordEntity" type="com.situation.analysis.entity.HolographicRecordEntity">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="HEALTH_RATING" property="healthRating"/>
+    </resultMap>
+
 
     <select id="getHolographic" parameterType="string" resultMap="BaseResultMap">
         select ID, HEALTH_RATING from holographic where code = #{code} order by id desc limit 1;
@@ -41,9 +48,19 @@
         select HEALTH_RATING from business b,businessSystem bs where bs.NAME = #{business_name} and bs.ID = b.B_ID and b.code = #{code} order by b.id desc limit 1;
     </select>
 
-<!--    <select id="getObjectC2" parameterType="string" resultMap="BaseObject">-->
-<!--        select VIDEO_INTENSITY_RATE_C21,VIDEO_WHOLE_RATE_C22,ANNOTATION_RATE_C23 from historyVideo where code = #{code} order by id desc limit 1;-->
-<!--    </select>-->
+    <select id="selectHealthByCode" parameterType="com.situation.analysis.entity.secondary.ThirdResultEntity" resultMap="HolographicRecordEntity">
+        set sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+        set global sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+        set session sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+        set @@sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+
+        select code, HEALTH_RATING, name  from holographic h, (select max(id) id from holographic where code in
+        <foreach collection="list" item="record" open="(" separator=","  close=")">
+            #{record.areaId}
+        </foreach>
+        group by code) hc where hc.id =h.id;
+    </select>
+
 
 <!--    <select id="getObjectD1" parameterType="string" resultMap="BaseObject">-->
 <!--        select VIDEO_INTENSITY_RATE_C21,VIDEO_WHOLE_RATE_C22,ANNOTATION_RATE_C23 from service where code = #{code} order by id desc limit 1;-->

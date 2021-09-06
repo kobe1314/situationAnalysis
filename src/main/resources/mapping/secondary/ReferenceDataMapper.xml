@@ -10,6 +10,11 @@
         <result column="offlineDuration" property="offlineDuration"/>
     </resultMap>
 
+    <resultMap id="ThirdResult" type="ThirdResultEntity">
+        <result column="areaId" property="areaId"/>
+        <result column="areaName" property="areaName"/>
+    </resultMap>
+
     <select id="checkTaskResultRecord4A11" resultMap="response">
         select sum(offlineduration) offlineDuration, count(*) totalRecords from rm_outdeviceinfo;
     </select>
@@ -225,6 +230,14 @@
 
     <select id="checkTaskResultRecord4D14" resultMap="response">
         select callnum totalRecords, callerr failRecords from rm_srv_call;
+    </select>
+
+    <select id="getChildrenCode" resultMap="ThirdResult">
+        select areaId,areaName from ao_area where parentAreaId = #{code};
+    </select>
+
+    <select id="getAreaName" resultType="string">
+        select areaName from ao_area where areaId = #{code};
     </select>
 
 

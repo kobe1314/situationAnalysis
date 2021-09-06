@@ -1,7 +1,10 @@
 package com.situation.analysis.mapper.primary;
 
 import com.situation.analysis.entity.*;
+import com.situation.analysis.entity.secondary.ThirdResultEntity;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @description: user mapper
@@ -22,5 +25,7 @@ public interface SupportThirdMapper {
     Entity4Record getObject(@Param("code") String code, @Param("object_name") String object_name);
 
     Entity4Record getBusinessRecord(@Param("code") String code, @Param("business_name") String business_name);
+
+    List<HolographicRecordEntity> selectHealthByCode(List<ThirdResultEntity>  list);
 
 }

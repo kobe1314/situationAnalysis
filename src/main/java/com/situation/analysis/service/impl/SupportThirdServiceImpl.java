@@ -4,16 +4,20 @@ import com.situation.analysis.entity.Entity4Record;
 import com.situation.analysis.entity.HolographicRecordEntity;
 import com.situation.analysis.entity.IndicatorEntity4ObjectC1;
 import com.situation.analysis.entity.IndicatorEntity4ObjectC2;
+import com.situation.analysis.entity.secondary.ThirdResultEntity;
 import com.situation.analysis.mapper.primary.SupportThirdMapper;
+import com.situation.analysis.mapper.secondary.ReferenceDataMapper;
 import com.situation.analysis.model.KernelDataResponse;
 import com.situation.analysis.service.SupportThirdService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.lang.ref.Reference;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @description: third service
@@ -27,6 +31,9 @@ public class SupportThirdServiceImpl implements SupportThirdService {
 
     @Resource
     private SupportThirdMapper supportThirdMapper;
+
+    @Resource
+    private ReferenceDataMapper referenceDataMapper;
 
     @Override
     public String getHolographic(String code) {
@@ -127,5 +134,26 @@ public class SupportThirdServiceImpl implements SupportThirdService {
             list.add(KernelDataResponse.builder().name("联网/共享服务").threshold(d1.getHealthRating()).build());
         }
         return list;
+    }
+
+    @Override
+    public List<KernelDataResponse> selectHealthByCode(String code) {
+
+        List<ThirdResultEntity> childrenCode = referenceDataMapper.getChildrenCode(code);
+        log.info("childrenCode length: {}", childrenCode.size());
+        List<HolographicRecordEntity> entities = supportThirdMapper.selectHealthByCode(childrenCode);
+
+        if (null == entities) {
+            return null;
+        }
+
+        entities.forEach(entity -> {
+            childrenCode.forEach(node -> {
+                if(node.getAreaId().equals(entity.getCode())) {
+                    entity.setName(node.getAreaName());
+                }
+            });
+        });
+        return entities.stream().map(entity-> KernelDataResponse.builder().name(entity.getName()).threshold(entity.getHealthRating()).build()).collect(Collectors.toList());
     }
 }

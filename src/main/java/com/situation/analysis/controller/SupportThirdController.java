@@ -58,4 +58,13 @@ public class SupportThirdController {
         log.debug("start getNetworkSharePlatform, code is {}",code);
         return supportThirdService.getNetworkSharePlatform(code);
     }
+
+    @GetMapping("/holographic/selectHealthByCode")
+    public List<KernelDataResponse> selectHealthByCode(@RequestParam String code){
+        log.debug("start getNetworkSharePlatform, code is {}",code);
+        return supportThirdService.selectHealthByCode(code);
+    }
+    
+    
+
 }

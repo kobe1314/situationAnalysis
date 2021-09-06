@@ -22,4 +22,6 @@ public interface SupportThirdService {
 
     List<KernelDataResponse> getNetworkSharePlatform(String code);
 
+    List<KernelDataResponse> selectHealthByCode(String code);
+
 }

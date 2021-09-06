@@ -4,6 +4,7 @@ import com.situation.analysis.entity.*;
 import com.situation.analysis.mapper.primary.MonitoringLevelMapper;
 import com.situation.analysis.mapper.primary.MonitoringObjectMapper;
 import com.situation.analysis.mapper.primary.RecordMapper;
+import com.situation.analysis.mapper.secondary.ReferenceDataMapper;
 import com.situation.analysis.service.RecordService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,9 @@ public class RecordServiceImpl implements RecordService {
 
     @Resource
     RecordMapper recordMapper;
+
+    @Resource
+    private ReferenceDataMapper referenceDataMapper;
 
     /**
      * @param objectNames
@@ -99,6 +103,7 @@ public class RecordServiceImpl implements RecordService {
         HolographicRecordEntity hEntity = HolographicRecordEntity.builder().healthRating(healthRating).build();
         hEntity.setDiagTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")));
         hEntity.setCode(cityCode);
+        hEntity.setName(referenceDataMapper.getAreaName(String.valueOf(cityCode)));
         recordMapper.addRecord4Holographic(hEntity);
     }
 
