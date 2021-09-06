@@ -1,9 +1,6 @@
 package com.situation.analysis.service;
 
-import com.situation.analysis.model.ApplicationResponse;
-import com.situation.analysis.model.AreaResponse;
-import com.situation.analysis.model.KernelDataResponse;
-import com.situation.analysis.model.ServerResourceResp;
+import com.situation.analysis.model.*;
 
 import java.util.List;
 
@@ -29,7 +26,10 @@ public interface SupportThirdService {
 
 
 
+
     AreaResponse selectCodeByName(String name);
+
+    RadarResp getRadarMapData(String code);
 
     ServerResourceResp getServerResource(String code);
 

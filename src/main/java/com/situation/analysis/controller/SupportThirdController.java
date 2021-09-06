@@ -1,10 +1,7 @@
 package com.situation.analysis.controller;
 
 import com.situation.analysis.annotation.ResponseResult;
-import com.situation.analysis.model.ApplicationResponse;
-import com.situation.analysis.model.AreaResponse;
-import com.situation.analysis.model.KernelDataResponse;
-import com.situation.analysis.model.ServerResourceResp;
+import com.situation.analysis.model.*;
 import com.situation.analysis.service.SupportThirdService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -133,13 +130,9 @@ public class SupportThirdController {
     }
 
     @GetMapping("/holographic/getRadarMapData")
-    public List<ApplicationResponse> getRadarMapData(@RequestParam String code){
+    public RadarResp getRadarMapData(@RequestParam String code){
         log.debug("start getRadarMapData, code is {}",code);
-        List<ApplicationResponse> list = new ArrayList<>();
-
-        //supportThirdService.getRadarMapData(code);
-
-        return list;
+        return supportThirdService.getRadarMapData(code);
     }
 
 

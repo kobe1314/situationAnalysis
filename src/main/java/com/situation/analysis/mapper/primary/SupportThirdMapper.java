@@ -29,6 +29,10 @@ public interface SupportThirdMapper {
     List<HolographicRecordEntity> selectHealthByCode(List<ThirdResultEntity>  list);
 
 
+    List<LevelRecordEntity> getRadarMapData(String code);
+
+    List<MonitoringLevelEntity> getLevelInfo();
+
     IndicatorEntity4ObjectD1 getServerResource(String code);
     
     IndicatorEntity4ObjectC3 getImageQualityData(String code);
