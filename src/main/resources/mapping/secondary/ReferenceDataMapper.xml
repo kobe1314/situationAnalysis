@@ -240,5 +240,9 @@
         select areaName from ao_area where areaId = #{code};
     </select>
 
+    <select id="getCode" resultType="string">
+        select areaId from ao_area where areaName = #{name};
+    </select>
+
 
 </mapper>

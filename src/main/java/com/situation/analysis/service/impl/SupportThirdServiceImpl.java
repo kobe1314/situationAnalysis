@@ -7,6 +7,7 @@ import com.situation.analysis.entity.IndicatorEntity4ObjectC2;
 import com.situation.analysis.entity.secondary.ThirdResultEntity;
 import com.situation.analysis.mapper.primary.SupportThirdMapper;
 import com.situation.analysis.mapper.secondary.ReferenceDataMapper;
+import com.situation.analysis.model.AreaResponse;
 import com.situation.analysis.model.KernelDataResponse;
 import com.situation.analysis.service.SupportThirdService;
 import lombok.extern.slf4j.Slf4j;
@@ -155,5 +156,12 @@ public class SupportThirdServiceImpl implements SupportThirdService {
             });
         });
         return entities.stream().map(entity-> KernelDataResponse.builder().name(entity.getName()).threshold(entity.getHealthRating()).build()).collect(Collectors.toList());
+    }
+
+    @Override
+    public AreaResponse selectCodeByName(String name) {
+        log.info("start selectCodeByName name: {}", name);
+        String code = referenceDataMapper.getCode(name);
+        return AreaResponse.builder().code(code).name(name).build();
     }
 }

@@ -1,6 +1,7 @@
 package com.situation.analysis.controller;
 
 import com.situation.analysis.annotation.ResponseResult;
+import com.situation.analysis.model.AreaResponse;
 import com.situation.analysis.model.KernelDataResponse;
 import com.situation.analysis.service.SupportThirdService;
 import lombok.extern.slf4j.Slf4j;
@@ -64,7 +65,28 @@ public class SupportThirdController {
         log.debug("start getNetworkSharePlatform, code is {}",code);
         return supportThirdService.selectHealthByCode(code);
     }
-    
+
+
+    @GetMapping("/civilcode/selectCodeByName")
+    public AreaResponse selectCodeByName(@RequestParam String name){
+        log.debug("start selectCodeByName, name is {}",name);
+        return supportThirdService.selectCodeByName(name);
+    }
+
+
+    @GetMapping("/holographic/basicFacilityByName")
+    public Map basicFacilityByName(@RequestParam String code){
+        log.debug("start basicFacilityByName, code is {}",code);
+        HashMap hashMap = new HashMap();
+        hashMap.put("cpuStatus",0);
+        hashMap.put("memoryBankStatus",0);
+        hashMap.put("swapSpaceStatus",0);
+        hashMap.put("diskUsability",0);
+        hashMap.put("networkUsability",0);
+        hashMap.put("packetLossProbability",0);
+        hashMap.put("flowStatus",0);
+        return hashMap;
+    }
     
 
 }

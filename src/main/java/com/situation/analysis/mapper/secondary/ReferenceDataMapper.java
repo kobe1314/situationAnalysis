@@ -174,5 +174,7 @@ public interface ReferenceDataMapper {
 
     String getAreaName(String code);
 
+    String getCode(String name);
+
 
 }

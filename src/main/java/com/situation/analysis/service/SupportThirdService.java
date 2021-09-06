@@ -1,5 +1,6 @@
 package com.situation.analysis.service;
 
+import com.situation.analysis.model.AreaResponse;
 import com.situation.analysis.model.KernelDataResponse;
 
 import java.util.List;
@@ -23,5 +24,9 @@ public interface SupportThirdService {
     List<KernelDataResponse> getNetworkSharePlatform(String code);
 
     List<KernelDataResponse> selectHealthByCode(String code);
+
+
+
+    AreaResponse selectCodeByName(String name);
 
 }
