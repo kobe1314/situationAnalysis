@@ -37,6 +37,16 @@
         <result column="SERVICE_D14" property="serviceDelayRatingD14"/>
     </resultMap>
 
+    <resultMap id="IndicatorEntity4ObjectC3" type="com.situation.analysis.entity.IndicatorEntity4ObjectC3">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="NAME" property="name"/>
+        <result column="CODE" property="code"/>
+        <result column="IMAGE_C31" property="imageCompletedRatingC31"/>
+        <result column="IAMGE_C32" property="imageAlignRatingC32"/>
+        <result column="IMAGE_C33" property="stableRatingC33"/>
+        <result column="IMAGE_C34" property="standardRatingC34"/>
+    </resultMap>
+
 
     <select id="getHolographic" parameterType="string" resultMap="BaseResultMap">
         select ID, HEALTH_RATING from holographic where code = #{code} order by id desc limit 1;
@@ -75,6 +85,11 @@
     <select id="getServerResource" parameterType="string" resultMap="IndicatorEntity4ObjectD1">
         select CODE,NAME,SERVICE_D11,SERVICE_D12,SERVICE_D13,SERVICE_D14 from indicatorOfService where code = #{code} order by id desc limit 1;
     </select>
+
+    <select id="getImageQualityData" parameterType="string" resultMap="IndicatorEntity4ObjectC3">
+        select CODE,NAME,IMAGE_C31,IAMGE_C32,IMAGE_C33,IMAGE_C34 from indicatorOfImageQuantity where code = #{code} order by id desc limit 1;
+    </select>
+
 
 
 

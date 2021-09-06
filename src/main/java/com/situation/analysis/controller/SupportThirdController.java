@@ -146,8 +146,13 @@ public class SupportThirdController {
     @GetMapping("/holographic/getServerResource")
     public ServerResourceResp getServerResource(@RequestParam String code){
         log.debug("start getServerResource, code is {}",code);
-
         return supportThirdService.getServerResource(code);
+    }
+
+    @GetMapping("/holographic/getImageQualityData")
+    public List<ApplicationResponse> getImageQualityData(@RequestParam String code){
+        log.debug("start getImageQualityData, code is {}",code);
+        return supportThirdService.getImageQualityData(code);
     }
 
 

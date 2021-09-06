@@ -4,6 +4,7 @@ import com.situation.analysis.entity.*;
 import com.situation.analysis.entity.secondary.ThirdResultEntity;
 import com.situation.analysis.mapper.primary.SupportThirdMapper;
 import com.situation.analysis.mapper.secondary.ReferenceDataMapper;
+import com.situation.analysis.model.ApplicationResponse;
 import com.situation.analysis.model.AreaResponse;
 import com.situation.analysis.model.KernelDataResponse;
 import com.situation.analysis.model.ServerResourceResp;
@@ -70,11 +71,11 @@ public class SupportThirdServiceImpl implements SupportThirdService {
         log.info("start getAnalysisSystemData code: {}", code);
         List<KernelDataResponse> list = new ArrayList<>();
         Entity4Record a1 = supportThirdMapper.getObject(code, "图像数据采集设备A2");
-        if(null != a1) {
+        if (null != a1) {
             list.add(KernelDataResponse.builder().name("图像数据采集设备").threshold(a1.getHealthRating()).build());
         }
         Entity4Record c1 = supportThirdMapper.getObject(code, "图像数据质量C3");
-        if(null != c1) {
+        if (null != c1) {
             list.add(KernelDataResponse.builder().name("图像数据质量").threshold(c1.getHealthRating()).build());
         }
         return list;
@@ -118,19 +119,19 @@ public class SupportThirdServiceImpl implements SupportThirdService {
 
         List<KernelDataResponse> list = new ArrayList<>();
         Entity4Record a1 = supportThirdMapper.getObject(code, "视频流采集设备A1");
-        if(null != a1) {
+        if (null != a1) {
             list.add(KernelDataResponse.builder().name("视频流采集设备").threshold(a1.getHealthRating()).build());
         }
         Entity4Record c1 = supportThirdMapper.getObject(code, "实时视频流质量C1");
-        if(null != c1) {
+        if (null != c1) {
             list.add(KernelDataResponse.builder().name("实时视频流质量").threshold(c1.getHealthRating()).build());
         }
         Entity4Record c2 = supportThirdMapper.getObject(code, "历史视频质量C2");
-        if(null != c2) {
+        if (null != c2) {
             list.add(KernelDataResponse.builder().name("历史视频质量").threshold(c2.getHealthRating()).build());
         }
         Entity4Record d1 = supportThirdMapper.getObject(code, "服务D1");
-        if(null != d1) {
+        if (null != d1) {
             list.add(KernelDataResponse.builder().name("联网/共享服务").threshold(d1.getHealthRating()).build());
         }
         return list;
@@ -149,12 +150,12 @@ public class SupportThirdServiceImpl implements SupportThirdService {
 
         entities.forEach(entity -> {
             childrenCode.forEach(node -> {
-                if(node.getAreaId().equals(entity.getCode())) {
+                if (node.getAreaId().equals(entity.getCode())) {
                     entity.setName(node.getAreaName());
                 }
             });
         });
-        return entities.stream().map(entity-> KernelDataResponse.builder().name(entity.getName()).threshold(entity.getHealthRating()).build()).collect(Collectors.toList());
+        return entities.stream().map(entity -> KernelDataResponse.builder().name(entity.getName()).threshold(entity.getHealthRating()).build()).collect(Collectors.toList());
     }
 
     @Override
@@ -168,7 +169,7 @@ public class SupportThirdServiceImpl implements SupportThirdService {
     public ServerResourceResp getServerResource(String code) {
         log.info("start getServerResource code: {}", code);
         ServerResourceResp resp = new ServerResourceResp();
-        List<String> name = Arrays.asList("服务连通率","服务完整率","服务使用率","服务延指标");
+        List<String> name = Arrays.asList("服务连通率", "服务完整率", "服务使用率", "服务延指标");
         IndicatorEntity4ObjectD1 serverResource = supportThirdMapper.getServerResource(code);
         List<Float> value = Arrays.asList(Util.convertFloat(serverResource.getServiceConnectedRatingD11()),
                 Util.convertFloat(serverResource.getServiceCompletedRatingD12()),
@@ -177,5 +178,19 @@ public class SupportThirdServiceImpl implements SupportThirdService {
         resp.setName(name);
         resp.setValue(value);
         return resp;
+    }
+
+    @Override
+    public List<ApplicationResponse> getImageQualityData(String code) {
+
+        List<ApplicationResponse> list = new ArrayList<>();
+        IndicatorEntity4ObjectC3 data = supportThirdMapper.getImageQualityData(code);
+        if (null != data) {
+            list.add(ApplicationResponse.builder().name("图像完好率").value(Util.convertFloat(data.getImageCompletedRatingC31())).build());
+            list.add(ApplicationResponse.builder().name("图像数据一致率").value(Util.convertFloat(data.getImageAlignRatingC32())).build());
+            list.add(ApplicationResponse.builder().name("结构化数据稳定性行").value(Util.convertFloat(data.getStableRatingC33())).build());
+            list.add(ApplicationResponse.builder().name("结构化数据规范").value(Util.convertFloat(data.getStandardRatingC34())).build());
+        }
+        return list;
     }
 }

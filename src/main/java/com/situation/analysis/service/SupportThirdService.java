@@ -1,5 +1,6 @@
 package com.situation.analysis.service;
 
+import com.situation.analysis.model.ApplicationResponse;
 import com.situation.analysis.model.AreaResponse;
 import com.situation.analysis.model.KernelDataResponse;
 import com.situation.analysis.model.ServerResourceResp;
@@ -31,5 +32,7 @@ public interface SupportThirdService {
     AreaResponse selectCodeByName(String name);
 
     ServerResourceResp getServerResource(String code);
+
+    List<ApplicationResponse> getImageQualityData(String code);
 
 }
