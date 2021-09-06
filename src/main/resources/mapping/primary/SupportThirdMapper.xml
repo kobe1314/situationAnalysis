@@ -27,6 +27,16 @@
         <result column="HEALTH_RATING" property="healthRating"/>
     </resultMap>
 
+    <resultMap id="IndicatorEntity4ObjectD1" type="com.situation.analysis.entity.IndicatorEntity4ObjectD1">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="NAME" property="name"/>
+        <result column="CODE" property="code"/>
+        <result column="SERVICE_D11" property="serviceConnectedRatingD11"/>
+        <result column="SERVICE_D12" property="serviceCompletedRatingD12"/>
+        <result column="SERVICE_D13" property="serviceUsingRatingD13"/>
+        <result column="SERVICE_D14" property="serviceDelayRatingD14"/>
+    </resultMap>
+
 
     <select id="getHolographic" parameterType="string" resultMap="BaseResultMap">
         select ID, HEALTH_RATING from holographic where code = #{code} order by id desc limit 1;
@@ -62,9 +72,9 @@
     </select>
 
 
-<!--    <select id="getObjectD1" parameterType="string" resultMap="BaseObject">-->
-<!--        select VIDEO_INTENSITY_RATE_C21,VIDEO_WHOLE_RATE_C22,ANNOTATION_RATE_C23 from service where code = #{code} order by id desc limit 1;-->
-<!--    </select>-->
+    <select id="getServerResource" parameterType="string" resultMap="IndicatorEntity4ObjectD1">
+        select CODE,NAME,SERVICE_D11,SERVICE_D12,SERVICE_D13,SERVICE_D14 from indicatorOfService where code = #{code} order by id desc limit 1;
+    </select>
 
 
 

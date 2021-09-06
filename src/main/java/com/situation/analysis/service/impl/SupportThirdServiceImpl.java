@@ -1,15 +1,14 @@
 package com.situation.analysis.service.impl;
 
-import com.situation.analysis.entity.Entity4Record;
-import com.situation.analysis.entity.HolographicRecordEntity;
-import com.situation.analysis.entity.IndicatorEntity4ObjectC1;
-import com.situation.analysis.entity.IndicatorEntity4ObjectC2;
+import com.situation.analysis.entity.*;
 import com.situation.analysis.entity.secondary.ThirdResultEntity;
 import com.situation.analysis.mapper.primary.SupportThirdMapper;
 import com.situation.analysis.mapper.secondary.ReferenceDataMapper;
 import com.situation.analysis.model.AreaResponse;
 import com.situation.analysis.model.KernelDataResponse;
+import com.situation.analysis.model.ServerResourceResp;
 import com.situation.analysis.service.SupportThirdService;
+import com.situation.analysis.util.Util;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -163,5 +162,20 @@ public class SupportThirdServiceImpl implements SupportThirdService {
         log.info("start selectCodeByName name: {}", name);
         String code = referenceDataMapper.getCode(name);
         return AreaResponse.builder().code(code).name(name).build();
+    }
+
+    @Override
+    public ServerResourceResp getServerResource(String code) {
+        log.info("start getServerResource code: {}", code);
+        ServerResourceResp resp = new ServerResourceResp();
+        List<String> name = Arrays.asList("服务连通率","服务完整率","服务使用率","服务延指标");
+        IndicatorEntity4ObjectD1 serverResource = supportThirdMapper.getServerResource(code);
+        List<Float> value = Arrays.asList(Util.convertFloat(serverResource.getServiceConnectedRatingD11()),
+                Util.convertFloat(serverResource.getServiceCompletedRatingD12()),
+                Util.convertFloat(serverResource.getServiceUsingRatingD13()),
+                Util.convertFloat(serverResource.getServiceDelayRatingD14()));
+        resp.setName(name);
+        resp.setValue(value);
+        return resp;
     }
 }

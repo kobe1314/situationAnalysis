@@ -1,7 +1,9 @@
 package com.situation.analysis.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @description: 指标
@@ -11,6 +13,8 @@ import lombok.Data;
  */
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class IndicatorEntity4ObjectD1 extends BasedEntity4Record {
     private float serviceConnectedRatingD11;
     private float serviceCompletedRatingD12;

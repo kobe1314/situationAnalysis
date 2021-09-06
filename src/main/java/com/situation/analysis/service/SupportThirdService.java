@@ -2,6 +2,7 @@ package com.situation.analysis.service;
 
 import com.situation.analysis.model.AreaResponse;
 import com.situation.analysis.model.KernelDataResponse;
+import com.situation.analysis.model.ServerResourceResp;
 
 import java.util.List;
 
@@ -28,5 +29,7 @@ public interface SupportThirdService {
 
 
     AreaResponse selectCodeByName(String name);
+
+    ServerResourceResp getServerResource(String code);
 
 }

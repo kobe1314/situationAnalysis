@@ -28,4 +28,8 @@ public interface SupportThirdMapper {
 
     List<HolographicRecordEntity> selectHealthByCode(List<ThirdResultEntity>  list);
 
+
+    IndicatorEntity4ObjectD1 getServerResource(String cdoe);
+
+
 }

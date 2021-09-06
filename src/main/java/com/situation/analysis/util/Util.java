@@ -67,4 +67,10 @@ public class Util {
     public static ResultEntity getResultEntity(List<ResultEntity> resultList, Integer code) {
         return resultList.stream().filter(result -> result.getCivilcode() == code).findFirst().orElse(new ResultEntity());
     }
+
+    public static float convertFloat(float score) {
+        String result = String.format("%.1f", score * 100);
+        return Float.valueOf(result);
+    }
+
 }
