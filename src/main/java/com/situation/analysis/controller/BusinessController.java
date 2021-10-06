@@ -5,7 +5,9 @@ import com.situation.analysis.exception.BizException;
 import com.situation.analysis.model.PageRequest;
 import com.situation.analysis.model.PageResult;
 import com.situation.analysis.entity.MonitoringLevel;
-import com.situation.analysis.service.MonitoringService;
+import com.situation.analysis.service.AOService;
+import com.situation.analysis.webservices.expenseinfo.ReadExpenseinfoResult;
+import com.situation.analysis.webservices.expenses.ExpensesResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,21 +22,22 @@ import java.util.List;
  */
 @Slf4j
 @RestController
+@ResponseResult
 public class BusinessController {
     @Resource
-    private MonitoringService monitoringService;
+    private AOService aoService;
 
-    @ResponseResult
-    @GetMapping("monitoringLevel")
-    public List<MonitoringLevel> getAllMonitoringLevels() {
-        log.debug("start monitoring level controller");
-        throw new BizException(400,"this is testing");
-        //return monitoringService.getAllMonitoringLevels();
+    @GetMapping("/expenses")
+    public ExpensesResult searchExpenses(@RequestParam String empId) {
+        log.debug("search empId is : {}",empId);
+        return aoService.searchExpensesService(empId);
     }
-    @ResponseResult
-    @PostMapping("monitoringLevel")
-    public PageResult<MonitoringLevel> getMonitoringLevelsByPage(@RequestBody PageRequest pageRequest) {
-        log.debug("pageNumber:{},pageSize:{}", pageRequest.getPageNum(), pageRequest.getPageSize());
-        return monitoringService.getMonitoringLevelsByPage(pageRequest);
+
+    @GetMapping("/expenses")
+    public ReadExpenseinfoResult readExpenseInfo(@RequestParam String orderId, @RequestParam String orderNum,@RequestParam String empId) {
+        log.debug("read expense info orderId is: {}, orderNum is : {}, empId is : {}",orderId, orderNum, empId);
+        return aoService.readExpenseInfo(orderId,orderNum,empId);
     }
+
+
 }

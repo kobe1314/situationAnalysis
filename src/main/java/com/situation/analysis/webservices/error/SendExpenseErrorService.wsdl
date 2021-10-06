@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions name="SendExpenseErrorServiceImplService" targetNamespace="http://service.webservice.invoice.app.eweaver.com/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://service.webservice.invoice.app.eweaver.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+<xs:schema elementFormDefault="unqualified" targetNamespace="http://service.webservice.invoice.app.eweaver.com/" version="1.0" xmlns:tns="http://service.webservice.invoice.app.eweaver.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="sendExpenseError" type="tns:sendExpenseError"/>
+<xs:element name="sendExpenseErrorResponse" type="tns:sendExpenseErrorResponse"/>
+<xs:complexType name="sendExpenseError">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="SID" type="xs:string"/>
+      <xs:element minOccurs="0" name="BILLNO" type="xs:string"/>
+      <xs:element minOccurs="0" name="HRMNO" type="xs:string"/>
+      <xs:element name="ERRORNUM" type="xs:int"/>
+      <xs:element name="CEHCKSTATUS" type="xs:int"/>
+      <xs:element minOccurs="0" name="COL1" type="xs:string"/>
+      <xs:element minOccurs="0" name="COL2" type="xs:string"/>
+      <xs:element minOccurs="0" name="COL3" type="xs:string"/>
+      <xs:element minOccurs="0" name="COL4" type="xs:string"/>
+      <xs:element minOccurs="0" name="COL5" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="AT_DATA" type="tns:invoiceException"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="invoiceException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ERROR" type="xs:string"/>
+      <xs:element minOccurs="0" name="INVOICENO" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="sendExpenseErrorResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:sendExpenseResult"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="sendExpenseResult">
+    <xs:sequence>
+      <xs:element name="CEHCKSTATUS" type="xs:int"/>
+      <xs:element minOccurs="0" name="COL1" type="xs:string"/>
+      <xs:element minOccurs="0" name="COL2" type="xs:string"/>
+      <xs:element minOccurs="0" name="COL3" type="xs:string"/>
+      <xs:element minOccurs="0" name="COL4" type="xs:string"/>
+      <xs:element minOccurs="0" name="COL5" type="xs:string"/>
+      <xs:element name="ERRORNUM" type="xs:int"/>
+      <xs:element minOccurs="0" name="MESSAGE" type="xs:string"/>
+      <xs:element minOccurs="0" name="STATUS" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="sendExpenseErrorResponse">
+    <wsdl:part element="tns:sendExpenseErrorResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sendExpenseError">
+    <wsdl:part element="tns:sendExpenseError" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="SendExpenseErrorService">
+    <wsdl:operation name="sendExpenseError">
+      <wsdl:input message="tns:sendExpenseError" name="sendExpenseError">
+    </wsdl:input>
+      <wsdl:output message="tns:sendExpenseErrorResponse" name="sendExpenseErrorResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SendExpenseErrorServiceImplServiceSoapBinding" type="tns:SendExpenseErrorService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="sendExpenseError">
+      <soap:operation soapAction="sendExpenseError" style="document"/>
+      <wsdl:input name="sendExpenseError">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="sendExpenseErrorResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SendExpenseErrorServiceImplService">
+    <wsdl:port binding="tns:SendExpenseErrorServiceImplServiceSoapBinding" name="SendExpenseErrorServiceImplPort">
+      <soap:address location="http://10.50.57.88:8095/ws/SendExpenseErrorService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

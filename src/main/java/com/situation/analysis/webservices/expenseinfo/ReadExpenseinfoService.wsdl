@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions name="ReadExpenseinfoServiceImplService" targetNamespace="http://service.webservice.invoice.app.eweaver.com/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://service.webservice.invoice.app.eweaver.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+<xs:schema elementFormDefault="unqualified" targetNamespace="http://service.webservice.invoice.app.eweaver.com/" version="1.0" xmlns:tns="http://service.webservice.invoice.app.eweaver.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="readExpenseinfo" type="tns:readExpenseinfo"/>
+<xs:element name="readExpenseinfoResponse" type="tns:readExpenseinfoResponse"/>
+<xs:complexType name="readExpenseinfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="SID" type="xs:string"/>
+      <xs:element minOccurs="0" name="BILLNO" type="xs:string"/>
+      <xs:element minOccurs="0" name="HRMNO" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="readExpenseinfoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:readExpenseinfoResult"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="readExpenseinfoResult">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="AT_RETURN" nillable="true" type="tns:readExpensesDetail"/>
+      <xs:element minOccurs="0" name="COL1" type="xs:string"/>
+      <xs:element minOccurs="0" name="COL2" type="xs:string"/>
+      <xs:element minOccurs="0" name="COL3" type="xs:string"/>
+      <xs:element minOccurs="0" name="COL4" type="xs:string"/>
+      <xs:element minOccurs="0" name="COL5" type="xs:string"/>
+      <xs:element minOccurs="0" name="EXPMAN" type="xs:string"/>
+      <xs:element name="EXPMONEY" type="xs:double"/>
+      <xs:element name="INVMONEY" type="xs:double"/>
+      <xs:element name="INVNUMS" type="xs:int"/>
+      <xs:element minOccurs="0" name="MESSAGE" type="xs:string"/>
+      <xs:element minOccurs="0" name="REQDATE" type="xs:string"/>
+      <xs:element minOccurs="0" name="STATUS" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="readExpensesDetail">
+    <xs:sequence>
+      <xs:element name="AMOUNT" type="xs:double"/>
+      <xs:element minOccurs="0" name="COL1" type="xs:string"/>
+      <xs:element minOccurs="0" name="COL2" type="xs:string"/>
+      <xs:element minOccurs="0" name="COL3" type="xs:string"/>
+      <xs:element minOccurs="0" name="COL4" type="xs:string"/>
+      <xs:element minOccurs="0" name="COL5" type="xs:string"/>
+      <xs:element minOccurs="0" name="INVOICECODE" type="xs:string"/>
+      <xs:element minOccurs="0" name="INVOICENO" type="xs:string"/>
+      <xs:element minOccurs="0" name="INVOICENUMBER" type="xs:string"/>
+      <xs:element minOccurs="0" name="NAME" type="xs:string"/>
+      <xs:element name="TAX" type="xs:double"/>
+      <xs:element minOccurs="0" name="TRAINL" type="xs:string"/>
+      <xs:element minOccurs="0" name="UNITNAME" type="xs:string"/>
+      <xs:element minOccurs="0" name="UNITTAXNO" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="readExpenseinfoResponse">
+    <wsdl:part element="tns:readExpenseinfoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="readExpenseinfo">
+    <wsdl:part element="tns:readExpenseinfo" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ReadExpenseinfoService">
+    <wsdl:operation name="readExpenseinfo">
+      <wsdl:input message="tns:readExpenseinfo" name="readExpenseinfo">
+    </wsdl:input>
+      <wsdl:output message="tns:readExpenseinfoResponse" name="readExpenseinfoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ReadExpenseinfoServiceImplServiceSoapBinding" type="tns:ReadExpenseinfoService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="readExpenseinfo">
+      <soap:operation soapAction="searchExpenses" style="document"/>
+      <wsdl:input name="readExpenseinfo">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="readExpenseinfoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ReadExpenseinfoServiceImplService">
+    <wsdl:port binding="tns:ReadExpenseinfoServiceImplServiceSoapBinding" name="ReadExpenseinfoServiceImplPort">
+      <soap:address location="http://10.50.57.88:8095/ws/ReadExpenseinfoService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

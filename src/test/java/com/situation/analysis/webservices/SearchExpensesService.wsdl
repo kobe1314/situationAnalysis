@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions name="SearchExpensesServiceImplService" targetNamespace="http://service.webservice.invoice.app.eweaver.com/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://service.webservice.invoice.app.eweaver.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+<xs:schema elementFormDefault="unqualified" targetNamespace="http://service.webservice.invoice.app.eweaver.com/" version="1.0" xmlns:tns="http://service.webservice.invoice.app.eweaver.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="searchExpenses" type="tns:searchExpenses"/>
+<xs:element name="searchExpensesResponse" type="tns:searchExpensesResponse"/>
+<xs:complexType name="searchExpenses">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="HRMNO" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="searchExpensesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:expensesResult"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="expensesResult">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="AT_RETURN" nillable="true" type="tns:expensenDetail"/>
+      <xs:element minOccurs="0" name="MESSAGE" type="xs:string"/>
+      <xs:element name="RECORDNUMBER" type="xs:int"/>
+      <xs:element minOccurs="0" name="STATUS" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="expensenDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BILLNO" type="xs:string"/>
+      <xs:element minOccurs="0" name="COL1" type="xs:string"/>
+      <xs:element minOccurs="0" name="COL2" type="xs:string"/>
+      <xs:element minOccurs="0" name="COL3" type="xs:string"/>
+      <xs:element minOccurs="0" name="COL4" type="xs:string"/>
+      <xs:element minOccurs="0" name="COL5" type="xs:string"/>
+      <xs:element minOccurs="0" name="EXPMAN" type="xs:string"/>
+      <xs:element name="EXPMONEY" type="xs:double"/>
+      <xs:element name="INVMONEY" type="xs:double"/>
+      <xs:element name="INVNUMS" type="xs:int"/>
+      <xs:element minOccurs="0" name="REQDATE" type="xs:string"/>
+      <xs:element minOccurs="0" name="SID" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="searchExpensesResponse">
+    <wsdl:part element="tns:searchExpensesResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="searchExpenses">
+    <wsdl:part element="tns:searchExpenses" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="SearchExpensesService">
+    <wsdl:operation name="searchExpenses">
+      <wsdl:input message="tns:searchExpenses" name="searchExpenses">
+    </wsdl:input>
+      <wsdl:output message="tns:searchExpensesResponse" name="searchExpensesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SearchExpensesServiceImplServiceSoapBinding" type="tns:SearchExpensesService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="searchExpenses">
+      <soap:operation soapAction="searchExpenses" style="document"/>
+      <wsdl:input name="searchExpenses">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="searchExpensesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SearchExpensesServiceImplService">
+    <wsdl:port binding="tns:SearchExpensesServiceImplServiceSoapBinding" name="SearchExpensesServiceImplPort">
+      <soap:address location="http://10.50.57.88:8095/ws/SearchExpensesService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
