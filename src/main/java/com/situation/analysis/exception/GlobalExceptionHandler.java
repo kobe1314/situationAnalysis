@@ -4,12 +4,15 @@ import com.situation.analysis.enums.ResultCode;
 import com.situation.analysis.model.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolationException;
+import javax.validation.ValidationException;
 
 /**
  * @description: Global exception handler
@@ -36,6 +39,13 @@ public class GlobalExceptionHandler {
         return Result.error(e.getErrorCode(), e.getErrorMsg());
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = {MissingServletRequestParameterException.class})
+    public Result exceptionHandler(HttpServletRequest req,  MissingServletRequestParameterException e) {
+        log.error("参数验证异常！原因是:{}", e);
+        return Result.error(ResultCode.BODY_NOT_MATCH);
+    }
+
     /**
      * 处理空指针的异常
      *
@@ -46,10 +56,11 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(value = NoSuchMethodException.class)
     public Result exceptionHandler(HttpServletRequest req, NoSuchMethodException e) {
-        log.error("发生空指针异常！原因是:", e);
+        log.error("发生空指针异常！原因是:{}", e);
         return Result.error(ResultCode.NOT_FOUND);
     }
 
+    
 
     /**
      * 处理其他异常

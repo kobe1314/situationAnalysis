@@ -8,14 +8,18 @@ import com.situation.analysis.entity.MonitoringLevel;
 import com.situation.analysis.service.AOService;
 import com.situation.analysis.webservices.expenseinfo.ReadExpenseinfoResult;
 import com.situation.analysis.webservices.expenses.ExpensesResult;
+
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
- * @description: business
+ * @description: businessØ
  * @author: Kobe
  * @date: 2021/2/15 下午4:51
  * @version: v1.0
@@ -33,7 +37,7 @@ public class BusinessController {
         return aoService.searchExpensesService(empId);
     }
 
-    @GetMapping("/expenses")
+    @GetMapping("/expense")
     public ReadExpenseinfoResult readExpenseInfo(@RequestParam String orderId, @RequestParam String orderNum,@RequestParam String empId) {
         log.debug("read expense info orderId is: {}, orderNum is : {}, empId is : {}",orderId, orderNum, empId);
         return aoService.readExpenseInfo(orderId,orderNum,empId);
