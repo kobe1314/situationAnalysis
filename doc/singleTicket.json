@@ -1,0 +1,68 @@
+{
+  "code": 200,
+  "message": null,
+  "data": {
+    "atreturn": [
+      {
+        "amount": 40.0,
+        "col1": "",
+        "col2": "",
+        "col3": "",
+        "col4": "",
+        "col5": "",
+        "invoicecode": "150001973910",
+        "invoiceno": "202109140004",
+        "invoicenumber": "39854918",
+        "name": "",
+        "tax": 0.0,
+        "trainl": "",
+        "unitname": "",
+        "unittaxno": ""
+      },
+      {
+        "amount": 5.0,
+        "col1": "",
+        "col2": "",
+        "col3": "",
+        "col4": "",
+        "col5": "",
+        "invoicecode": "132021991013",
+        "invoiceno": "202109140005",
+        "invoicenumber": "01406132",
+        "name": "",
+        "tax": 0.0,
+        "trainl": "",
+        "unitname": "",
+        "unittaxno": ""
+      },
+      {
+        "amount": 2064.0,
+        "col1": "",
+        "col2": "",
+        "col3": "",
+        "col4": "",
+        "col5": "",
+        "invoicecode": "5000204130",
+        "invoiceno": "202109140003",
+        "invoicenumber": "02876587",
+        "name": "",
+        "tax": 116.83,
+        "trainl": "",
+        "unitname": "无锡协智网络科技有限公司",
+        "unittaxno": "91320206MA1NP5YE02"
+      }
+    ],
+    "col1": "",
+    "col2": "",
+    "col3": "",
+    "col4": "",
+    "col5": "",
+    "expman": "A2219-吴向前",
+    "expmoney": 2459.0,
+    "invmoney": 2459.0,
+    "invnums": 3,
+    "message": null,
+    "reqdate": "2021-10-09",
+    "status": "S"
+  }
+}

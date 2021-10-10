@@ -1,0 +1,79 @@
+{
+  "result": 1,
+  "response": {
+    "data": {
+      "version": "20210301",
+      "result": 1,
+      "timestamp": 1633758046,
+      "message": "success",
+      "id": "d278e64792846a93cc1c9c340be8a6aa",
+      "sha1": "15ef89f7d33b55a63ba2da6552cfe914dc5dc1a6",
+      "time_cost": "1708",
+      "identify_results": [
+        {
+          "type": "10102",
+          "orientation": 0,
+          "region": [
+            0,
+            0,
+            1256,
+            838
+          ],
+          "details": {
+            "code": "013002020011",
+            "number": "26267073",
+            "date": "2020年11月26日",
+            "pretax_amount": "266.34",
+            "tax": "2.66",
+            "check_code": "08405221341846325228",
+            "total": "269.00",
+            "seller": "涉县开发区川西坝子餐饮中心",
+            "seller_tax_id": "92130426MA08W70F0G",
+            "buyer": "中科智新信息技术(邯郸)有限责任公司",
+            "buyer_tax_id": "91130426MA0FPLU649",
+            "company_seal": "1",
+            "form_type": "",
+            "kind": "餐饮",
+            "ciphertext": "0397309002358-9389<>4893076<,5<<29//38789417/7029<51981<<,**0*+-16<6/3239475*>2132<91*,*/3>+<**3-01>+9919<7300170*8",
+            "machine_code": "499935758816",
+            "receiptor": "张荣凤",
+            "reviewer": "申晓玲",
+            "issuer": "刘文静",
+            "province": "河北省",
+            "city": "",
+            "service_name": "餐饮服务",
+            "remark": "",
+            "item_names": "*餐饮服务*餐饮费",
+            "seller_addr_tel": "龙山大街君子居东门0310-3885917",
+            "seller_bank_account": "中国建设银行6217000110018340753",
+            "items": [
+              {
+                "name": "*餐饮服务*餐饮费",
+                "total": "266.34",
+                "tax_rate": "1%",
+                "tax": "2.66"
+              }
+            ],
+            "producer_stamp": "固宗税务总场",
+            "title": "河北增值税电子普通发票",
+            "stamp_info": "广西县开发区和源兴快捷宾馆,92130426MA08W70F0G",
+            "code_confirm": "013002020011",
+            "electronic_mark": "1"
+          },
+          "extra": {
+            "check_code_candidates": [],
+            "check_code_last_six": [],
+            "number_order_error": [],
+            "qrcode": [
+              "01,10,013002020011,26267073,266.34,20201126,08405221341846325228,58B4"
+            ]
+          }
+        }
+      ],
+      "extra": {},
+      "total_time": "1719",
+      "timestamp_request_arrival": 1633758044,
+      "timestamp_image_received": 1633758045
+    }
+  }
+}

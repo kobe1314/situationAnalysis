@@ -1,26 +1,23 @@
 package com.situation.analysis.controller;
 
 import com.situation.analysis.annotation.ResponseResult;
-import com.situation.analysis.exception.BizException;
-import com.situation.analysis.model.PageRequest;
-import com.situation.analysis.model.PageResult;
-import com.situation.analysis.entity.MonitoringLevel;
 import com.situation.analysis.service.AOService;
+import com.situation.analysis.service.BusinessService;
 import com.situation.analysis.webservices.expenseinfo.ReadExpenseinfoResult;
 import com.situation.analysis.webservices.expenses.ExpensesResult;
-
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import javax.validation.constraints.NotNull;
-import java.util.List;
+import java.io.IOException;
 
 /**
  * @description: businessØ
- * @author: Kobe
+ * @author: Kobe≤
  * @date: 2021/2/15 下午4:51
  * @version: v1.0
  */
@@ -30,6 +27,8 @@ import java.util.List;
 public class BusinessController {
     @Resource
     private AOService aoService;
+    @Resource
+    private BusinessService businessService;
 
     @GetMapping("/expenses")
     public ExpensesResult searchExpenses(@RequestParam String empId) {
@@ -39,8 +38,14 @@ public class BusinessController {
 
     @GetMapping("/expense")
     public ReadExpenseinfoResult readExpenseInfo(@RequestParam String orderId, @RequestParam String orderNum,@RequestParam String empId) {
-        log.debug("read expense info orderId is: {}, orderNum is : {}, empId is : {}",orderId, orderNum, empId);
+        log.debug("read expense info. orderId is: {}, orderNum is : {}, empId is : {}",orderId, orderNum, empId);
         return aoService.readExpenseInfo(orderId,orderNum,empId);
+    }
+
+    @PostMapping("/ticket")
+    public Object deliveryTicket(@RequestParam("file") MultipartFile file, @RequestParam String orderId, @RequestParam String orderNum, @RequestParam String empId) throws IOException {
+        log.debug("delivery ticket info. orderId is: {}, orderNum is : {}, empId is : {}",orderId, orderNum, empId);
+        return businessService.deliveryTicket(file,orderId,orderNum,empId);
     }
 
 

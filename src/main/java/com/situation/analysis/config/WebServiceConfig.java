@@ -2,7 +2,6 @@ package com.situation.analysis.config;
 
 import com.situation.analysis.webservices.error.SendExpenseErrorService;
 import com.situation.analysis.webservices.error.SendExpenseErrorServiceImplService;
-import com.situation.analysis.webservices.expenseinfo.ReadExpenseinfo;
 import com.situation.analysis.webservices.expenseinfo.ReadExpenseinfoService;
 import com.situation.analysis.webservices.expenseinfo.ReadExpenseinfoServiceImplService;
 import com.situation.analysis.webservices.expenses.SearchExpensesService;
@@ -17,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
  * @version: v1.0
  */
 @Configuration
-public class Config {
+public class WebServiceConfig {
 
     @Bean
     public SearchExpensesService searchExpensesService() {

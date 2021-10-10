@@ -17,3 +17,7 @@ logging:
       situation:
         analysis:
           mapper: debug
+
+
+ocr:
+  url: http://168.168.1.185/v1/item/get_multiple_items_info
