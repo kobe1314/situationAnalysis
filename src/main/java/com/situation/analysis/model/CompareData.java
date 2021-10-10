@@ -1,6 +1,5 @@
 package com.situation.analysis.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.situation.analysis.webservices.expenseinfo.ReadExpensesDetail;
 import lombok.Data;
 
@@ -17,4 +16,6 @@ public class CompareData {
     private boolean equalInvoiceNum;
     private boolean equalInvoiceCode;
     private boolean equalInvoiceMon;
+    private boolean isMark;
+    private String imagePath;
 }
