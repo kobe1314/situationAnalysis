@@ -1,18 +1,18 @@
 server:
-  port: 8080
+  port: 8199
 
 #datasource configuration
 spring:
   datasource:
     primary:
       username: root
-      password: Ye#123456
-      jdbc-url: jdbc:mysql://114.115.147.134:3306/situationAnalysis?allowMultiQueries=true&characterEncoding=utf8&useSSL=false
+      password: admin@123
+      jdbc-url: jdbc:mysql://10.1.14.83:3306/situationAnalysis?serverTimezone=Asia/Shanghai&allowMultiQueries=true&characterEncoding=utf8&useSSL=false
       driver-class-name: com.mysql.jdbc.Driver
     secondary:
       username: root
-      password: Ye#123456
-      jdbc-url: jdbc:mysql://114.115.147.134:3306/dynamic?allowMultiQueries=true&characterEncoding=utf8&useSSL=false
+      password: admin@123
+      jdbc-url: jdbc:mysql://10.1.14.83:3306/vims30?serverTimezone=Asia/Shanghai&allowMultiQueries=true&characterEncoding=utf8&useSSL=false
       driver-class-name: com.mysql.jdbc.Driver
 
 
