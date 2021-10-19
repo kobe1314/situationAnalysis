@@ -1,4 +1,4 @@
-package com.situation.analysis.sms;
+package com.situation.analysis.mybaites.plus;
 
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.config.*;

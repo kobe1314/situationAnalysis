@@ -18,8 +18,8 @@ public class SmsDemo {
     private static String signName = "北京莱湾兴业科技有限公司";
     private static String product = "Dysmsapi";//短信API产品名称
     private static String domain = "dysmsapi.aliyuncs.com";//短信API产品域名
-    private static String accessKeyId = "IDLTAI5tPsj6xp1hquftzZZexn";//你的accessKeyId
-    private static String accessKeySecret = "SecretuuK6lilM21So1XDxiyXsETBjdEkbjS";//你的accessKeySecret
+    private static String accessKeyId = "LTAI5tPsj6xp1hquftzZZexn" ;//你的accessKeyId
+    private static String accessKeySecret = "uuK6lilM21So1XDxiyXsETBjdEkbjS";//你的accessKeySecret
 
     public static SendSmsResponse sendSms() throws ClientException {
 
