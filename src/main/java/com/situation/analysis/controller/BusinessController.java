@@ -3,13 +3,11 @@ package com.situation.analysis.controller;
 import com.situation.analysis.annotation.ResponseResult;
 import com.situation.analysis.service.AOService;
 import com.situation.analysis.service.BusinessService;
+import com.situation.analysis.util.BaseLiuFile;
 import com.situation.analysis.webservices.expenseinfo.ReadExpenseinfoResult;
 import com.situation.analysis.webservices.expenses.ExpensesResult;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -24,6 +22,7 @@ import java.io.IOException;
 @Slf4j
 @RestController
 @ResponseResult
+@CrossOrigin(originPatterns = "*", methods = {RequestMethod.GET, RequestMethod.POST})
 public class BusinessController {
     @Resource
     private AOService aoService;
@@ -43,10 +42,10 @@ public class BusinessController {
     }
 
     @PostMapping("/ticket")
-    public Object deliveryTicket(@RequestParam("file") MultipartFile file, @RequestParam String orderId, @RequestParam String orderNum, @RequestParam String empId) throws IOException {
+    public Object deliveryTicket(@RequestParam("file") String file, @RequestParam String orderId, @RequestParam String orderNum, @RequestParam String empId) throws IOException {
         log.debug("delivery ticket info. orderId is: {}, orderNum is : {}, empId is : {}",orderId, orderNum, empId);
-        return businessService.deliveryTicket(file,orderId,orderNum,empId);
+        MultipartFile multipartFilefile = BaseLiuFile.baseLiuToMultipart(file);
+        return businessService.deliveryTicket(multipartFilefile,orderId,orderNum,empId);
     }
-
 
 }
