@@ -13,6 +13,7 @@
     <resultMap id="monitoringObjectInfo" type="com.situation.analysis.model.MonitoringObjectInfo">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="NAME" property="objectName"/>
+        <result column="IMPACT_FACTOR" property="impactFactor"/>
         <result column="RUN_THRESHOLD" property="runThreshold"/>
         <result column="LEVEL_NAME" property="levelName"/>
         <result column="L_ID" property="levelId"/>
@@ -68,7 +69,7 @@
 
 
     <select id="selectObjectList" resultMap="monitoringObjectInfo">
-        select o.id,o.name,o.RUN_THRESHOLD,o.L_ID,monitoringLevel.name LEVEL_NAME, indicator.name INAME,o.IS_ORIGINAL_VALUE
+        select o.id,o.name,o.IMPACT_FACTOR,o.RUN_THRESHOLD,o.L_ID,monitoringLevel.name LEVEL_NAME, indicator.name INAME,o.IS_ORIGINAL_VALUE
         from monitoringObject o
         left join monitoringLevel on o.l_id = monitoringLevel.id
         left join indicator on o.id = indicator.O_ID
