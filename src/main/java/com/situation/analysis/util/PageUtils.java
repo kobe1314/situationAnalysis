@@ -1,8 +1,6 @@
 package com.situation.analysis.util;
 
-import com.github.pagehelper.PageInfo;
-import com.situation.analysis.model.PageResult;
-
+//import com.github.pagehelper.PageInfo;
 /**
  * @description: Page utils
  * @author: Kobe
@@ -14,13 +12,13 @@ public class PageUtils {
      * @param pageInfo  将分页信息封装到统一的接口
      * @return
      */
-    public static PageResult getPageResult(PageInfo<?> pageInfo) {
-        PageResult pageResult = new PageResult();
-        pageResult.setPageNum(pageInfo.getPageNum());
-        pageResult.setPageSize(pageInfo.getPageSize());
-        pageResult.setTotalSize((int) pageInfo.getTotal());
-        pageResult.setTotalPage(pageInfo.getPages());
-        pageResult.setContents(pageInfo.getList());
-        return pageResult;
-    }
+    //public static PageResult getPageResult(PageInfo<?> pageInfo) {
+    //    PageResult pageResult = new PageResult();
+    //    pageResult.setPageNum(pageInfo.getPageNum());
+    //    pageResult.setPageSize(pageInfo.getPageSize());
+    //    pageResult.setTotalSize((int) pageInfo.getTotal());
+    //    pageResult.setTotalPage(pageInfo.getPages());
+    //    pageResult.setContents(pageInfo.getList());
+    //    return pageResult;
+    //}
 }

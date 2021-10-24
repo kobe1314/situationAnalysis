@@ -27,6 +27,13 @@ public class SmsDemo {
         System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
         System.setProperty("sun.net.client.defaultReadTimeout", "10000");
 
+        String[] codees={"0","1","2","3","4","5","6","7","8","9"};
+        String code="";
+        for(int i=0;i<6;i++){
+            int j=(int)(Math.random()*10);
+            code+=codees[j];
+        }
+
         //初始化acsClient,暂不支持region化
         IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
         DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", product, domain);
@@ -41,7 +48,7 @@ public class SmsDemo {
         //必填:短信模板-可在短信控制台中找到
         request.setTemplateCode("SMS_226270029");
         //可选:模板中的变量替换JSON串,如模板内容为"亲爱的${name},您的验证码为${code}"时,此处的值为
-        request.setTemplateParam("{\"code\":\"123\"}");
+        request.setTemplateParam("{\"code\":\""+code+"\"}");
 
         //选填-上行短信扩展码(无特殊需求用户请忽略此字段)
         //request.setSmsUpExtendCode("90997");
