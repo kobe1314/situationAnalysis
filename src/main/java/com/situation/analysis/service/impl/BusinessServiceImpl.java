@@ -36,36 +36,42 @@ public class BusinessServiceImpl implements BusinessService {
     private AOService aoService;
 
     @Override
-    public Object deliveryTicket(MultipartFile file, String orderId, String orderNum, String empId) throws IOException {
+    public Object deliveryTicket(List<MultipartFile> files, String orderId, String orderNum, String empId) throws IOException {
         log.debug("come in delivery ticket service");
-
-        String json = ocrService.get_multiple_items_info(file);
-        List<DetailsDTO> list = getResult(json);
-
-
-        ReadExpenseinfoResult info = aoService.readExpenseInfo(orderId, orderNum, empId);
-        List<ReadExpensesDetail> atreturn = info.getATRETURN();
 
         List<CompareData> compareDataList = new ArrayList<>();
 
-        list.forEach(ocrDetail -> {
-            CompareData compareData = new CompareData();
-            compareData.setOcrDetail(ocrDetail);
-            String code = ocrDetail.getCode();
-            String number = ocrDetail.getNumber();
-            String total = ocrDetail.getTotal();
-            findRecord4OCR(code,number,total,atreturn,compareDataList,compareData);
-            compareDataList.add(compareData);
+        files.forEach(file -> {
+            try {
+                String json = ocrService.get_multiple_items_info(file);
+                List<DetailsDTO> list = getResult(json);
+
+
+                ReadExpenseinfoResult info = aoService.readExpenseInfo(orderId, orderNum, empId);
+                List<ReadExpensesDetail> atreturn = info.getATRETURN();
+
+                list.forEach(ocrDetail -> {
+                    CompareData compareData = new CompareData();
+                    compareData.setOcrDetail(ocrDetail);
+                    String code = ocrDetail.getCode();
+                    String number = ocrDetail.getNumber();
+                    String total = ocrDetail.getTotal();
+                    findRecord4OCR(code,number,total,atreturn,compareDataList,compareData);
+                    compareDataList.add(compareData);
+                });
+
+
+                atreturn.forEach(detail -> {
+                    String code = detail.getINVOICECODE();
+                    String number = detail.getINVOICENUMBER();
+                    String amount = String.valueOf(detail.getAMOUNT());
+                    findRecord(code,number,amount,list,compareDataList,detail);
+                });
+            } catch (Exception error) {
+                log.error("search empId is : {}",empId);
+            }
+
         });
-
-
-        atreturn.forEach(detail -> {
-            String code = detail.getINVOICECODE();
-            String number = detail.getINVOICENUMBER();
-            String amount = String.valueOf(detail.getAMOUNT());
-            findRecord(code,number,amount,list,compareDataList,detail);
-        });
-
 
         return compareDataList;
     }

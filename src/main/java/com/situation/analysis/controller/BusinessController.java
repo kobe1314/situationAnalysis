@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @description: businessØ
@@ -42,10 +43,10 @@ public class BusinessController {
     }
 
     @PostMapping("/ticket")
-    public Object deliveryTicket(@RequestParam("file") String file, @RequestParam String orderId, @RequestParam String orderNum, @RequestParam String empId) throws IOException {
+    public Object deliveryTicket(@RequestParam("files") String[] files, @RequestParam String orderId, @RequestParam String orderNum, @RequestParam String empId) throws IOException {
         log.debug("delivery ticket info. orderId is: {}, orderNum is : {}, empId is : {}",orderId, orderNum, empId);
-        MultipartFile multipartFilefile = BaseLiuFile.baseLiuToMultipart(file);
-        return businessService.deliveryTicket(multipartFilefile,orderId,orderNum,empId);
+        List<MultipartFile> multipartFilefiles = BaseLiuFile.baseLiuToMultipart(files);
+        return businessService.deliveryTicket(multipartFilefiles,orderId,orderNum,empId);
     }
 
 }

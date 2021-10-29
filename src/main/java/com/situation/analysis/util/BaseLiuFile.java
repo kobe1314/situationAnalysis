@@ -4,6 +4,8 @@ import org.springframework.web.multipart.MultipartFile;
 import sun.misc.BASE64Decoder;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by yaosir on 2021/10/22.
@@ -79,5 +81,13 @@ public class BaseLiuFile implements MultipartFile {
         }
     }
 
+    public static List<MultipartFile> baseLiuToMultipart(String[] baseLiuList) {
+        List<MultipartFile> resultFileList = new ArrayList<>();
+        for(int i = 0; i< baseLiuList.length; ++i) {
+            MultipartFile fileItem = BaseLiuFile.baseLiuToMultipart(baseLiuList[i]);
+            resultFileList.add(fileItem);
+        }
+        return resultFileList;
+    }
 
 }
