@@ -12,12 +12,12 @@ import com.situation.analysis.annotation.ResponseResult;
 import com.situation.analysis.entity.Employee;
 import com.situation.analysis.entity.Logon;
 import com.situation.analysis.exception.BizException;
+import com.situation.analysis.model.LogonRequest;
 import com.situation.analysis.service.EmployeeService;
 import com.situation.analysis.service.LogonService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -54,6 +54,36 @@ public class ValidateCodeController {
         return employee;
     }
 
+    @PostMapping("/logon")
+    public Employee logon(@RequestBody LogonRequest logonRequest) {
+        int type = logonRequest.getType();
+        log.info("logon type ", type);
+
+        if (1 == logonRequest.getType()) {
+            QueryWrapper<Employee> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("CardId", logonRequest.getCardId());
+            Employee employee = employeeService.getOne(queryWrapper);
+            return employee;
+        }
+
+        if (2 == logonRequest.getType()) {
+            QueryWrapper<Logon> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("name", logonRequest.getName());
+            queryWrapper.eq("phone_number", logonRequest.getPhoneNumber());
+            Logon logon = logonService.getOne(queryWrapper);
+            if (!StringUtils.isEmpty(logonRequest.getCode()) && Long.valueOf(logon.getExpiredTime()) >= (System.currentTimeMillis() / 1000) && logonRequest.getCode().equals(logon.getCode())) {
+                QueryWrapper<Employee> wrapper = new QueryWrapper<>();
+                wrapper.eq("cnname", logonRequest.getName());
+                wrapper.eq("phonenumber",logonRequest.getPhoneNumber());
+                return employeeService.getOne(wrapper);
+
+            }
+
+        }
+        throw new BizException("用户名或者密码不正确!");
+
+    }
+
     @GetMapping("/code")
     public SendSmsResponse generatorValidationCode(@RequestParam String name, @RequestParam String phoneNum) throws ClientException {
         log.info("name is {}, phoneNum is {}", name, phoneNum);
@@ -73,8 +103,11 @@ public class ValidateCodeController {
         logon.setPhoneNumber(phoneNum);
         logon.setName(name);
         logon.setCode(response.getCode());
-        logon.setExpiredTime(String.valueOf(System.currentTimeMillis()/1000 + 300));
-        logonService.save(logon);
+        logon.setExpiredTime(String.valueOf(System.currentTimeMillis() / 1000 + 300));
+
+        QueryWrapper<Logon> logonQueryWrapper = new QueryWrapper<>();
+        logonQueryWrapper.eq("phone_number", phoneNum);
+        logonService.saveOrUpdate(logon,logonQueryWrapper);
 
         return response;
     }
@@ -119,6 +152,7 @@ public class ValidateCodeController {
         SendSmsResponse sendSmsResponse = null;
         try {
             sendSmsResponse = acsClient.getAcsResponse(request);
+            sendSmsResponse.setCode(code);
         } catch (ClientException e) {
             e.printStackTrace();
         }
